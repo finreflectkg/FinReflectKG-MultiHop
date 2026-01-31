@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "pattern": "3hop_cross_year_type1",
+    "hop_count": "3hop",
+    "category": "cross-year",
+    "connector_mode": "qualitative",
+    "count": 1,
+    "timestamp": "20260131_004555"
+  },
+  "questions": [
+    {
+      "question_id": 1,
+      "question": "How did the change in notional amounts of forecasted transactions hedged by Linde from 2023 to 2024 influence the company's use of foreign exchange forward contracts?",
+      "answer": "In 2023, Linde disclosed that the notional amount of forecasted transactions hedged was $335 million, while in 2024, this amount increased to $749 million. This significant increase in hedged forecasted transactions indicates a more aggressive hedging strategy. As a result, Linde's use of foreign exchange forward contracts expanded, with the notional amounts of these contracts rising to $9.9 billion in 2024 from $8.3 billion in 2023, reflecting the company's increased reliance on such instruments to manage foreign exchange risk associated with forecasted transactions.",
+      "reasoning_steps": [
+        "Hop 1: LIN(2023) \u2192 Forecasted Transactions: Discloses a notional amount of $335 million for forecasted transactions hedged.",
+        "Hop 2: Forecasted Transactions \u2192 Foreign Exchange Forward Contracts: Forecasted transactions influence the use of foreign exchange forward contracts as part of the company's hedging strategy.",
+        "Hop 3: Foreign Exchange Forward Contracts \u2190 LIN(2024): The notional amount of foreign exchange forward contracts increased to $9.9 billion in 2024 from $8.3 billion in 2023."
+      ],
+      "difficulty": "medium",
+      "idf_score": 4.435347107452618,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_INST -[Impacts]-> FIN_INST <-[Uses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "node_2": "Forecasted Transactions",
+        "node_3": "Foreign Exchange Forward Contracts",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "node_2": "FIN_INST",
+        "node_3": "FIN_INST",
+        "end": "ORG"
+      },
+      "hop_count": 3,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_80",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                                                    |                  |                  | Fair Value   | Fair Value   | Fair Value      | Fair Value      |\n|----------------------------------------------------|------------------|------------------|--------------|--------------|-----------------|-----------------|\n| (Millions of dollars)                              | Notional Amounts | Notional Amounts | Assets (a)   | Assets (a)   | Liabilities (a) | Liabilities (a) |\n| December 31,                                       | 2023             | 2022             | 2023         | 2022         | 2023            | 2022            |\n| Derivatives Not Designated as Hedging Instruments: |                  |                  |              |              |                 |                 |\n| Currency contracts:                                |                  |                  |              |              |                 |                 |\n| Balance sheet items                                | $ 4,567          | $ 3,056          | $ 46         | $ 13         | $ 26            | $ 7             |\n| Forecasted transactions                            | 335              | 449              | 11           | 9            | 6               | 9               |\n| Cross-currency swaps                               | -                | 42               | -            | -            | -               | 1               |\n| Commodity contracts                                | N/A              | N/A              | -            | -            | -               | -               |\n| Total                                              | $ 4,902          | $ 3,547          | $ 57         | $ 22         | $ 32            | $ 17            |\n| Derivatives Designated as Hedging Instruments:     |                  |                  |              |              |                 |                 |\n| Currency contracts:                                |                  |                  |              |              |                 |                 |\n| Forecasted transactions                            | $ 749            | $ 323            | $ 20         | $ 6          | $ 4             | $ 5             |\n| Commodity contracts                                | N/A              | N/A              | 3            | -            | 7               | 4               |\n| Interest rate swaps                                | 1,214            | 856              | 1            | -            | 4               | 70              |\n| Total Hedges                                       | $ 1,963          | $ 1,179          | $ 24         | $ 6          | $ 15            | $ 79            |\n| Total Derivatives                                  | $ 6,865          | $ 4,726          | $ 81         | $ 28         | $ 47            | $ 96            |",
+          "relationship": "Discloses"
+        },
+        "node_2": {
+          "id": "Forecasted_Transactions",
+          "name": "Forecasted Transactions",
+          "type": "FIN_INST",
+          "idf_score": 4.4942386252808095
+        },
+        "hop_2_rel": {
+          "source_file": "DIS_10k_2024.pdf",
+          "page_id": "page_121",
+          "chunk_id": "chunk_5",
+          "chunk_text": "\nThe Company may designate pay-fixed interest rate swaps as cash flow hedges of interest payments on floating-rate borrowings. Pay-fixed interest rate swaps effectively convert floating-rate borrowings to fix ed-rate borrowings. The unrealized gains or losses from these cash flow hedges are deferred in AOCI and recognized in interest ex pense as the interest payments occur. The Company did not have pay-fixed interest rate swaps that were designated as cash flow hedges of interest payments at September 28, 2024 or at September 30, 2023, and gains and losses related to pay-fixed interest rate swaps recognized in earnings for fiscal 2024, 2023 and 2022 were not material.\n\n## Foreign Exchange Risk Management\n\nThe Company transacts business globally and is subject to risks associated with foreign currency exchange rates. The Company's objective is to reduce earnings and cash flow fluctuations associated with changes in foreign currency exchange rates, enabling management to focus on core business operations.\n\nThe Company enters into option and forward contracts to protect the value of its existing foreign currency assets, liabilities, firm commitments and forecasted but not firmly committed foreign currency transactions. In accordance with policy, the Company hedges its forecasted foreign currency transactions for periods generally not to exceed four years within an established minimum and maximum range of annual exposure. The gains and losses on these contracts offset changes in the U.S. dollar equivalent value of the related forecasted transaction, asset, liability or firm commitment. The principal currencies hedged are the euro, Canadian dollar, Japanese yen, British pound and Chinese yuan. Cross-currency swaps are used to effectively convert foreign currency denominated borrowings into U.S. dollar denominated borrowings.\n\nThe Company designates foreign exchange forward and option contracts as cash flow hedges of firmly committed and forecasted foreign currency transactions. As of September 28, 2024 and September 30, 2023, the notional amounts of the Company's net foreign exchange cash flow hedges were $9.9 billion and $8.3 billion, respectively. Mark-to-market gains and losses on these contracts are deferred in AOCI and are recognized in earnings when the hedged transactions occur, offsetting changes in the value of the foreign currency transactions. Net deferred gains recorded in AOCI for contracts that will mature in the next twelve months total $99 million. The following table summarizes the effect of foreign ex change cash flow hedges on AOCI:\n\n",
+          "relationship": "Impacts"
+        },
+        "node_3": {
+          "id": "Foreign_Exchange_Forward_Contracts",
+          "name": "Foreign Exchange Forward Contracts",
+          "type": "FIN_INST",
+          "idf_score": 4.376455589624427
+        },
+        "hop_3_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_9",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\n## Currency exchange rate fluctuations and other related risks may adversely affect Linde's results.\n\nBecause a significant portion of  Linde's revenue is denominated in currencies other than its reporting currency, the  U.S. dollar, changes in exchange rates will produce fluctuations in revenue, costs and earnings and may also affect the book value of assets and liabilities and related equity. Although the company from time to time utilizes foreign ex change forward contracts to hedge these exposures, its efforts to minimize currency ex posure through such hedging transactions may not be successful depending on market and business conditions. As a result, fluctuations in foreign currency exchange rates could adversely affect  Linde's financial condition, results of operations or cash flows.\n\n## Macroeconomic factors may impact  Linde's  ability  to  obtain  financing  or  increase  the  cost  of  obtaining  financing  which  may  adversely  impact  Linde's financial results and/or cash flows.\n\nVolatility and disruption in the U.S., European and global credit and equity markets, from time to time, could make it more difficult for Linde to obtain financing for its operations and/or could increase the cost of obtaining financing. In addition, Linde's borrowing costs can be affected by short- and long-term debt ratings assigned by independent rating agencies which are based, in significant part, on its performance as measured by certain criteria such as interest coverage and leverage ratios. A decrease in these debt ratings could increase the cost of borrowing or make it more difficult to obtain financing.\n\n## An impairment of goodwill or intangible assets could negatively impact the company's financial results.\n\nAs of December 31, 2024, the net carrying value of goodwill and other indefinite-lived intangible assets was approximately $26 billion and $2 billion, respectively, primarily as a result of the business combination and the related acquisition method of accounting applied to the 2018 merger between Linde plc's predecessor companies.  In  accordance  with  generally  accepted  accounting  principles,  the  company  periodically  assesses  these  assets  to  determine  if  they  are  impaired. Significant negative industry or economic trends, disruptions to business, unexpected significant changes or planned changes in use of the assets, divestitures and sustained  market  capitalization  declines  may  result  in  recognition  of  impairments  to  goodwill  or  other  indefinite-lived  assets.  Any  charges  relating  to  such impairments could have a material adverse impact on Linde's results of operations in the periods recognized.\n\n## Catastrophic events could disrupt the operations of Linde and/or its customers and suppliers and may have a significant adverse impact on the results of operations.\n\nThe occurrence of catastrophic events or natural disasters such as extreme weather, including hurricanes and floods; health epidemics; pandemics, such as COVID19; and acts of war or terrorism, could disrupt or delay Linde's ability to produce and distribute its products to customers and could potentially ex pose Linde to thirdparty liability claims. In addition, such events could impact Linde's customers and suppliers resulting in temporary or long-term outages and/or the limitation of supply of energy and other raw materials used in normal business operations. Linde evaluates the direct and indirect business risks, consults with vendors, insurance providers and industry experts, makes investments in suitably resilient design and technology, and conducts regular reviews of the business risks with management. Despite these steps, however, these situations are outside Linde's control and may have a significant adverse impact on its financial results.\n\n## The inability to attract and retain qualified personnel may adversely impact Linde's business.\n\nIf Linde fails to attract, hire and retain qualified personnel, it may not be able to develop, market or sell its products or successfully manage its business. Linde is dependent upon a highly skilled, experienced and efficient  workforce  to  be  successful.  Much  of  Linde's  competitive  advantage  is  based  on  the  expertise  and experience of key personnel regarding marketing, technology, manufacturing and distribution infrastructure, systems and products. The inability to attract and hire qualified individuals or the loss of key employees in very skilled areas could have a negative effect on Linde's financial results.\n\n## If Linde fails to keep pace with technological advances in the industry or if new technology initiatives do not become commercially accepted, customers may not continue to buy Linde's products and results of operations could be adversely affected.\n\nLinde's research and development is directed toward developing new and improved methods for the production and distribution of industrial gases, the design and construction of plants and toward developing new markets and applications for the use of industrial and process gases. This results in the introduction of new applications and the development of new advanced process technologies. As a result of these efforts, Linde develops new and proprietary technologies and employs necessary measures to protect such technologies within the global geographies in which Linde operates. These technologies help Linde to create a competitive advantage and to provide a platform to grow its business. If Linde's research and",
+          "relationship": "Uses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 46
+    }
+  ]
+}

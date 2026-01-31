@@ -1,0 +1,831 @@
+{
+  "metadata": {
+    "pattern": "2hop_cross_year",
+    "hop_count": "2hop",
+    "category": "cross-year",
+    "connector_mode": "quantitative",
+    "count": 13,
+    "timestamp": "20260129_133733"
+  },
+  "questions": [
+    {
+      "question_id": 1,
+      "question": "How has the financial exposure and project scope of Linde's Engineering business in Russia evolved between 2023 and 2024, based on disclosed contract liabilities and project activities?",
+      "answer": "In 2023, Linde disclosed $418 million in contract liabilities related to engineering projects in Russia that were suspended and lawfully wound down due to sanctions. By 2024, there is no mention of ongoing engineering projects in Russia, and instead, the focus shifts to global engineering operations in locations such as Germany, France, the U.S., and China. This indicates a full withdrawal from Russian engineering projects and a reallocation of engineering resources to other regions.",
+      "reasoning_steps": [
+        "Step 1: In 2023, Linde reported $418 million in contract liabilities tied to suspended engineering projects in Russia due to sanctions.",
+        "Step 2: In 2024, the Engineering section highlights project activities in other global locations with no mention of Russia, indicating a full cessation of operations there.",
+        "Step 3: The change reflects a strategic and operational shift away from Russia, reducing exposure and refocusing the Engineering business on other regions."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Manages]-> SEGMENT <-[Has_Segment]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Engineering Business",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "SEGMENT",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_101",
+          "chunk_id": "chunk_1",
+          "chunk_text": "The\tcompany's\tperformance\tobligations\trelated\tto\tpackaged\tgases\tare\tsatisfied\tat\ta\tpoint\tin\ttime.\tAccordingly,\trevenue\tis recognized\twhen\tproduct\tis\tdelivered\tto\tthe\tcustomer\tor\twhen\tthe\tcustomer\tpicks\tup\tproduct\tfrom\ta\tpackaged\tgas\tfacility\tor retail\tstore,\tand\tthe\tcompany\thas\tthe\tright\tto\tpayment\tfrom\tthe\tcustomer\tin\taccordance\twith\tthe\tcontract\tterms.\tAny\tvariable consideration\tis\tconstrained\tand\twill\tbe\trecognized\twhen\tthe\tuncertainty\trelated\tto\tthe\tconsideration\tis\tresolved.\n\n## Engineering\n\nThe\t company\t designs\t and\t manufactures\t equipment\t for\t air\t separation\t and\t other\t industrial\t gas\t applications\t manufactured specifically\t for\t end\t customers.\t Sale\t of\t equipment\t contracts\t are\t generally\t comprised\t of\t a\t single\t performance\t obligation. Revenue\tfrom\tsale\tof\tequipment\tis\tgenerally\trecognized\tover\ttime\tas\tLinde\thas\tan\tenforceable\tright\tto\tpayment\tfor\tperformance completed\tto\tdate\tand\tperformance\tdoes\tnot\tcreate\tan\tasset\twith\talternative\tuse.\tFor\tcontracts\trecognized\tover\ttime,\trevenue is\t recognized\t primarily\t using\t a\t cost\t incurred\t input\t method.\t Costs\t incurred\t to\t date\t relative\t to\t total\t estimated\t costs\t at completion\tare\tused\tto\tmeasure\tprogress\ttoward\tsatisfying\tperformance\tobligations.\tCosts\tincurred\tinclude\tmaterial,\tlabor, and\toverhead\tcosts\tand\trepresent\twork\tcontributing\tand\tproportionate\tto\tthe\ttransfer\tof\tcontrol\tto\tthe\tcustomer.\tChanges\tto cost\testimates\tand\tcontract\tmodifications\tare\ttypically\taccounted\tfor\tas\tpart\tof\tthe\texisting\tcontract\tand\tare\trecognized\tas a\tcumulative\tadjustments\tfor\tthe\tinception-to-date\teffect\tof\tsuch\tchange.\n\n## Contract\tAssets\tand\tLiabilities\n\nContract\tassets\tand\tliabilities\tresult\tfrom\tdifferences\tin\ttiming\tof\trevenue\trecognition\tand\tcustomer\tinvoicing.\tContract assets\t primarily\t relate\t to\t sale\t of\t equipment\t contracts\t for\t which\t revenue\t is\t recognized\t over\t time.\t The\t balance\t represents unbilled\trevenue\twhich\toccurs\twhen\trevenue\trecognized\tunder\tthe\tmeasure\tof\tprogress\texceeds\tamounts\tinvoiced\tto\tcustomers. Customer\tinvoices\tmay\tbe\tbased\ton\tthe\tpassage\tof\ttime,\tthe\tachievement\tof\tcertain\tcontractual\tmilestones\tor\ta\tcombination\tof both\t criteria.\t Contract\t liabilities\t include\t advance\t payments\t or\t right\t to\t consideration\t prior\t to\t performance\t under\t the contract.\tContract\tliabilities\tare\trecognized\tas\trevenue\tas\tperformance\tobligations\tare\tsatisfied\tunder\tcontract\tterms.\tLinde has\tcontract\tassets\tof\t$196\tmillion\tat\tDecember\t31,\t2023\tand\t$124\tmillion\tat\tDecember\t31,\t2022.\tTotal\tcontract\tliabilities are\t $2,950\t million\t at\t December\t 31,\t 2023\t (current\t of\t $1,901\t million\t and\t $1,049\t million\t within\t deferred\t credits\t in\t the consolidated\tbalance\tsheets).\tAs\tof\tDecember\t31,\t2023,\tLinde\thas\t$418\tmillion\trecorded\tin\tcontract\tliabilities\trelated\tto engineering\t projects\t in\t Russia\t subject\t to\t sanctions\t and\t therefore\t suspended\t and\t lawfully\t wound\t down.\t Total\t contract liabilities\twere\t$3,986\tmillion\tat\tDecember\t31,\t2022\t(current\tcontract\tliabilities\tof\t$3,073\tmillion\tand\t$913\tmillion\twithin deferred\t credits\t in\t the\t consolidated\t balance\t sheets).\t The\t decrease\t in\t contract\t liabilities\t is\t primarily\t related\t to\t a reclassification\t of\t contract\t liabilities\t to\t a\t contingent\t liability\t in\t other\t long-term\t liabilities\t associated\t with\t an engineering\t project\t in\t Russia\t (see\t Note\t 17).\t Revenue\t recognized\t for\t the\t twelve\t months\t ended\t December\t 31,\t 2023\t that\t was included\tin\tthe\tcontract\tliability\tat\tDecember\t31,\t2022\twas\t$1,017\tmillion.\tContract\tassets\tand\tliabilities\tprimarily\trelate to\tthe\tEngineering\tbusiness.\n\n## Payment\tTerms\tand\tOther\n\nLinde\tgenerally\treceives\tpayment\tafter\tperformance\tobligations\tare\tsatisfied,\tand\tcustomer\tprepayments\tare\tnot\ttypical\tfor the\t industrial\t gases\t business.\t Payment\t terms\t vary\t based\t on\t the\t country\t where\t sales\t originate\t and\t local\t customary\t payment practices.\t Linde\t does\t not\t offer\t extended\t financing\t outside\t of\t customary\t payment\t terms.\t Amounts\t billed\t for\t sales\t and\t use taxes,\tvalue-added\ttaxes,\tand\tcertain\texcise\tand\tother\tspecific\ttransactional\ttaxes\timposed\ton\trevenue\tproducing\ttransactions are\tpresented\ton\ta\tnet\tbasis\tand\tare\tnot\tincluded\tin\tsales\twithin\tthe\tconsolidated\tstatement\tof\tincome.\tAdditionally,\tsales returns\tand\tallowances\tare\tnot\ta\tnormal\tpractice\tin\tthe\tindustry\tand\tare\tnot\tsignificant.\n\n## Disaggregated\tRevenue\tInformation\n\nAs\t described\t above\t and\t in\t Note\t 18,\t the\t company\t manages\t its\t industrial\t gases\t business\t on\t a\t geographic\t basis,\t while\t the Engineering\tand\tOther\tbusinesses\tare\tgenerally\tmanaged\ton\ta\tglobal\tbasis.\tFurthermore,\tthe\tcompany\tbelieves\tthat\treporting sales\t by\t distribution\t method\t by\t reportable\t geographic\t segment\t best\t illustrates\t the\t nature,\t timing,\t type\t of\t customer,\t and contract\tterms\tfor\tits\trevenues,\tincluding\tterms\tand\tpricing.\n\nThe\tfollowing\ttables\tshow\tsales\tby\tdistribution\tmethod\tat\tthe\tconsolidated\tlevel\tand\tfor\teach\treportable\tsegment\tand\tOther for\tthe\tyears\tended\tDecember\t31,\t2023,\t2022\tand\t2021.",
+          "relationship": "Manages"
+        },
+        "intermediate_node": {
+          "id": "Engineering_Business",
+          "name": "Engineering Business",
+          "type": "SEGMENT",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_14",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\n## Americas\n\nThe Americas segment operates production facilities primarily in the U.S., Canada, Mexico and Brazil, approximately 350 of which are mainly cryogenic air separation plants, hydrogen plants and carbon dioxide plants. There are five major pipeline complexes in North America located in northern Indiana, Houston, along the G ulf Coast of Texas, Detroit and Louisiana. Also located throughout the Americas are noncryogenic air separation plants, packaged gas facilities and other smaller plant facilities.\n\n## EMEA\n\nThe EMEA segment has production facilities primarily in  G ermany, the  U.K.,  Eastern  Europe,  France,  Sweden and the  Republic of  South Africa which include approximately 275 cryogenic air separation plants and carbon dioxide plants. Also located throughout Europe are noncryogenic air separation plants, pipelines, hydrogen, packaged gas facilities and other smaller plant facilities.\n\n## APAC\n\nThe APAC segment has production facilities located primarily in China, Australia, India, South Korea and Thailand, approximately 230 of which are cryogenic air separation plants and carbon dioxide plants. Also located throughout Asia are noncryogenic air separation plants, pipelines, hydrogen, packaged gas and other production facilities.\n\n## Engineering\n\nThe Engineering business designs and constructs turnkey process plants for third-party customers as well as for the gases businesses in many locations worldwide, such as air separation, hydrogen, synthesis, olefin and natural gas plants. Plant components are produced in owned factories in Tacherting, G ermany; Hesingue, France; New York and Oklahoma, United States; and Dalian, China.\n\n## ITEM 3.     LE GAL PROCEEDINGS\n\nInformation required by this item is incorporated herein by reference to the section captioned 'Notes to Consolidated Financial Statements - 17. Commitments and Contingencies' in Item 8 of this 10-K.\n\n## ITEM 4.     MINE  SAFE TY DISCLOSURES\n\nNot Applicable.\n\n## PART II\n\n## ITEM 5.     MARKET FOR REGISTRANT'S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SECURITIES\n\nLinde plc shares trade on the Nasdaq Stock Market LLC ('Nasdaq') under the ticker symbol 'LIN'. At December 31, 2024 there were 6,151 shareholders of record.\n\nPurchases of Equity Securities - Certain information regarding purchases made by or on behalf of the company or any affiliated purchaser (as defined in Rule 10b18(a)(3) under the Securities Ex change Act of 1934, as amended) of its ordinary shares during the three months ended December 31, 2024 is provided below:\n\n",
+          "relationship": "Has_Segment"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 46
+    },
+    {
+      "question_id": 2,
+      "question": "How has Linde's use of total requirement contracts in its on-site industrial gas distribution evolved between 2023 and 2024, particularly in terms of contract structure and duration?",
+      "answer": "In 2023, Linde described its on-site product supply contracts as generally being total requirement contracts with terms typically ranging from 10\u201320 years, containing minimum purchase requirements and price escalation provisions. By 2024, the company maintained the same description of these contracts, including the 10\u201320 year term range, minimum purchase requirements, and price escalation provisions, indicating no structural changes to the contract framework. This suggests that Linde preserved its long-term, committed contract model for on-site supply without modification across the two reporting years.",
+      "reasoning_steps": [
+        "Step 1: In 2023, Linde disclosed that on-site contracts were total requirement contracts with terms typically ranging from 10\u201320 years, including minimum purchase requirements and price escalation provisions.",
+        "Step 2: In 2024, Linde again described on-site contracts using the exact same language, including the 10\u201320 year term range and inclusion of minimum purchase requirements and price escalation provisions.",
+        "Step 3: Since the description and structure of total requirement contracts remained unchanged between 2023 and 2024, there was no evolution or modification in how Linde structured its long-term on-site supply agreements."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Introduces]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Total Requirement Contracts",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_100",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## 19.\tREVENUE\tRECOGNITION\n\nRevenue\tis\taccounted\tfor\tin\taccordance\twith\tASC\t606.\tRevenue\tis\trecognized\tas\tcontrol\tof\tgoods\tor\tservices\tare\ttransferred\tto customers\tin\tan\tamount\tthat\treflects\tthe\tconsideration\tto\twhich\tan\tentity\texpects\tto\tbe\tentitled\tto\treceive\tin\texchange\tfor the\tgoods\tor\tservices.\n\n## Contracts\twith\tCustomers\n\nLinde\tserves\ta\tdiverse\tgroup\tof\tindustries\tincluding\thealthcare,\tchemicals\tand\tenergy,\tmanufacturing,\tmetals\tand\tmining,\tfood and\tbeverage,\tand\telectronics.\n\n## Industrial\tGases\n\nWithin\teach\tof\tthe\tcompany's\tgeographic\tsegments\tfor\tindustrial\tgases,\tthere\tare\tthree\tbasic\tdistribution\tmethods:\t(i)\tonsite\tor\ttonnage;\t(ii)\tmerchant\tor\tbulk\tliquid;\tand\t(iii)\tpackaged\tor\tcylinder\tgases.\tThe\tdistribution\tmethod\tused\tby\tLinde\tto supply\ta\tcustomer\tis\tdetermined\tby\tmany\tfactors,\tincluding\tthe\tcustomer's\tvolume\trequirements\tand\tlocation.\tThe\tdistribution method\t generally\t determines\t the\t contract\t terms\t with\t the\t customer\t and,\t accordingly,\t the\t revenue\t recognition\t accounting practices.\tLinde's\tprimary\tproducts\tin\tits\tindustrial\tgases\tbusiness\tare\tatmospheric\tgases\t(oxygen,\tnitrogen,\targon,\trare gases)\tand\tprocess\tgases\t(carbon\tdioxide,\thelium,\thydrogen,\telectronic\tgases,\tspecialty\tgases,\tacetylene).\tThese\tproducts\tare generally\tsold\tthrough\tone\tof\tthe\tthree\tdistribution\tmethods.\n\nFollowing\tis\ta\tdescription\tof\teach\tof\tthe\tthree\tindustrial\tgases\tdistribution\tmethods\tand\tthe\trespective\trevenue\trecognition policies:\n\nOn-site. Customers\t that\t require\t the\t largest\t volumes\t of\t product\t and\t that\t have\t a\t relatively\t constant\t demand\t pattern\t are supplied\tby\tcryogenic\tand\tprocess\tgas\ton-site\tplants.\tLinde\tconstructs\tplants\ton\tor\tadjacent\tto\tthese\tcustomers'\tsites\tand supplies\tthe\tproduct\tdirectly\tto\tcustomers\tby\tpipeline.\tWhere\tthere\tare\tlarge\tconcentrations\tof\tcustomers,\ta\tsingle\tpipeline may\tbe\tconnected\tto\tseveral\tplants\tand\tcustomers.\tOn-site\tproduct\tsupply\tcontracts\tgenerally\tare\ttotal\trequirement\tcontracts with\tterms\ttypically\tranging\tfrom\t10-20\tyears\tand\tcontain\tminimum\tpurchase\trequirements\tand\tprice\tescalation\tprovisions.\tMany of\tthe\tcryogenic\ton-site\tplants\talso\tproduce\tliquid\tproducts\tfor\tthe\tmerchant\tmarket.\tTherefore,\tplants\tare\ttypically\tnot dedicated\tto\ta\tsingle\tcustomer.\tAdditionally,\tLinde\tis\tresponsible\tfor\tthe\tdesign,\tconstruction,\toperations\tand\tmaintenance of\tthe\tplants\tand\tour\tcustomers\ttypically\thave\tno\tinvolvement\tin\tthese\tactivities.\tAdvanced\tair\tseparation\tprocesses\talso allow\ton-site\tdelivery\tto\tcustomers\twith\tsmaller\tvolume\trequirements.\n\nThe\tcompany's\tperformance\tobligations\trelated\tto\ton-site\tcustomers\tare\tsatisfied\tover\ttime\tas\tcustomers\treceive\tand\tobtain control\tof\tthe\tproduct.\tLinde\thas\telected\tto\tapply\tthe\tpractical\texpedient\tfor\tmeasuring\tprogress\ttowards\tthe\tcompletion\tof\ta performance\t obligation\t and\t recognizes\t revenue\t as\t the\t company\t has\t the\t right\t to\t invoice\t each\t customer,\t which\t generally corresponds\t with\t product\t delivery.\t Accordingly,\t revenue\t is\t recognized\t when\t product\t is\t delivered\t to\t the\t customer\t and\t the company\thas\tthe\tright\tto\tinvoice\tthe\tcustomer\tin\taccordance\twith\tthe\tcontract\tterms.\tConsideration\tin\tthese\tcontracts\tis generally\tbased\ton\tpricing\twhich\tfluctuates\twith\tvarious\tprice\tindices.\tVariable\tcomponents\tof\tconsideration\texist\twithin\tonsite\tcontracts\tbut\tare\tconsidered\tconstrained.\n\nMerchant. Merchant\tdeliveries\tgenerally\tare\tmade\tfrom\tLinde's\tplants\tby\ttanker\ttrucks\tto\tstorage\tcontainers\tat\tthe\tcustomer's site.\t Due\t to\t the\t relatively\t high\t distribution\t cost,\t merchant\t oxygen\t and\t nitrogen\t generally\t have\t a\t relatively\t small distribution\t radius\t from\t the\t plants\t at\t which\t they\t are\t produced.\t Merchant\t argon,\t hydrogen\t and\t helium\t can\t be\t shipped\t much longer\tdistances.\tThe\tcustomer\tagreements\tused\tin\tthe\tmerchant\tbusiness\tare\tusually\tthree\tto\tseven\tyear\tsupply\tagreements based\ton\tthe\trequirements\tof\tthe\tcustomer.\tThese\tcontracts\tgenerally\tdo\tnot\tcontain\tminimum\tpurchase\trequirements\tor\tvolume commitments.\n\nThe\t company's\t performance\t obligations\t related\t to\t merchant\t customers\t are\t generally\t satisfied\t at\t a\t point\t in\t time\t as\t the customers\treceive\tand\tobtain\tcontrol\tof\tthe\tproduct.\tRevenue\tis\trecognized\twhen\tproduct\tis\tdelivered\tto\tthe\tcustomer\tand\tthe company\thas\tthe\tright\tto\tinvoice\tthe\tcustomer\tin\taccordance\twith\tthe\tcontract\tterms.\tAny\tvariable\tcomponents\tof\tconsideration within\tmerchant\tcontracts\tare\tconstrained\thowever\tthis\tconsideration\tis\tnot\tsignificant.\n\nPackaged\tGases. Customers\trequiring\tsmall\tvolumes\tare\tsupplied\tproducts\tin\tcontainers\tcalled\tcylinders,\tunder\tmedium\tto\thigh pressure.\t Linde\t distributes\t merchant\t gases\t from\t its\t production\t plants\t to\t company-owned\t cylinder\t filling\t plants\t where cylinders\tare\tthen\tfilled\tfor\tdistribution\tto\tcustomers.\tCylinders\tmay\tbe\tdelivered\tto\tthe\tcustomer's\tsite\tor\tpicked\tup\tby the\tcustomer\tat\ta\tpackaging\tfacility\tor\tretail\tstore.\tLinde\tinvoices\tthe\tcustomer\tfor\tthe\tindustrial\tgases\tand\tthe\tuse\tof\tthe cylinder\t container(s).\t The\t company\t also\t sells\t hardgoods\t and\t welding\t equipment\t purchased\t from\t independent\t manufacturers. Packaged\tgases\tare\tgenerally\tsold\tunder\tone\tto\tthree-year\tsupply\tcontracts\tand\tpurchase\torders\tand\tdo\tnot\tcontain\tminimum purchase\trequirements\tor\tvolume\tcommitments.",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Total_Requirement_Contracts",
+          "name": "Total Requirement Contracts",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_87",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\n## Contracts with Customers\n\nLinde serves a diverse group of industries including healthcare, chemicals and energy, manufacturing, metals and mining, food and beverage, and electronics.\n\n## Industrial Gases\n\nWithin each of the company's geographic segments for industrial gases, there are three basic distribution methods: (i) on-site or tonnage; (ii) merchant or bulk liquid; and (iii) packaged or cylinder gases. The distribution method used by Linde to supply a customer is determined by many factors, including the customer's volume requirements and location. The distribution method generally determines the contract terms with the customer and, accordingly, the revenue recognition accounting practices. Linde's primary products in its industrial gases business are atmospheric gases (oxygen, nitrogen, argon, rare gases) and process gases (hydrogen, helium, carbon dioxide, carbon monoxide, electronic gases, specialty gases, acetylene). These products are generally sold through one of the three distribution methods.\n\nFollowing is a description of each of the three industrial gases distribution methods and the respective revenue recognition policies:\n\nOn-site. Customers that require the largest volumes of product and that have a relatively constant demand pattern are supplied by cryogenic and process gas on-site plants.  Linde  constructs  plants  on  or  adjacent  to  these  customers'  sites  and  supplies  the  product  directly  to  customers  by  pipeline.  Where  there  are  large concentrations of customers, a single pipeline may be connected to several plants and customers. On-site product supply contracts generally are total requirement contracts with terms typically ranging from 10-20 years and contain minimum purchase requirements and price escalation provisions. Many of the cryogenic on-site plants also produce liquid products for the merchant market. Therefore, plants are typically not dedicated to a single customer. Additionally, Linde is responsible for the design, construction, operations and maintenance of the plants and our customers typically have no involvement in these activities. Advanced air separation processes also allow on-site delivery to customers with smaller volume requirements.\n\nThe company's performance obligations related to on-site customers are satisfied over time as customers receive and obtain control of the product. Linde has elected to apply the practical ex pedient for measuring progress towards the completion of a performance obligation and recognizes revenue as the company has the right to invoice each customer, which generally corresponds with product delivery. Accordingly, revenue is recognized when product is delivered to the customer and the company has the right to invoice the customer in accordance with the contract terms. Consideration in these contracts is generally based on pricing which fluctuates with various price indices. Variable components of consideration exist within on-site contracts but are considered constrained.\n\nMerchant. Merchant deliveries generally are made from  Linde's plants by tanker trucks to storage containers at the customer's site.  Due to the relatively high distribution cost, merchant oxygen and nitrogen generally have a relatively small distribution radius from the plants at which they are produced. Merchant argon, hydrogen and helium can be shipped much longer distances.  The customer agreements used in the merchant business are usually three  to seven year supply agreements based on the requirements of the customer. These contracts generally do not contain minimum purchase requirements or volume commitments.\n\nThe company's performance obligations related to merchant customers are generally satisfied at a point in time as the customers receive and obtain control of the product. Revenue is recognized when product is delivered to the customer and the company has the right to invoice the customer in accordance with the contract terms.\n\nPackaged Gases. Customers requiring small volumes are supplied products in containers called cylinders, under medium to high pressure. Linde distributes merchant gases from its production plants to company-owned cylinder filling plants where cylinders are then filled for distribution to customers. Cylinders may be delivered to the customer's site or picked up by the customer at a packaging facility or retail store. Linde invoices the customer for the industrial gases and the use of the cylinder container(s). The company also sells hardgoods and welding equipment purchased from independent manufacturers. Packaged gases are generally sold under one to three-year supply contracts and purchase orders and do not contain minimum purchase requirements or volume commitments.\n\nThe company's performance obligations related to packaged gases are satisfied at a point in time. Accordingly, revenue is recognized when product is delivered to the customer or when the customer picks up product from a packaged gas facility or retail store, and the company has the right to payment from the customer in accordance with the contract terms.\n\n## Engineering\n\nThe company designs and manufactures equipment for air separation and other industrial gas applications manufactured specifically for end customers. Sale of equipment contracts are generally comprised of a single performance obligation.",
+          "relationship": "Introduces"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 47
+    },
+    {
+      "question_id": 3,
+      "question": "How did the net pension and OPEB benefit, excluding service cost, evolve between 2023 and 2024, and what were the key drivers behind the change?",
+      "answer": "In 2023, the net pension and OPEB benefit, excluding service cost, was $164 million. In 2024, this benefit increased to $190 million. The increase in the benefit was primarily driven by a higher expected return on assets and lower interest costs due to a decrease in benefit obligations, partially offset by lower amortization of deferred gains year-over-year.",
+      "reasoning_steps": [
+        "Step 1: Identify the net pension and OPEB benefit in 2023, which was $164 million.",
+        "Step 2: Identify the net pension and OPEB benefit in 2024, which increased to $190 million.",
+        "Step 3: Analyze the change, which indicates an increase in the benefit, driven by a higher expected return on assets and lower interest costs due to a decrease in benefit obligations, partially offset by lower amortization of deferred gains."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Decreases]-> FIN_METRIC <-[Positively_Impacts]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Net Pension and OPEB Benefit",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_24",
+          "chunk_id": "chunk_1",
+          "chunk_text": "On\ta\treported\tbasis,\tthe\tincrease\twas\tprimarily\tdriven\tby\tRussia-Ukraine\tconflict\tand\tother\tcharges\trecorded\tin\t2022\tand included\t higher\t pricing,\t savings\t from\t productivity\t initiatives,\t and\t lower\t depreciation\t and\t amortization\t driven\t by\t merger related\tintangible\tassets.\tThese\tincreases\tmore\tthan\toffset\tthe\tadverse\timpacts\tof\tinflation\tand\tcurrency\tin\tthe\tyear\tas\twell as\tother\tcharges\tof\t$40\tmillion.\n\nOn\tan\tadjusted\tbasis,\twhich\texcludes\tthe\timpacts\tof\tpurchase\taccounting\tas\twell\tas\tother\tcharges,\toperating\tprofit\tincreased $1,166\tmillion,\tor\t15%.\tOperating\tprofit\tgrowth\twas\tdriven\tby\thigher\tpricing,\tand\tproductivity\tinitiatives,\tpartially\toffset by\tcost\tinflation\tand\tlower\tvolumes.\tA\tdiscussion\tof\toperating\tprofit\tby\tsegment\tis\tincluded\tin\tthe\tsegment\tdiscussion\tthat follows.\n\n## Interest\texpense\t-\tnet\n\nReported\tinterest\texpense\t-\tnet\tin\t2023\tincreased\t$137\tmillion,\tor\t217%,\tversus\t2022.\tOn\tan\tadjusted\tbasis\tinterest\texpense increased\t$118\tmillion,\tor\t120%\tin\t2023\tas\tcompared\tto\t2022.\tThe\tincrease\twas\tdriven\tprimarily\tby\thigher\tinterest\trates\ton debt\tand\tincluded\tapproximately\t$28\tmillion\tof\tdevaluation\timpacts\tfrom\thyperinflationary\tcountries.\n\n## Net\tpension\tand\tOPEB\tcost\t(benefit),\texcluding\tservice\tcost\n\nReported\tnet\tpension\tand\tOPEB\tcost\t(benefit),\texcluding\tservice\tcost\twere\tbenefits\tof\t$164\tmillion\tand\t$237\tmillion\tin\t2023 and\t2022,\trespectively.\tThe\tdecrease\tin\tbenefit\tprimarily\trelates\tto\thigher\tinterest\tcost\treflective\tof\tthe\thigher\tdiscount rate\tenvironment\tyear-over-year\t(see\tNote\t16\tto\tthe\tconsolidated\tfinancial\tstatements).\n\n## Effective\ttax\trate\n\nThe\t reported\t effective\t tax\t rate\t (\"ETR\")\t for\t 2023\t was\t 22.7%\t versus\t 25.9%\t in\t 2022.\t The\t decrease\t in\t the\t rate\t is\t primarily related\t to\t a\t net\t decrease\t in\t the\t company's\t uncertain\t tax\t positions\t and\t the\t absence\t of\t the\t net\t unfavorable\t tax\t expense resulting\tfrom\tthe\tRussia\timpairment\tand\tdeconsolidation\tin\t2022\t(see\tNote\t3\tto\tthe\tconsolidated\tfinancial\tstatements).\n\nOn\tan\tadjusted\tbasis,\tthe\tETR\tfor\t2023\twas\t23.6%\tversus\t24.2%\tin\t2022.\tThe\tdecrease\tincludes\thigher\ttax\tbenefits\tfrom\tshare based\tcompensation.\n\n## Income\tfrom\tequity\tinvestments\n\nReported\tincome\tfrom\tequity\tinvestments\tfor\t2023\twas\t$167\tmillion\tas\tcompared\tto\t$172\tmillion\tin\t2022.\tOn\tan\tadjusted\tbasis, income\tfrom\tequity\tinvestments\tfor\t2023\twas\t$239\tmillion\tversus\t$247\tmillion\tin\t2022.\n\nOn\t an\t adjusted\t basis,\t the\t year-over-year\t decrease\t in\t income\t from\t equity\t investments\t was\t primarily\t driven\t by\t the\t overall performance\tof\tinvestments\tin\tAPAC.\n\n## Noncontrolling\tinterests\n\nAt\tDecember\t31,\t2023,\tnoncontrolling\tinterests\tfrom\tcontinuing\toperations\tconsisted\tprimarily\tof\tnoncontrolling\tshareholders' investments\tin\tAPAC\t(primarily\tin\tChina).\n\nReported\tnoncontrolling\tinterests\tfrom\tcontinuing\toperations\tincreased\t$8\tmillion,\tfrom\t$134\tmillion\tin\t2022\tto\t$142\tmillion in\t2023.\n\nAdjusted\tnoncontrolling\tinterests\tfrom\tcontinuing\toperations\tdecreased\t$2\tmillion\tin\t2023\tas\tcompared\tto\t2022.\n\n## Net\tIncome\t-\tLinde\tplc\n\nReported\t net\t income\t -\t Linde\t plc\t increased\t $2,052\t million,\t or\t 49%.\t On\t an\t adjusted\t basis,\t which\t excludes\t the\t impacts\t of purchase\taccounting\tand\tother\tcharges,\tnet\tincome\t-\tLinde\tplc\tincreased\t$794\tmillion,\tor\t13%,\tin\t2023\tversus\t2022.\tOn\tboth\ta reported\tand\tadjusted\tbasis,\tthe\tincrease\twas\tdriven\tby\thigher\toperating\tprofit.\n\n## Diluted\tearnings\tper\tshare\n\nReported\tdiluted\tearnings\tper\tshare\tincreased\t$4.36,\tor\t53%,\tin\t2023\tas\tcompared\tto\t2022.\tOn\tan\tadjusted\tbasis,\tdiluted\tEPS of\t$14.20\tin\t2023\tincreased\t16%\tversus\t2022.\tThe\tincrease\ton\tboth\ta\treported\tand\tadjusted\tbasis\tis\tprimarily\tdue\tto\thigher net\tincome\t-\tLinde\tplc\tand\tlower\tdiluted\tshares\toutstanding.\n\n## Employees\n\nThe\tnumber\tof\temployees\tat\tDecember\t31,\t2023\twas\t66,323,\tan\tincrease\tof\t2%,\tor\t1,313\temployees\tfrom\t2022,\tdriven\tprimarily\tby the\tacquisition\tof\tnexAir.",
+          "relationship": "Decreases"
+        },
+        "intermediate_node": {
+          "id": "Net_Pension_and_OPEB_Benefit",
+          "name": "Net Pension and OPEB Benefit",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_21",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\nOn a reported basis, operating profit increased $611 million in 2024, or 8%.  The increase was primarily driven by higher pricing and savings from productivity initiatives, which more than offset the effects of cost inflation, cost reduction program and other charges and currency.\n\nOn an adjusted basis, which excludes the impacts of merger-related purchase accounting as well as cost reduction program and other charges, operating profit increased $650 million, or 7%, for 2024 versus 2023. Operating profit growth was driven by higher pricing and productivity initiatives, which more than offset the effects of cost inflation and currency during 2024. A discussion of operating profit by segment is included in the segment discussion that follows.\n\n## Interest expense - net\n\nReported interest expense - net in 2024 increased $56 million, or 28%, versus 2023. The increase was driven primarily by higher outstanding borrowings due to net issuances in 2024 and higher interest rates on borrowings.\n\n## Net pension and OPEB cost (benefit), excluding service cost\n\nReported net pension and OPEB cost (benefit), excluding service cost were benefits of $190 million and $164 million in 2024 and 2023, respectively. The increase was driven primarily by a higher expected return on assets and lower interest cost due to decrease in benefit obligations, partially offset by lower amortization of deferred gains year-over-year. (see Note 16 to the consolidated financial statements).\n\n## Effective tax rate\n\nThe reported effective tax rate (\"ETR\") for 2024 was 23.4% versus 22.7% in 2023. The increase in the rate is primarily related to a prior year benefit from a net decrease in the company's uncertain tax positions. On an adjusted basis, the ETR for 2024 was 23.4% versus 23.6% in 2023.\n\n## Income from equity investments\n\nReported income from equity investments for 2024 was $170 million as compared to $167 million in 2023. On an adjusted basis, income from equity investments for 2024 was $242 million versus $239 million million in 2023.\n\n## Noncontrolling interests\n\nAt  December  31,  2024,  noncontrolling  interests  consisted  primarily  of  noncontrolling  shareholders'  investments  in  APAC  (primarily  in  China).  Reported noncontrolling interests increased $30 million, from $142 million in 2023 to $172 million in 2024 and included the impact of a divestiture in the APAC segment.\n\nAdjusted noncontrolling interests increased $14 million in 2024 as compared to 2023.\n\n## Net Income - Linde plc\n\nReported net income - Linde plc increased $366 million, or 6%. On an adjusted basis, which excludes the impacts of purchase accounting and cost reduction program and other charges, net income - Linde plc increased $486 million, or 7%, in 2024 versus 2023. On both a reported and adjusted basis, the increase was driven by higher operating profit.\n\n## Diluted earnings per share\n\nReported diluted earnings per share increased $1.03, or 8%, in 2024 as compared to 2023. On an adjusted basis, diluted EPS of $15.51 in 2024 increased $1.31 versus 2023. The increase on both a reported and adjusted basis is primarily due to higher net income - Linde plc and lower diluted shares outstanding.\n\n## Employees\n\nThe number of employees at December 31, 2024 was 65,289, a decrease of 2%, or 1,034 employees from 2023, driven primarily by the impact of cost reduction programs and a divestiture in APAC.\n\n## Other Financial Data\n\nEBITDA increased to $12,585 million in 2024 from $12,007 million in 2023. Adjusted EBITDA increased to $12,819 million for 2024 as compared to $12,133 million in 2023. The increase in both periods was driven by higher operating profit versus prior year.\n\nSee the \"Non-GAAP Financial Measures\" section for definitions and reconciliations of these non-GAAP measures to reported GAAP amounts.\n\n## Other Comprehensive Income (Loss)\n\nOther comprehensive income (loss) for the year ended December 31, 2024 was a loss of $1,126 million that resulted primarily from currency translation adjustments of $1,632  million  partially  offset  by  gains  related  to  change  in  funded  status  of  retirement  plans  of  $519  million.  The  translation  adjustments  reflect  the  impact  of translating local currency",
+          "relationship": "Positively_Impacts"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 46
+    },
+    {
+      "question_id": 4,
+      "question": "How has Linde's disclosure regarding assets pledged as collateral evolved between 2023 and 2024, and what does this indicate about the company's collateral practices?",
+      "answer": "In both 2023 and 2024, Linde disclosed that the amount of assets pledged as collateral was immaterial as of December 31 of each respective year. However, in 2024, the company expanded its disclosure by providing additional context on its financial risk management practices, including the use of derivative financial instruments such as interest-rate swaps, currency-swap agreements, and forward contracts. This indicates that while the level of pledged assets remained unchanged and immaterial, Linde enhanced its transparency around financial risk mitigation strategies over time.",
+      "reasoning_steps": [
+        "Step 1: In 2023, Linde disclosed that assets pledged as collateral were immaterial and referenced Note 13 for fair value information related to debt.",
+        "Step 2: In 2024, Linde repeated that pledged assets were immaterial but added a detailed explanation of its financial risk management strategies involving derivatives.",
+        "Step 3: The immaterial level of pledged assets remained stable, but the company evolved its disclosure to include broader financial risk management context in 2024."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Reports]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Assets Pledged As Collateral",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_79",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\nAs\tof\tDecember\t31,\t2023,\tthe\tamount\tof\tLinde's\tassets\tpledged\tas\tcollateral\twas\timmaterial.\n\nSee\tNote\t13\tfor\tthe\tfair\tvalue\tinformation\trelated\tto\tdebt.",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Assets_Pledged_As_Collateral",
+          "name": "Assets Pledged As Collateral",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_68",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\nAs of December 31, 2024, the amount of Linde's assets pledged as collateral was immaterial.\n\nSee Note 13 for the fair value information related to debt.\n\n## NOTE 12. FINANCIAL INSTRUMENTS\n\nIn its normal operations, Linde is ex posed to market risks relating to fluctuations in interest rates, foreign currency ex change rates, energy and commodity costs. The objective of financial risk management at Linde is to minimize the negative impact of such fluctuations on the company's earnings and cash flows. To manage these risks, among other strategies, Linde routinely enters into various derivative financial instruments ('derivatives') including interest-rate swap and treasury rate lock agreements, currency-swap agreements, forward contracts, currency options, and commodity-swap",
+          "relationship": "Reports"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 46
+    },
+    {
+      "question_id": 5,
+      "question": "How has Linde's disclosure regarding pricing mechanisms tied to indices evolved between its 2023 and 2024 10-K filings, and what implications might this have for understanding the company's revenue volatility?",
+      "answer": "In the 2023 10-K filing, Linde explicitly stated that 'consideration in these contracts is generally based on pricing which fluctuates with various price indices' within the 'On-site' section, indicating a direct link between external indices and contract pricing. In the 2024 10-K filing, while the company maintained identical language regarding the use of price indices in 'On-site' contracts, it did not expand on or further clarify the nature or extent of these pricing mechanisms. This suggests that while the company continues to use index-based pricing, it has not provided additional transparency into how these indices may impact revenue stability or variability. This lack of additional disclosure could make it more challenging for investors to assess the financial implications of index-linked pricing on Linde\u2019s revenue predictability.",
+      "reasoning_steps": [
+        "Step 1: Identify state/situation in Year 1 \u2014 In 2023, Linde explicitly disclosed that on-site contracts used pricing based on various price indices, signaling a potential source of revenue volatility.",
+        "Step 2: Identify state/situation in Year 2 \u2014 In 2024, Linde retained the same language about index-based pricing in on-site contracts but did not enhance or modify the disclosure to reflect any changes or additional context.",
+        "Step 3: Analyze and characterize the change \u2014 The disclosure remained unchanged, indicating no new strategic shift or added transparency, but the lack of elaboration may affect investor understanding of revenue risk tied to pricing indices."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Depends_On]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Pricing Based on Indices",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_100",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## 19.\tREVENUE\tRECOGNITION\n\nRevenue\tis\taccounted\tfor\tin\taccordance\twith\tASC\t606.\tRevenue\tis\trecognized\tas\tcontrol\tof\tgoods\tor\tservices\tare\ttransferred\tto customers\tin\tan\tamount\tthat\treflects\tthe\tconsideration\tto\twhich\tan\tentity\texpects\tto\tbe\tentitled\tto\treceive\tin\texchange\tfor the\tgoods\tor\tservices.\n\n## Contracts\twith\tCustomers\n\nLinde\tserves\ta\tdiverse\tgroup\tof\tindustries\tincluding\thealthcare,\tchemicals\tand\tenergy,\tmanufacturing,\tmetals\tand\tmining,\tfood and\tbeverage,\tand\telectronics.\n\n## Industrial\tGases\n\nWithin\teach\tof\tthe\tcompany's\tgeographic\tsegments\tfor\tindustrial\tgases,\tthere\tare\tthree\tbasic\tdistribution\tmethods:\t(i)\tonsite\tor\ttonnage;\t(ii)\tmerchant\tor\tbulk\tliquid;\tand\t(iii)\tpackaged\tor\tcylinder\tgases.\tThe\tdistribution\tmethod\tused\tby\tLinde\tto supply\ta\tcustomer\tis\tdetermined\tby\tmany\tfactors,\tincluding\tthe\tcustomer's\tvolume\trequirements\tand\tlocation.\tThe\tdistribution method\t generally\t determines\t the\t contract\t terms\t with\t the\t customer\t and,\t accordingly,\t the\t revenue\t recognition\t accounting practices.\tLinde's\tprimary\tproducts\tin\tits\tindustrial\tgases\tbusiness\tare\tatmospheric\tgases\t(oxygen,\tnitrogen,\targon,\trare gases)\tand\tprocess\tgases\t(carbon\tdioxide,\thelium,\thydrogen,\telectronic\tgases,\tspecialty\tgases,\tacetylene).\tThese\tproducts\tare generally\tsold\tthrough\tone\tof\tthe\tthree\tdistribution\tmethods.\n\nFollowing\tis\ta\tdescription\tof\teach\tof\tthe\tthree\tindustrial\tgases\tdistribution\tmethods\tand\tthe\trespective\trevenue\trecognition policies:\n\nOn-site. Customers\t that\t require\t the\t largest\t volumes\t of\t product\t and\t that\t have\t a\t relatively\t constant\t demand\t pattern\t are supplied\tby\tcryogenic\tand\tprocess\tgas\ton-site\tplants.\tLinde\tconstructs\tplants\ton\tor\tadjacent\tto\tthese\tcustomers'\tsites\tand supplies\tthe\tproduct\tdirectly\tto\tcustomers\tby\tpipeline.\tWhere\tthere\tare\tlarge\tconcentrations\tof\tcustomers,\ta\tsingle\tpipeline may\tbe\tconnected\tto\tseveral\tplants\tand\tcustomers.\tOn-site\tproduct\tsupply\tcontracts\tgenerally\tare\ttotal\trequirement\tcontracts with\tterms\ttypically\tranging\tfrom\t10-20\tyears\tand\tcontain\tminimum\tpurchase\trequirements\tand\tprice\tescalation\tprovisions.\tMany of\tthe\tcryogenic\ton-site\tplants\talso\tproduce\tliquid\tproducts\tfor\tthe\tmerchant\tmarket.\tTherefore,\tplants\tare\ttypically\tnot dedicated\tto\ta\tsingle\tcustomer.\tAdditionally,\tLinde\tis\tresponsible\tfor\tthe\tdesign,\tconstruction,\toperations\tand\tmaintenance of\tthe\tplants\tand\tour\tcustomers\ttypically\thave\tno\tinvolvement\tin\tthese\tactivities.\tAdvanced\tair\tseparation\tprocesses\talso allow\ton-site\tdelivery\tto\tcustomers\twith\tsmaller\tvolume\trequirements.\n\nThe\tcompany's\tperformance\tobligations\trelated\tto\ton-site\tcustomers\tare\tsatisfied\tover\ttime\tas\tcustomers\treceive\tand\tobtain control\tof\tthe\tproduct.\tLinde\thas\telected\tto\tapply\tthe\tpractical\texpedient\tfor\tmeasuring\tprogress\ttowards\tthe\tcompletion\tof\ta performance\t obligation\t and\t recognizes\t revenue\t as\t the\t company\t has\t the\t right\t to\t invoice\t each\t customer,\t which\t generally corresponds\t with\t product\t delivery.\t Accordingly,\t revenue\t is\t recognized\t when\t product\t is\t delivered\t to\t the\t customer\t and\t the company\thas\tthe\tright\tto\tinvoice\tthe\tcustomer\tin\taccordance\twith\tthe\tcontract\tterms.\tConsideration\tin\tthese\tcontracts\tis generally\tbased\ton\tpricing\twhich\tfluctuates\twith\tvarious\tprice\tindices.\tVariable\tcomponents\tof\tconsideration\texist\twithin\tonsite\tcontracts\tbut\tare\tconsidered\tconstrained.\n\nMerchant. Merchant\tdeliveries\tgenerally\tare\tmade\tfrom\tLinde's\tplants\tby\ttanker\ttrucks\tto\tstorage\tcontainers\tat\tthe\tcustomer's site.\t Due\t to\t the\t relatively\t high\t distribution\t cost,\t merchant\t oxygen\t and\t nitrogen\t generally\t have\t a\t relatively\t small distribution\t radius\t from\t the\t plants\t at\t which\t they\t are\t produced.\t Merchant\t argon,\t hydrogen\t and\t helium\t can\t be\t shipped\t much longer\tdistances.\tThe\tcustomer\tagreements\tused\tin\tthe\tmerchant\tbusiness\tare\tusually\tthree\tto\tseven\tyear\tsupply\tagreements based\ton\tthe\trequirements\tof\tthe\tcustomer.\tThese\tcontracts\tgenerally\tdo\tnot\tcontain\tminimum\tpurchase\trequirements\tor\tvolume commitments.\n\nThe\t company's\t performance\t obligations\t related\t to\t merchant\t customers\t are\t generally\t satisfied\t at\t a\t point\t in\t time\t as\t the customers\treceive\tand\tobtain\tcontrol\tof\tthe\tproduct.\tRevenue\tis\trecognized\twhen\tproduct\tis\tdelivered\tto\tthe\tcustomer\tand\tthe company\thas\tthe\tright\tto\tinvoice\tthe\tcustomer\tin\taccordance\twith\tthe\tcontract\tterms.\tAny\tvariable\tcomponents\tof\tconsideration within\tmerchant\tcontracts\tare\tconstrained\thowever\tthis\tconsideration\tis\tnot\tsignificant.\n\nPackaged\tGases. Customers\trequiring\tsmall\tvolumes\tare\tsupplied\tproducts\tin\tcontainers\tcalled\tcylinders,\tunder\tmedium\tto\thigh pressure.\t Linde\t distributes\t merchant\t gases\t from\t its\t production\t plants\t to\t company-owned\t cylinder\t filling\t plants\t where cylinders\tare\tthen\tfilled\tfor\tdistribution\tto\tcustomers.\tCylinders\tmay\tbe\tdelivered\tto\tthe\tcustomer's\tsite\tor\tpicked\tup\tby the\tcustomer\tat\ta\tpackaging\tfacility\tor\tretail\tstore.\tLinde\tinvoices\tthe\tcustomer\tfor\tthe\tindustrial\tgases\tand\tthe\tuse\tof\tthe cylinder\t container(s).\t The\t company\t also\t sells\t hardgoods\t and\t welding\t equipment\t purchased\t from\t independent\t manufacturers. Packaged\tgases\tare\tgenerally\tsold\tunder\tone\tto\tthree-year\tsupply\tcontracts\tand\tpurchase\torders\tand\tdo\tnot\tcontain\tminimum purchase\trequirements\tor\tvolume\tcommitments.",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Pricing_Based_on_Indices",
+          "name": "Pricing Based on Indices",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_87",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\n## Contracts with Customers\n\nLinde serves a diverse group of industries including healthcare, chemicals and energy, manufacturing, metals and mining, food and beverage, and electronics.\n\n## Industrial Gases\n\nWithin each of the company's geographic segments for industrial gases, there are three basic distribution methods: (i) on-site or tonnage; (ii) merchant or bulk liquid; and (iii) packaged or cylinder gases. The distribution method used by Linde to supply a customer is determined by many factors, including the customer's volume requirements and location. The distribution method generally determines the contract terms with the customer and, accordingly, the revenue recognition accounting practices. Linde's primary products in its industrial gases business are atmospheric gases (oxygen, nitrogen, argon, rare gases) and process gases (hydrogen, helium, carbon dioxide, carbon monoxide, electronic gases, specialty gases, acetylene). These products are generally sold through one of the three distribution methods.\n\nFollowing is a description of each of the three industrial gases distribution methods and the respective revenue recognition policies:\n\nOn-site. Customers that require the largest volumes of product and that have a relatively constant demand pattern are supplied by cryogenic and process gas on-site plants.  Linde  constructs  plants  on  or  adjacent  to  these  customers'  sites  and  supplies  the  product  directly  to  customers  by  pipeline.  Where  there  are  large concentrations of customers, a single pipeline may be connected to several plants and customers. On-site product supply contracts generally are total requirement contracts with terms typically ranging from 10-20 years and contain minimum purchase requirements and price escalation provisions. Many of the cryogenic on-site plants also produce liquid products for the merchant market. Therefore, plants are typically not dedicated to a single customer. Additionally, Linde is responsible for the design, construction, operations and maintenance of the plants and our customers typically have no involvement in these activities. Advanced air separation processes also allow on-site delivery to customers with smaller volume requirements.\n\nThe company's performance obligations related to on-site customers are satisfied over time as customers receive and obtain control of the product. Linde has elected to apply the practical ex pedient for measuring progress towards the completion of a performance obligation and recognizes revenue as the company has the right to invoice each customer, which generally corresponds with product delivery. Accordingly, revenue is recognized when product is delivered to the customer and the company has the right to invoice the customer in accordance with the contract terms. Consideration in these contracts is generally based on pricing which fluctuates with various price indices. Variable components of consideration exist within on-site contracts but are considered constrained.\n\nMerchant. Merchant deliveries generally are made from  Linde's plants by tanker trucks to storage containers at the customer's site.  Due to the relatively high distribution cost, merchant oxygen and nitrogen generally have a relatively small distribution radius from the plants at which they are produced. Merchant argon, hydrogen and helium can be shipped much longer distances.  The customer agreements used in the merchant business are usually three  to seven year supply agreements based on the requirements of the customer. These contracts generally do not contain minimum purchase requirements or volume commitments.\n\nThe company's performance obligations related to merchant customers are generally satisfied at a point in time as the customers receive and obtain control of the product. Revenue is recognized when product is delivered to the customer and the company has the right to invoice the customer in accordance with the contract terms.\n\nPackaged Gases. Customers requiring small volumes are supplied products in containers called cylinders, under medium to high pressure. Linde distributes merchant gases from its production plants to company-owned cylinder filling plants where cylinders are then filled for distribution to customers. Cylinders may be delivered to the customer's site or picked up by the customer at a packaging facility or retail store. Linde invoices the customer for the industrial gases and the use of the cylinder container(s). The company also sells hardgoods and welding equipment purchased from independent manufacturers. Packaged gases are generally sold under one to three-year supply contracts and purchase orders and do not contain minimum purchase requirements or volume commitments.\n\nThe company's performance obligations related to packaged gases are satisfied at a point in time. Accordingly, revenue is recognized when product is delivered to the customer or when the customer picks up product from a packaged gas facility or retail store, and the company has the right to payment from the customer in accordance with the contract terms.\n\n## Engineering\n\nThe company designs and manufactures equipment for air separation and other industrial gas applications manufactured specifically for end customers. Sale of equipment contracts are generally comprised of a single performance obligation.",
+          "relationship": "Depends_On"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 46
+    },
+    {
+      "question_id": 6,
+      "question": "How did Linde's utilization of cost pass-through mechanisms evolve between 2022 and 2023, and what does this indicate about the company's approach to managing cost fluctuations?",
+      "answer": "In 2022, Linde identified cost pass-through as a 2% contributor to sales changes, indicating a limited but measurable impact of cost recovery mechanisms. By 2023, the company emphasized a structural advantage in its ability to pass through changes in energy and feedstock costs to customers through long-term contracts, suggesting a more strategic and intentional reliance on cost pass-through as a financial management tool. This evolution indicates a shift from a reactive cost adjustment to a more proactive and contractual approach.",
+      "reasoning_steps": [
+        "Step 1: In 2022, cost pass-through was quantified as contributing 2% to sales changes, showing it played a minor but explicit role in sales variance.",
+        "Step 2: In 2023, the company highlighted its long-term contracts as enabling the ability to pass through cost changes, framing it as a competitive advantage and strategic enabler.",
+        "Step 3: The shift from a specific but modest quantitative impact in 2022 to a broader strategic emphasis in 2023 indicates that cost pass-through evolved from a marginal factor to a core financial strategy."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Positively_Impacts]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Cost Pass-Through",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_30",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| (Dollar amounts in millions)            |         |               | Variance      |\n|-----------------------------------------|---------|---------------|---------------|\n| Sales                                   |         | 2020          | 2021 vs. 2020 |\n|                                         | $ 6,133 | $ 5,687       | 8%            |\n| Operating profit                        | $ 1,502 | $ 1,277       | 18%           |\n| As a percent of sales                   | 24.5%   | 22.5%         |               |\n|                                         |         | 2021 vs. 2020 | 2021 vs. 2020 |\n|                                         |         | %Change       | %Change       |\n| Factors Contributing to Changes - Sales |         |               |               |\n| Volume/Equipment                        |         |               | 11%           |\n| Price/Mix                               |         |               | 2%            |\n| Cost pass-through                       |         |               | 2%            |\n| Currency                                |         |               | 5%            |\n| Acquisitions/Divestitures               |         |               | (12)%         |\n|                                         |         |               | 8%            |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Cost_Pass-Through",
+          "name": "Cost Pass-Through",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_20",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\nThe\t company\t manufactures\t and\t distributes\t its\t industrial\t gas\t products\t through\t networks\t of\t thousands\t of\t production\t plants, pipeline\tcomplexes,\tdistribution\tcenters\tand\tdelivery\tvehicles.\tMajor\tpipeline\tcomplexes\tare\tprimarily\tlocated\tin\tthe\tUnited States\t and\t China.\t These\t networks\t are\t a\t competitive\t advantage,\t providing\t the\t foundation\t of\t reliable\t product\t supply\t to\t the company's\tcustomer\tbase.\tThe\tmajority\tof\tLinde's\tbusiness\tis\tconducted\tthrough\tlong-term\tcontracts\twhich\tprovide\tstability\tin cash\t flow\t and\t the\t ability\t to\t pass\t through\t changes\t in\t energy\t and\t feedstock\t costs\t to\t customers.\t The\t company\t has\t growth opportunities\tin\tall\tmajor\tgeographies\tand\tin\tdiverse\tend-markets\tsuch\tas\thealthcare,\tchemicals\tand\tenergy,\tmanufacturing, metals\tand\tmining,\tfood\tand\tbeverage,\tand\telectronics.",
+          "relationship": "Positively_Impacts"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 47
+    },
+    {
+      "question_id": 7,
+      "question": "How did the operating profit as a percentage of sales evolve from 2022 to 2023, and what does this indicate about the company's margin performance?",
+      "answer": "In 2022, the operating profit as a percentage of sales was 26.9%, while in 2023, it increased to 29.7%. This indicates an improvement in the company's margin performance, suggesting better cost control or pricing strategies contributing to higher profitability relative to sales.",
+      "reasoning_steps": [
+        "Step 1: Identify state/situation in Year 1 - In 2022, the operating profit as a percentage of sales was 26.9%.",
+        "Step 2: Identify state/situation in Year 2 - In 2023, the operating profit as a percentage of sales increased to 29.7%.",
+        "Step 3: Analyze and characterize the change - The operating profit margin increased by 2.8 percentage points, indicating improved efficiency or pricing power."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Increases]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "OP as % of Sales",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_31",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| (Dollar amounts in millions)            |         |               | Variance      |\n|-----------------------------------------|---------|---------------|---------------|\n| Year Ended December 31,                 | 2021    | 2020          | 2021 vs. 2020 |\n| Sales                                   | $ 2,867 | $ 2,851       | 1%            |\n| Operating profit                        | $ 473   | $ 435         | 9%            |\n| As a percent of sales                   | 16.5%   | 15.3%         |               |\n|                                         |         | 2021 vs. 2020 | 2021 vs. 2020 |\n|                                         |         | %Change       | %Change       |\n| Factors Contributing to Changes - Sales |         |               |               |\n| Volume                                  |         |               | (3)%          |\n| Currency                                |         |               | 4%            |\n|                                         |         |               | 1%            |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "OP_as_%_of_Sales",
+          "name": "OP as % of Sales",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_29",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| (Dollar amounts in millions)            |          |               | Variance      |\n|-----------------------------------------|----------|---------------|---------------|\n| Year Ended December 31,                 | 2023     | 2022          | 2023 vs. 2022 |\n| Sales                                   | $ 14,304 | $ 13,874      | 3 %           |\n| Operating profit                        | $ 4,244  | $ 3,732       | 14 %          |\n| As a percent of sales                   | 29.7 %   | 26.9 %        |               |\n|                                         |          | 2023 vs. 2022 |               |\n|                                         |          | % Change      |               |\n| Factors Contributing to Changes - Sales |          |               |               |\n| Volume                                  |          |               | - %           |\n| Price/Mix                               |          |               | 6 %           |\n| Cost pass-through                       |          |               | (6)%          |\n| Currency                                |          |               | - %           |\n| Acquisitions/Divestitures               |          |               | 3 %           |\n|                                         |          |               | 3 %           |\n",
+          "relationship": "Increases"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 47
+    },
+    {
+      "question_id": 8,
+      "question": "How did the Engineering Segment Operating Profit change between 2022 and 2023, and what specific factors contributed to this change?",
+      "answer": "In 2022, the Engineering Segment Operating Profit was $473 million. In 2023, it decreased by $64 million, or 12%, to $409 million. This decline was primarily driven by a $602 million decrease in Engineering segment sales, which included $894 million from projects in Russia in 2022 compared to only $238 million in 2023. Although the wind down of terminated or suspended Russian projects contributed to higher margins, it only partially offset the overall decline in operating profit.",
+      "reasoning_steps": [
+        "Step 1: In 2022, the Engineering Segment Operating Profit was $473 million with $894 million in sales related to Russia.",
+        "Step 2: In 2023, Engineering Segment Operating Profit dropped to $409 million, reflecting a $64 million (12%) decrease, with Russian project sales falling to $238 million.",
+        "Step 3: The change represents a 12% decrease in operating profit, primarily due to the significant drop in Russian project sales ($894 million in 2022 to $238 million in 2023), despite margin improvements from winding down those projects."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Decreases]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Engineering Segment Operating Profit",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_28",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| (Millions of dollars) Year Ended December 31,      | 2021     | 2020     | Variance   |\n|----------------------------------------------------|----------|----------|------------|\n| Sales                                              |          |          |            |\n| Americas                                           | $ 12,103 | $ 10,459 | 16%        |\n| EMEA                                               | 7,643    | 6,449    | 19%        |\n| APAC                                               | 6,133    | 5,687    | 8%         |\n| Engineering                                        | 2,867    | 2,851    | 1%         |\n| Other                                              | 2,047    | 1,797    | 14%        |\n| Total sales                                        | $ 30,793 | $ 27,243 | 13%        |\n| Operating Profit                                   |          |          |            |\n| Americas                                           | $ 3,368  | $ 2,773  | 21%        |\n| EMEA                                               | 1,889    | 1,465    | 29%        |\n| APAC                                               | 1,502    | 1,277    | 18%        |\n| Engineering                                        | 473      | 435      | 9%         |\n| Other                                              | (56)     | (153)    | 63%        |\n| Segment operating profit                           | 7,176    | 5,797    | 24%        |\n| Reconciliation to reported operating profit :      |          |          |            |\n| Cost reduction programs and other charges (Note 3) | (273)    | (506)    |            |\n| Purchase accounting impacts - LindeAG              | (1,919)  | (1,969)  |            |\n| Total operating profit                             | $ 4,984  | $ 3,322  |            |",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Engineering_Segment_Operating_Profit",
+          "name": "Engineering Segment Operating Profit",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_31",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\n## Sales\n\nEngineering\tsegment\tsales\tdecreased\t$602\tmillion,\tor\t22%,\tin\t2023\tversus\t2022\t.\tThe\tdecrease\twas\tdriven\tby\tproject\ttiming.\n\nProjects\t for\t Russia\t that\t were\t sanctioned,\t and\t therefore\t terminated\t or\t suspended,\t have\t been\t lawfully\t wound\t down\t and represented\tapproximately\t$238\tmillion\tand\t$894\tmillion\tof\tthe\tEngineering\tsegment\tsales\tduring\t2023\tand\t2022,\trespectively.\n\n## Operating\tprofit\n\nEngineering\tsegment\toperating\tprofit\tdecreased\t$64\tmillion,\tor\t12%,\tin\t2023\tversus\t2022.\tThe\tdecline\tfrom\tlower\tsales\twas partially\toffset\tby\thigher\tmargin\ton\twind\tdown\tof\tterminated\tor\tsuspended\tprojects\tsanctioned\tin\tRussia.",
+          "relationship": "Decreases"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 47
+    },
+    {
+      "question_id": 9,
+      "question": "How did Linde's use of cost pass-through mechanisms impact sales growth in 2023 compared to its 2022 strategy of passing through cost changes to customers?",
+      "answer": "In 2022, Linde emphasized its ability to pass through changes in energy and feedstock costs to customers as part of its long-term contracts, which provided cash flow stability. By 2023, this mechanism had a negative impact of 6% on sales growth, indicating a shift in how cost pass-through affected the company's financial performance. This change suggests that while the contractual framework remained in place, the economic or pricing environment altered the net effect of these pass-throughs.",
+      "reasoning_steps": [
+        "Step 1: Identify state/situation in 2022 \u2014 Linde had long-term contracts allowing for cost pass-throughs (energy/feedstock), providing cash flow stability.",
+        "Step 2: Identify state/situation in 2023 \u2014 Cost pass-through had a -6% impact on sales growth according to the variance table.",
+        "Step 3: Analyze and characterize the change \u2014 While cost pass-through mechanisms were still in place, they negatively affected sales growth in 2023, contrasting with the stability they provided in 2022."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Positively_Impacts]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Cost Pass-Through",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_19",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\nThe company manufactures and distributes its industrial gas products through networks of thousands of production plants, pipeline complexes, distribution centers and delivery vehicles. Major pipeline complexes are primarily located in the United States and China. These networks are a competitive advantage, providing the foundation of reliable product supply to the company's customer base. The majority of Linde's business is conducted through long-term contracts which provide stability in cash flow and the ability to pass through changes in energy and feedstock costs to customers. The company has growth opportunities in all major geographies and in diverse end-markets such as healthcare, chemicals and energy, manufacturing, metals and mining, food and beverage, and electronics.",
+          "relationship": "Positively_Impacts"
+        },
+        "intermediate_node": {
+          "id": "Cost_Pass-Through",
+          "name": "Cost Pass-Through",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_29",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| (Dollar amounts in millions)            |          |               | Variance      |\n|-----------------------------------------|----------|---------------|---------------|\n| Year Ended December 31,                 | 2023     | 2022          | 2023 vs. 2022 |\n| Sales                                   | $ 14,304 | $ 13,874      | 3 %           |\n| Operating profit                        | $ 4,244  | $ 3,732       | 14 %          |\n| As a percent of sales                   | 29.7 %   | 26.9 %        |               |\n|                                         |          | 2023 vs. 2022 |               |\n|                                         |          | % Change      |               |\n| Factors Contributing to Changes - Sales |          |               |               |\n| Volume                                  |          |               | - %           |\n| Price/Mix                               |          |               | 6 %           |\n| Cost pass-through                       |          |               | (6)%          |\n| Currency                                |          |               | - %           |\n| Acquisitions/Divestitures               |          |               | 3 %           |\n|                                         |          |               | 3 %           |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 46
+    },
+    {
+      "question_id": 10,
+      "question": "How did Linde's net purchases of ordinary shares evolve from 2022 to 2024, and what does this indicate about the company's use of cash in relation to shareholder returns during this period?",
+      "answer": "In 2022, Linde reported net purchases of ordinary shares amounting to $4,562 million, reflecting a significant use of cash for shareholder returns. By 2024, this figure decreased slightly to $4,451 million. This indicates that while the company remained committed to returning capital to shareholders through share repurchases, the level of activity in this area modestly declined over the two-year period. The reduction in share purchases coincided with an increase in dividends paid, which rose to $2,655 million in 2024, suggesting a potential shift in emphasis toward dividend distributions as part of the company's broader shareholder return approach. The overall cash deployment strategy appears to remain consistent, but with a slight recalibration in the mix between share repurchases and dividends.",
+      "reasoning_steps": [
+        "Step 1: Identify the level of net purchases of ordinary shares in 2022, which was $4,562 million according to the 2022 10-K filing.",
+        "Step 2: Identify the level of net purchases of ordinary shares in 2024, which was $4,451 million according to the 2024 10-K filing.",
+        "Step 3: Analyze the change between these two years and consider the broader context of shareholder returns, including the increase in dividends paid in 2024, to characterize the shift in cash deployment strategy."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Increases]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Net Purchases of Ordinary Shares",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_34",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\n## Investing\n\n## 2021 compared with 2020\n\nNet cash used for investing activities was $3,007 million in 2021 compared to $2,986 million in 2020. The increase was primarily driven by lower proceeds from divestitures in 2021, largely offset by lower capital expenditures.\n\nCapital expenditures in 2021 were $3,086 million, a decrease of $314 million from 2020. Capital expenditures during 2021 related primarily to investments in new plant and production equipment for growth. Approximately 42% of the capital expenditures were in the Americas segment with 32% in the APAC segment and the rest primarily in the EMEA segment.\n\nAt  December 31,  2021  ,  Linde's  sale  of  gas  backlog  of  large  projects  under  construction  was  approximately  $3.5  billion.  This represents the total estimated capital cost of large plants under construction.\n\nAcquisition expenditures in 2021 were $88 million, an increase of $20 million from 2020 and related primarily to acquisitions in the Americas and EMEA. Acquisitions for the year ended December 31, 2020 were $68 million and related to acquisitions in the Americas and APAC.\n\nDivestitures  and  asset  sales  in  2021  totaled  $167  million  as  compared  to  $482  million  in  2020.  The  2020  period  includes  net proceeds  from  merger-related  divestitures  of  $98  million  from  the  sale  of  selected  assets  of  Linde  China  and  proceeds  of approximately $130 million related to the divestiture of a non-core business in Scandinavia.\n\n## Financing\n\nLinde's financing strategy is to secure long-term committed funding by issuing public notes and debentures and commercial paper backed by a long-term bank credit agreement. Linde's international operations are funded through a combination of local borrowing and  intercompany  funding  to  minimize  the  total  cost  of  funds  and  to  manage  and  centralize  currency  exchange  exposures. As deemed necessary, Linde manages its exposure to interest-rate changes through the use of financial derivatives (see Note 12 to the consolidated financial statements and Item 7A. Quantitative and Qualitative Disclosures About Market Risk).\n\nCash used for financing activities was $7,588 million in 2021 compared to $3,345 million in 2020. Cash used for debt was $514 million in 2021 versus cash provided by debt of $1,313 million in 2020 primarily due to lower proceeds from debt issuances and decreased commercial paper borrowings, partially offset by lower debt repayments. Net purchases of ordinary shares were $4,562 million in 2021 versus $2,410 million in 2020. Cash dividends increased to $2,189 million in 2021 versus $2,028 million in 2020 driven primarily by a 10% increase in dividends per share from $3.852 per share to $4.24 per share. Cash used for Noncontrolling interest transactions and other was $323 million for the year ended December 31, 2021 versus cash used of $220 million for the respective 2020 period primarily due to the settlement of the buyout of minority interests in the Republic of South Africa in January of 2021.\n\nThe company believes that it has sufficient operating flexibility, cash reserves, and funding sources to maintain adequate amounts of liquidity to meet its business needs around the world. At December 31, 2021, Linde's credit ratings as reported by Standard &amp; Poor's and Moody's were A-1 and P-1 for short-term debt, respectively, and A and A2 for long-term debt, respectively.\n\nNote 11 to the consolidated financial statements includes information with respect to the company's debt activity in 2021, current debt position, debt covenants and the available credit facilities; and Note 12 includes information relating to derivative financial instruments.  Linde's  credit  facilities  are  with  major  financial  institutions  and  are  non-cancelable  until  maturity.  Therefore,  the company believes the risk of the financial institutions being unable to make required loans under the credit facilities, if requested, to be low. Linde's major bank credit and long-term debt agreements contain standard covenants. The company was in compliance with these covenants at December 31, 2021 and expects to remain in compliance for the foreseeable future.\n\nThe company maintains a $5 billion unsecured and undrawn revolving credit agreement with no associated financial covenants. No borrowings were outstanding under the credit agreement as of December 31, 2021. The company does not anticipate any limitations on its ability to access the debt capital markets and/or other external funding sources and remains committed to its strong ratings from Moody's and Standard &amp; Poor's.\n\nLinde's  total  net  debt  outstanding  at  December  31,  2021  was  $11,384  million,  $1,016  million  lower  than  $12,400  million  at December  31,  2020.  The  December  31,  2021  net  debt  balance  includes  $13,069  million  in  public  securities,  $1,138  million representing  primarily  worldwide  bank  borrowings,  net  of  $2,823  million  of  cash.  Linde's  global  effective  borrowing  rate  was approximately 1.4% for 2021.",
+          "relationship": "Increases"
+        },
+        "intermediate_node": {
+          "id": "Net_Purchases_of_Ordinary_Shares",
+          "name": "Net Purchases of Ordinary Shares",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_18",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\n## EXECUTIVE SUMMARY - FINANCIAL RESULTS &amp; OUTLOOK\n\n## 2024 Year in review\n\n- Sales of $33,005 million were flat versus 2023 sales. Sales increased 2% from higher price attainment primarily in the Americas and EMEA segments. Sales from volume were flat as growth from new project start-ups was offset by base volume declines. Cost pass-through, representing the contractual billing of energy cost variances primarily to onsite customers, decreased sales by 1% with minimal impact on operating profit. Currency translation decreased sales by 1%, largely in the Americas and APAC.\n- Reported operating profit of $8,635 million was 8% above 2023 reported operating profit of $8,024 million. Adjusted operating profit of $9,720 million was 7% above 2023 adjusted operating profit of $9,070 million. The increase in the reported and adjusted operating profit was primarily driven by higher pricing and savings from productivity initiatives in 2024. These increases more than offset the adverse impacts of cost inflation and currency translation.*\n- Net income - Linde plc of $6,565 million and diluted earnings per share of $13.62 increased from $6,199 million and $12.59, respectively in 2023. Adjusted net income - Linde plc of $7,475 million and adjusted diluted earnings per share of $15.51 were 7% above 2023 adjusted amounts.*\n- Cash flow from operations of $9,423 million was $118 million above 2023. The increase was driven by higher net income, partially offset by higher net working capital requirements, including lower inflows for contract liabilities from engineering customer advance payments and higher cash taxes. Capital expenditures were $4,497 million; dividends paid were $2,655 million; net purchases of ordinary shares were $4,451 million; and debt borrowings, net were $3,167 million.\n\n*A reconciliation of the adjusted amounts can be found in the \"Non-GAAP Financial Measures\" section in this MD&amp;A.\n\n## 2025 Outlook\n\nLinde provides quarterly updates on operating results, material trends that may affect financial performance, and financial guidance via earnings releases and investor teleconferences. These materials are available on the company's website, www.linde.com, but are not incorporated herein.",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 46
+    },
+    {
+      "question_id": 11,
+      "question": "How has Linde's estimate of revenue from minimum purchase requirements evolved from 2022 to 2024, and how did the time horizon for earning this revenue change between those years?",
+      "answer": "In 2022, Linde estimated that the consideration related to minimum purchase requirements was approximately $57 billion, with half expected to be earned in the next five years. By 2024, this estimate increased slightly to $58 billion, and the company revised the time horizon, stating that half of the revenue would be earned in the next six years. This indicates a minor extension in the expected timeline for revenue realization.",
+      "reasoning_steps": [
+        "Step 1: Identify Linde's estimate of revenue from minimum purchase requirements in 2022, which was $57 billion, with half expected in the next five years.",
+        "Step 2: Identify Linde's updated estimate in 2024, which increased to $58 billion, with half expected in the next six years.",
+        "Step 3: Analyze the change: the dollar estimate increased slightly (from $57B to $58B), and the time horizon for earning half the revenue extended from five to six years, indicating a minor change in the timing of revenue recognition."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Estimates]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Revenue from Minimum Purchase Requirements",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_99",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\n## Remaining Performance Obligations\n\nAs described above, Linde's contracts with on-site customers are under long-term supply arrangements which generally require the customer to purchase their requirements from Linde and also have minimum purchase requirements. The company estimates the consideration  related  to  minimum  purchase  requirements  is  approximately  $57  billion.  This  amount  excludes  all  sales  above minimum purchase requirements, which can be significant depending on customer needs. In the future, actual amounts will be different due to impacts from several factors, many of which are beyond the company's control including, but not limited to, timing of newly signed, terminated and renewed contracts, inflationary price escalations, currency exchange rates, and pass-through costs related to natural gas and electricity. The actual duration of long-term supply contracts ranges up to twenty years. The company estimates that approximately half of the revenue related to minimum purchase requirements will be earned in the next five years and the remaining thereafter.",
+          "relationship": "Estimates"
+        },
+        "intermediate_node": {
+          "id": "Revenue_from_Minimum_Purchase_Requirements",
+          "name": "Revenue from Minimum Purchase Requirements",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_89",
+          "chunk_id": "chunk_7",
+          "chunk_text": "\n## Remaining Performance Obligations\n\nAs described above, Linde's contracts with on-site customers are under long-term supply arrangements which generally require the customer to purchase their requirements from Linde and also have minimum purchase requirements. Additionally, plant sales from the Linde Engineering business are primarily contracted on a fix ed price basis. The company estimates the consideration related to future minimum purchase requirements and plant sales was approximately $58 billion.  This amount excludes all on-site sales above minimum purchase requirements, which can be significant depending on customer needs. In the future, actual amounts will be different due to impacts from several factors, many of which are beyond the company's control including, but not limited to, timing of newly signed, terminated and renewed contracts, inflationary price escalations, currency exchange rates, and pass-through costs related to natural gas and electricity. The actual duration of longterm supply contracts ranges up to twenty years. The company estimates that approximately half of the revenue related to minimum purchase requirements will be earned in the next six  years and the remaining thereafter.\n\n## NOTE 20. SUBSEQUENT EVENTS\n\nIn February 2025, Linde issued \u20ac850 million of 2.625% notes due in 2029, \u20ac750 million of 3.00% notes due in 2033 and \u20ac650 million of 3.25% notes due in 2037. Linde redeemed $600 million of 4.70% notes that were due in 2025.\n\n## ITEM 9.     CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE\n\nNone.",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 47
+    },
+    {
+      "question_id": 12,
+      "question": "How did the Engineering Segment Operating Profit change from 2022 to 2024, and what were the specific financial drivers behind the shift in performance?",
+      "answer": "In 2022, the Engineering Segment Operating Profit was $473 million, showing a 9% increase from the prior year. However, in 2024, the Engineering Segment Operating Profit decreased by $81 million, or 16%, compared to 2023, due to the absence of large benefits from higher margins on the lawful wind down of projects in Russia that had positively impacted the prior year. This indicates a reversal in performance trajectory, shifting from steady growth to a notable decline.",
+      "reasoning_steps": [
+        "Step 1: Identify Engineering Segment Operating Profit in 2022, which was $473 million with a 9% increase from the prior year.",
+        "Step 2: Identify Engineering Segment Operating Profit in 2024, which decreased by $81 million or 16% compared to 2023 due to the absence of benefits from wind-down projects in Russia.",
+        "Step 3: Analyze the change as a shift from growth to decline, driven by the one-time nature of prior-year benefits and lack of similar gains in 2024."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Decreases]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Engineering Segment Operating Profit",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_28",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| (Millions of dollars) Year Ended December 31,      | 2021     | 2020     | Variance   |\n|----------------------------------------------------|----------|----------|------------|\n| Sales                                              |          |          |            |\n| Americas                                           | $ 12,103 | $ 10,459 | 16%        |\n| EMEA                                               | 7,643    | 6,449    | 19%        |\n| APAC                                               | 6,133    | 5,687    | 8%         |\n| Engineering                                        | 2,867    | 2,851    | 1%         |\n| Other                                              | 2,047    | 1,797    | 14%        |\n| Total sales                                        | $ 30,793 | $ 27,243 | 13%        |\n| Operating Profit                                   |          |          |            |\n| Americas                                           | $ 3,368  | $ 2,773  | 21%        |\n| EMEA                                               | 1,889    | 1,465    | 29%        |\n| APAC                                               | 1,502    | 1,277    | 18%        |\n| Engineering                                        | 473      | 435      | 9%         |\n| Other                                              | (56)     | (153)    | 63%        |\n| Segment operating profit                           | 7,176    | 5,797    | 24%        |\n| Reconciliation to reported operating profit :      |          |          |            |\n| Cost reduction programs and other charges (Note 3) | (273)    | (506)    |            |\n| Purchase accounting impacts - LindeAG              | (1,919)  | (1,969)  |            |\n| Total operating profit                             | $ 4,984  | $ 3,322  |            |",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Engineering_Segment_Operating_Profit",
+          "name": "Engineering Segment Operating Profit",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_27",
+          "chunk_id": "chunk_5",
+          "chunk_text": "\n## Sales\n\nEngineering segment sales increased $162 million, or 8%, in 2024 versus 2023 driven by project timing.\n\n## Operating profit\n\nEngineering segment operating profit decreased $81 million, or 16%, in 2024 versus 2023 due to larger benefits in the prior year from higher margin on lawful wind down of projects subject to sanctions in Russia.\n\nVariance\n\n2024 vs 2023\n\n2024\n\n2023",
+          "relationship": "Decreases"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 46
+    },
+    {
+      "question_id": 13,
+      "question": "How did Linde's net purchases of ordinary shares evolve from 2022 to 2024, and what was the magnitude of this change?",
+      "answer": "In 2022, Linde reported net purchases of ordinary shares amounting to $4,562 million. By 2024, this figure had decreased to $4,451 million, representing a reduction of $111 million. This indicates a slight decline in the company's share repurchase activity over the two-year period.",
+      "reasoning_steps": [
+        "Step 1: Identify the value of net purchases of ordinary shares in 2022, which was $4,562 million.",
+        "Step 2: Identify the value of net purchases of ordinary shares in 2024, which was $4,451 million.",
+        "Step 3: Calculate the difference between the two years and characterize the change as a minor decrease."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Decreases]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Net Purchases of Ordinary Shares",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_same_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_33",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n(a) See Note 3 to the consolidated financial statements.\n\nCash decreased $931 million in 2021 versus 2020. The primary sources of cash in 2021 were cash flows from operations of $9,725 million.  The  primary  uses  of  cash  included  capital  expenditures  of  $3,086  million,  net  purchases  of  ordinary  shares  of  $4,562 million, and cash dividends to shareholders of $2,189 million.\n\n## Cash Flows From Operations\n\n## 2021 compared with 2020\n\nCash flows from operations was $9,725 million, an increase of $2,296 million, or 31% from 2020. The increase was driven by higher  net  income  adjusted  for  non-cash  charges  and  lower  working  capital  requirements,  including  an  increase  in  contract liabilities due to engineering customer advanced payments, which more than offset higher cash taxes. Cost reduction programs and other charges, net of payments was $98 million and $258 million for the years ended December 31, 2021 and 2020, respectively, representing charges of $273 million and $506 million net of related cash outflows of $175 million and $248 million, respectively, in each period.",
+          "relationship": "Decreases"
+        },
+        "intermediate_node": {
+          "id": "Net_Purchases_of_Ordinary_Shares",
+          "name": "Net Purchases of Ordinary Shares",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_31",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\nApproximately 58% of the capital expenditures were in the Americas segment with 22% in the APAC segment and the rest largely in the EMEA segment.\n\nAt December 31, 2024, Linde's sale of gas backlog of large projects under construction was approximately $7.1 billion. This represents the total estimated capital cost of large plants under construction.\n\nAcquisitions, net of cash acquired for 2024 were $317 million, a decrease of $636 million from 2023. In 2024, acquisitions were primarily related to packaged gas businesses  in  the Americas. Acquisitions  in  the  prior  year  were  $953  million  related  primarily  to  the  acquisition  of  nexAir  in  the Americas  (see  Note  2  to  the consolidated financial statements).\n\nDivestitures, net of cash divested and asset sales in 2024 were $170 million compared with $70 million in 2023. Divestiture proceeds in 2024 include $69 million in net proceeds for a divestiture in APAC and a settlement with a supplier in the Americas.\n\n## Financing\n\nLinde's financing strategy is to secure long-term committed funding by issuing public notes and debentures and commercial paper backed by a long-term bank credit agreement. Linde's international operations are funded through a combination of local borrowing and intercompany funding to minimize the total cost of funds and to manage and centralize  currency  exchange  exposures. As  deemed  necessary,  Linde  manages  its  exposure  to  interest-rate  changes  through  the  use  of  financial derivatives (see Note 12 to the consolidated financial statements and Item 7A. Quantitative and Qualitative Disclosures About Market Risk).\n\nCash used for financing activities was $4,359 million in 2024 compared to $5,400 million in 2023. Cash provided by debt was $3,167 million in 2024 versus $1,060 million in 2023, driven primarily by higher net debt issuances partially offset by lower commercial paper issuances in 2024. In February 2024, Linde repaid \u20ac550 million of 1.20% notes that became due and issued \u20ac700 million of 3.00% notes due in 2028, \u20ac850 million of 3.20% notes due in 2031 and \u20ac700 million of 3.40% notes due in 2036. In May 2024, Linde repaid \u20ac300 million of 1.875% notes that became due. In June 2024, Linde issued \u20ac750 million of 3.375% notes due in 2030, \u20ac750 million of 3.500% notes due in 2034 and \u20ac700 million of 3.75% notes due in 2044. In December 2024, Linde repaid $300 million of 4.800% notes that became due.\n\nIn February 2025, Linde issued \u20ac850 million of 2.625% notes due in 2029, \u20ac750 million of 3.00% notes due in 2033 and \u20ac650 million of 3.25% notes due in 2037. Linde redeemed $600 million of 4.70% notes that were due in 2025.\n\nNet purchases of ordinary shares were $4,451 million in 2024 versus $3,925 million in 2023. For additional information related to share repurchase programs, see Part II Item 5. Market for Registrant's Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities.\n\nCash dividends increased to $2,655 million in 2024 versus $2,482 million in 2023 driven primarily by a 9% increase in dividends per share to $5.56 per share from $5.10 per share, partially offset by lower shares outstanding. Cash used for Noncontrolling interest transactions and other was $420 million for the year ended December 31, 2024 versus cash used of $53 million for the respective 2023 period, primarily driven by financing related derivative outflows.\n\nLinde's total net debt outstanding at December 31, 2024 was $16,773 million, $2,064 million higher than $14,709 million at December 31, 2023. The December 31, 2024 net debt balance includes $21,140 million in public securities, and $483 million representing primarily worldwide bank borrowings, net of $4,850 million of cash. Linde's global effective borrowing rate was approximately 2.5% for 2024.\n\nThe company believes that it has sufficient operating flexibility, cash reserves, and funding sources to maintain adequate amounts of liquidity to meet its business needs  around  the  world. At  December  31,  2024,  Linde's  credit  ratings  as  reported  by  Standard  &amp;  Poor's  and  Moody's  were A-1  and  P-1  for  short-term  debt, respectively,  and A  and A2  for  long-term  debt,  respectively.  The  company  maintains  a  $5  billion  and  a  $1.5  billion  unsecured  and  undrawn  revolving  credit agreements with no associated financial covenants. No borrowings were outstanding under the credit agreements as of December 31, 2024. The company does not anticipate any limitations on its ability to access the debt capital markets and/or other external funding sources and remains committed to its strong ratings from Moody's and Standard &amp; Poor's.\n\nNote 11 to the consolidated financial statements includes information with respect to the company's debt activity, current debt position, debt covenants and the available credit facilities; and Note 12 includes information relating to derivative financial instruments. Linde's credit facilities are with major financial institutions and are non-cancelable until maturity. Therefore, the company believes the risk of the financial institutions being unable to make required loans under the credit facilities, if requested, to be low. Linde's major bank credit and long-term debt agreements contain standard covenants. The company was in compliance with these covenants at December 31, 2024 and expects to remain in compliance for the foreseeable future.",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "temporal_change": "unknown",
+      "quality_score": 46
+    }
+  ]
+}

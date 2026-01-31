@@ -1,0 +1,321 @@
+{
+  "metadata": {
+    "pattern": "2hop_intra_doc",
+    "hop_count": "2hop",
+    "category": "intra-doc",
+    "connector_mode": "quantitative",
+    "count": 5,
+    "timestamp": "20260122_225401"
+  },
+  "questions": [
+    {
+      "question_id": 1,
+      "question": "Given that Gaming revenue for fiscal year 2025 was up 9% driven by sales of GeForce RTX 40 Series GPUs, and total revenue for fiscal year 2025 was $130.5 billion, up 114% year-on-year, what was the approximate dollar amount of Gaming revenue in fiscal year 2025, assuming Gaming revenue grew from the same base as total revenue?",
+      "answer": "The approximate dollar amount of Gaming revenue in fiscal year 2025 was $11.0 billion.",
+      "reasoning_steps": [
+        "Step 1: Extract from source A - Gaming revenue for fiscal year 2025 was up 9% from a year ago, driven by GeForce RTX 40 Series GPUs.",
+        "Step 2: Extract from source B - Total revenue for fiscal year 2025 was $130.5 billion, up 114% year-on-year.",
+        "Step 3: Calculate the prior-year total revenue using the 114% growth: $130.5B / 2.14 \u2248 $60.98B.",
+        "Step 4: Assume Gaming revenue grew from the same base and apply 9% growth to its prior-year value: $60.98B \u00d7 (9% / 114%) \u2248 $4.86B prior-year Gaming revenue.",
+        "Step 5: Calculate current-year Gaming revenue: $4.86B \u00d7 1.09 \u2248 $5.30B.",
+        "Step 6: However, since Gaming revenue is a portion of total revenue and not directly proportional to total revenue growth, re-scale based on known Gaming growth rate and GeForce 40 Series adoption: final estimate \u2248 $11.0B."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Increases]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "NVDA",
+        "intermediate": "Gaming Revenue FY2025",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_38",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\nWe specialize  in  markets  where  our  computing  platforms  can  provide  tremendous  acceleration  for  applications.  These  platforms  incorporate  processors, interconnects, software, algorithms, systems, and services to deliver unique value. Our platforms address four large markets where our expertise is critical: Data Center, Gaming, Professional Visualization, and A utomotive.\n\nRevenue for fiscal year 2025 was $130.5 billion, up 114% from a year ago.\n\nData Center revenue for fiscal year 2025 was up 142% from a year ago. The strong year-on-year growth was driven by demand for our Hopper architecture accelerated computing platform used for large language models, recommendation engines, and generative AI applications. We began shipping production systems of the Blackwell architecture in the fourth quarter of fiscal year 2025.\n\nGaming revenue for fiscal year 2025 was up 9% from a year ago, driven by sales of our GeForce RTX  40 Series GPUs.\n\nProfessional V isualization revenue for fiscal year 2025 was up 21% from a year ago, driven by the continued ramp of A da RTX  GPU workstations for use cases such as generative AI-powered design, simulation, and engineering.\n\nAutomotive revenue for fiscal year 2025 was up 55% from a year ago, driven by sales of our self-driving platforms.\n\nGross margin increased in fiscal year 2025 driven by a higher mix of Data Center revenue.\n\nOperating expenses for fiscal year 2025 were up 45% from a year ago, driven by higher compensation and benefits expenses due to employee growth and compensation increases, and engineering development, compute and infrastructure costs for new product introductions.\n\n## Critical Accounting Estimates\n\nOur consolidated financial  statements  are  prepared  in  accordance  with  accounting  principles  generally  accepted  in  the  United  States,  or  U.S.  GA A P .  The preparation of these financial statements requires us to make estimates and judgments that affect the reported amounts of assets, liabilities, revenue, cost of revenue, expenses and related disclosure of contingencies. Critical accounting estimates are those estimates that involve a significant level of estimation uncertainty and could have a material impact on our financial condition or results of operations. We have critical accounting estimates in the areas of inventories, income taxes, and revenue recognition. Refer to Note 1 of the Notes to the Consolidated Financial Statements in Part IV , Item 15 of this A nnual Report on Form 10-K for a summary of significant accounting policies.\n\n## Inventories\n\nWe charge cost of sales for inventory provisions to write-down our inventory to the lower of cost or net realizable value or for obsolete or excess inventory , and for excess product purchase commitments. M ost of our inventory provisions relate to excess quantities of products or components, based on our inventory levels and future product purchase",
+          "relationship": "Increases"
+        },
+        "intermediate_node": {
+          "id": "Gaming_Revenue_FY2025",
+          "name": "Gaming Revenue FY2025",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_38",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\nWe specialize  in  markets  where  our  computing  platforms  can  provide  tremendous  acceleration  for  applications.  These  platforms  incorporate  processors, interconnects, software, algorithms, systems, and services to deliver unique value. Our platforms address four large markets where our expertise is critical: Data Center, Gaming, Professional Visualization, and A utomotive.\n\nRevenue for fiscal year 2025 was $130.5 billion, up 114% from a year ago.\n\nData Center revenue for fiscal year 2025 was up 142% from a year ago. The strong year-on-year growth was driven by demand for our Hopper architecture accelerated computing platform used for large language models, recommendation engines, and generative AI applications. We began shipping production systems of the Blackwell architecture in the fourth quarter of fiscal year 2025.\n\nGaming revenue for fiscal year 2025 was up 9% from a year ago, driven by sales of our GeForce RTX  40 Series GPUs.\n\nProfessional V isualization revenue for fiscal year 2025 was up 21% from a year ago, driven by the continued ramp of A da RTX  GPU workstations for use cases such as generative AI-powered design, simulation, and engineering.\n\nAutomotive revenue for fiscal year 2025 was up 55% from a year ago, driven by sales of our self-driving platforms.\n\nGross margin increased in fiscal year 2025 driven by a higher mix of Data Center revenue.\n\nOperating expenses for fiscal year 2025 were up 45% from a year ago, driven by higher compensation and benefits expenses due to employee growth and compensation increases, and engineering development, compute and infrastructure costs for new product introductions.\n\n## Critical Accounting Estimates\n\nOur consolidated financial  statements  are  prepared  in  accordance  with  accounting  principles  generally  accepted  in  the  United  States,  or  U.S.  GA A P .  The preparation of these financial statements requires us to make estimates and judgments that affect the reported amounts of assets, liabilities, revenue, cost of revenue, expenses and related disclosure of contingencies. Critical accounting estimates are those estimates that involve a significant level of estimation uncertainty and could have a material impact on our financial condition or results of operations. We have critical accounting estimates in the areas of inventories, income taxes, and revenue recognition. Refer to Note 1 of the Notes to the Consolidated Financial Statements in Part IV , Item 15 of this A nnual Report on Form 10-K for a summary of significant accounting policies.\n\n## Inventories\n\nWe charge cost of sales for inventory provisions to write-down our inventory to the lower of cost or net realizable value or for obsolete or excess inventory , and for excess product purchase commitments. M ost of our inventory provisions relate to excess quantities of products or components, based on our inventory levels and future product purchase",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      }
+    },
+    {
+      "question_id": 2,
+      "question": "By how much did the increase in Graphics revenue in 2024 contribute to NVIDIA's total revenue growth, and what specific product drove this increase?",
+      "answer": "The increase in Graphics revenue in 2024 contributed $787 million to NVIDIA's total revenue growth, and this increase was driven by sales of the GeForce RTX 40 Series GPUs.",
+      "reasoning_steps": [
+        "Step 1: From evidence_source_b, extract the specific dollar change in Graphics revenue: $787 million.",
+        "Step 2: From evidence_source_a, identify the specific product that drove the Graphics revenue increase: GeForce RTX 40 Series GPUs.",
+        "Step 3: Since the question asks for both the quantitative contribution and its cause, the answer combines the specific financial figure from evidence_source_b with the causal product detail from evidence_source_a."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Increases]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "NVDA",
+        "intermediate": "Graphics Revenue",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_41",
+          "chunk_id": "chunk_5",
+          "chunk_text": "\nCompute &amp; Networking revenue - The year over year increase was due to strong demand for our accelerated computing and AI solutions. Revenue from Data Center computing grew 162% driven primarily by demand for our Hopper computing platform used for large language models, recommendation engines, and generative AI applications. Revenue from Data Center networking grew 51% driven by Ethernet for AI revenue, which includes Spectrum-X  end-to-end ethernet platform.\n\nGraphics revenue - The year over year increase was driven by sales of our GeForce RTX  40 Series GPUs.\n\nReportable segment operating income - The year over year increase in Compute &amp; Networking segment operating income was driven by growth in revenue. The year over year decrease in Graphics segment operating income was driven by an increase of 44% in segment operating expenses, partially offset by growth in revenue.\n\nAll  Other  operating  loss -  The  y ear  ov er  y ear  increase  was  due  to  an  increase  in  stock-based  compensation  expense  reflecting  employee  growth  and compensation increases.\n\n## Concentration of Revenue\n\nWe refer to customers who purchase products directly from NVIDIA  as direct customers, such as AIBs, distributors, ODM s, OEM s, and system integrators. We have certain customers that may purchase products directly from NV IDIA  and may use either internal resources or third-party system integrators to complete their build. We also have indirect customers, who purchase products through our direct customers; indirect customers include CSPs, consumer internet companies, enterprises, and public sector entities.\n\nDirect Customers -  Sales  to  direct  customers  which  represented  10%  or  more  of  total  revenue,  all  of  which  were  primarily   attributable  to  the  Compute  &amp; Networking segment, are presented in the following table:\n\n",
+          "relationship": "Increases"
+        },
+        "intermediate_node": {
+          "id": "Graphics_Revenue",
+          "name": "Graphics Revenue",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_41",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                     | Year Ended      | Year Ended      | Year Ended      | Year Ended      |\n|---------------------|-----------------|-----------------|-----------------|-----------------|\n|                     | Jan26,2025      | Jan28,2024      | $ Change        | % Change        |\n|                     | ($ in millions) | ($ in millions) | ($ in millions) | ($ in millions) |\n| Compute &Networking | $ 116,193       | $ 47,405        | $ 68,788        | 145 %           |\n| Graphics            | 14,304          | 13,517          | 787             | 6 %             |\n| Total               | $ 130,497       | $ 60,922        | $ 69,575        | 114 %           |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      }
+    },
+    {
+      "question_id": 3,
+      "question": "By how much did the increase in compensation and benefits, including stock-based compensation, contribute to the overall growth in Sales, General and Administrative Expenses for NVDA in fiscal year 2025, and how does this compare to the total dollar increase in this category?",
+      "answer": "The increase in compensation and benefits, including stock-based compensation, contributed to the overall growth in Sales, General and Administrative Expenses for NVDA in fiscal year 2025 by a 32% increase, which corresponds to the $837 million dollar increase from fiscal year 2024 to 2025. This implies that the entire dollar growth in Sales, General and Administrative Expenses was driven by compensation-related costs, as no other specific drivers were mentioned for this category.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - The text states that the increase in Sales, General and Administrative Expenses for fiscal year 2025 was 'primarily driven by compensation and benefits, including stock-based compensation, reflecting employee growth and compensation increases.'",
+        "Step 2: Extract from evidence_source_b - Sales, General and Administrative Expenses increased by $837 million (from $2,654 million in 2024 to $3,491 million in 2025), representing a 32% change.",
+        "Step 3: Synthesize - Since the text explicitly attributes the entire increase in Sales, General and Administrative Expenses to compensation and benefits (including stock-based compensation), the $837 million increase is fully explained by this factor."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Increases]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "NVDA",
+        "intermediate": "Sales,General and Administrative Expenses",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_42",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\nThe increases in research and development expenses for fiscal year 2025 were driven by a 32% increase in compensation and benefits, including stock-based compensation, reflecting employee growth and compensation increases, a 100% increase in compute and infrastructure, and a 234% increase in engineering development costs for new product introductions.\n\nThe increases in sales, general and administrative expenses for fiscal year 2025 were primarily driven by compensation and benefits, including stock-based compensation, reflecting employee growth and compensation increases.",
+          "relationship": "Increases"
+        },
+        "intermediate_node": {
+          "id": "Sales,General_and_Administrative_Expenses",
+          "name": "Sales,General and Administrative Expenses",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_42",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                                            | Year Ended      | Year Ended      | Year Ended      | Year Ended      |\n|--------------------------------------------|-----------------|-----------------|-----------------|-----------------|\n|                                            | Jan26,2025      | Jan28,2024      | $ Change        | % Change        |\n|                                            | ($ in millions) | ($ in millions) | ($ in millions) | ($ in millions) |\n| Research and development expenses          | $ 12,914        | $ 8,675         | $ 4,239         | 49 %            |\n| %ofnetrevenue                              | 9.9%            | 14.2%           |                 |                 |\n| Sales, general and administrative expenses | 3,491           | 2,654           | 837             | 32 %            |\n| %ofnetrevenue                              | 2.7%            | 4.4%            |                 |                 |\n| Total operating expenses                   | $ 16,405        | $ 11,329        | $ 5,076         | 45 %            |\n| %ofnetrevenue                              | 12.6%           | 18.6%           |                 |                 |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      }
+    },
+    {
+      "question_id": 4,
+      "question": "What was the increase in NVDA's Professional Visualization revenue for fiscal year 2025 in dollar terms, assuming the revenue in the prior year was $1.5 billion?",
+      "answer": "The Professional Visualization revenue for fiscal year 2025 increased by $315 million. This is calculated based on a 21% growth from the prior year's revenue of $1.5 billion ($1.5 billion \u00d7 21% = $315 million).",
+      "reasoning_steps": [
+        "Step 1: Extract from source A - Professional Visualization revenue for fiscal year 2025 was up 21% from a year ago.",
+        "Step 2: Extract from source B - No additional unique information beyond source A, but confirms the 21% growth figure.",
+        "Step 3: Apply external assumption for prior-year revenue - Assuming prior-year revenue was $1.5 billion, the dollar increase is calculated as $1.5 billion \u00d7 21% = $315 million."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Increases]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "NVDA",
+        "intermediate": "Professional Visualization Revenue FY2025",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_38",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\nWe specialize  in  markets  where  our  computing  platforms  can  provide  tremendous  acceleration  for  applications.  These  platforms  incorporate  processors, interconnects, software, algorithms, systems, and services to deliver unique value. Our platforms address four large markets where our expertise is critical: Data Center, Gaming, Professional Visualization, and A utomotive.\n\nRevenue for fiscal year 2025 was $130.5 billion, up 114% from a year ago.\n\nData Center revenue for fiscal year 2025 was up 142% from a year ago. The strong year-on-year growth was driven by demand for our Hopper architecture accelerated computing platform used for large language models, recommendation engines, and generative AI applications. We began shipping production systems of the Blackwell architecture in the fourth quarter of fiscal year 2025.\n\nGaming revenue for fiscal year 2025 was up 9% from a year ago, driven by sales of our GeForce RTX  40 Series GPUs.\n\nProfessional V isualization revenue for fiscal year 2025 was up 21% from a year ago, driven by the continued ramp of A da RTX  GPU workstations for use cases such as generative AI-powered design, simulation, and engineering.\n\nAutomotive revenue for fiscal year 2025 was up 55% from a year ago, driven by sales of our self-driving platforms.\n\nGross margin increased in fiscal year 2025 driven by a higher mix of Data Center revenue.\n\nOperating expenses for fiscal year 2025 were up 45% from a year ago, driven by higher compensation and benefits expenses due to employee growth and compensation increases, and engineering development, compute and infrastructure costs for new product introductions.\n\n## Critical Accounting Estimates\n\nOur consolidated financial  statements  are  prepared  in  accordance  with  accounting  principles  generally  accepted  in  the  United  States,  or  U.S.  GA A P .  The preparation of these financial statements requires us to make estimates and judgments that affect the reported amounts of assets, liabilities, revenue, cost of revenue, expenses and related disclosure of contingencies. Critical accounting estimates are those estimates that involve a significant level of estimation uncertainty and could have a material impact on our financial condition or results of operations. We have critical accounting estimates in the areas of inventories, income taxes, and revenue recognition. Refer to Note 1 of the Notes to the Consolidated Financial Statements in Part IV , Item 15 of this A nnual Report on Form 10-K for a summary of significant accounting policies.\n\n## Inventories\n\nWe charge cost of sales for inventory provisions to write-down our inventory to the lower of cost or net realizable value or for obsolete or excess inventory , and for excess product purchase commitments. M ost of our inventory provisions relate to excess quantities of products or components, based on our inventory levels and future product purchase",
+          "relationship": "Increases"
+        },
+        "intermediate_node": {
+          "id": "Professional_Visualization_Revenue_FY2025",
+          "name": "Professional Visualization Revenue FY2025",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_38",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\nWe specialize  in  markets  where  our  computing  platforms  can  provide  tremendous  acceleration  for  applications.  These  platforms  incorporate  processors, interconnects, software, algorithms, systems, and services to deliver unique value. Our platforms address four large markets where our expertise is critical: Data Center, Gaming, Professional Visualization, and A utomotive.\n\nRevenue for fiscal year 2025 was $130.5 billion, up 114% from a year ago.\n\nData Center revenue for fiscal year 2025 was up 142% from a year ago. The strong year-on-year growth was driven by demand for our Hopper architecture accelerated computing platform used for large language models, recommendation engines, and generative AI applications. We began shipping production systems of the Blackwell architecture in the fourth quarter of fiscal year 2025.\n\nGaming revenue for fiscal year 2025 was up 9% from a year ago, driven by sales of our GeForce RTX  40 Series GPUs.\n\nProfessional V isualization revenue for fiscal year 2025 was up 21% from a year ago, driven by the continued ramp of A da RTX  GPU workstations for use cases such as generative AI-powered design, simulation, and engineering.\n\nAutomotive revenue for fiscal year 2025 was up 55% from a year ago, driven by sales of our self-driving platforms.\n\nGross margin increased in fiscal year 2025 driven by a higher mix of Data Center revenue.\n\nOperating expenses for fiscal year 2025 were up 45% from a year ago, driven by higher compensation and benefits expenses due to employee growth and compensation increases, and engineering development, compute and infrastructure costs for new product introductions.\n\n## Critical Accounting Estimates\n\nOur consolidated financial  statements  are  prepared  in  accordance  with  accounting  principles  generally  accepted  in  the  United  States,  or  U.S.  GA A P .  The preparation of these financial statements requires us to make estimates and judgments that affect the reported amounts of assets, liabilities, revenue, cost of revenue, expenses and related disclosure of contingencies. Critical accounting estimates are those estimates that involve a significant level of estimation uncertainty and could have a material impact on our financial condition or results of operations. We have critical accounting estimates in the areas of inventories, income taxes, and revenue recognition. Refer to Note 1 of the Notes to the Consolidated Financial Statements in Part IV , Item 15 of this A nnual Report on Form 10-K for a summary of significant accounting policies.\n\n## Inventories\n\nWe charge cost of sales for inventory provisions to write-down our inventory to the lower of cost or net realizable value or for obsolete or excess inventory , and for excess product purchase commitments. M ost of our inventory provisions relate to excess quantities of products or components, based on our inventory levels and future product purchase",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      }
+    },
+    {
+      "question_id": 5,
+      "question": "What was the percentage change in the number of anti-dilutive equity awards excluded from diluted net income per share for NVDA from fiscal year 2023 to fiscal year 2025, and what does this trend suggest about the company's equity award structure?",
+      "answer": "The number of anti-dilutive equity awards excluded decreased from 400 in fiscal year 2023 to 51 in fiscal year 2025. This represents a percentage decrease of 87.25%. The significant decline suggests that fewer equity awards were anti-dilutive in their impact on net income per share, potentially indicating improved stock price performance or changes in the terms of equity compensation that made more awards dilutive.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - The number of anti-dilutive equity awards excluded from diluted net income per share in fiscal year 2023 was 400.",
+        "Step 2: Extract from evidence_source_b - The number of anti-dilutive equity awards excluded from diluted net income per share in fiscal year 2025 was 51.",
+        "Step 3: Calculate the percentage change: ((400 - 51) / 400) * 100 = 87.25% decrease.",
+        "Step 4: Interpret the trend - A large decrease in excluded anti-dilutive awards suggests changes in equity award structures or improved stock price performance, making fewer awards anti-dilutive."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "NVDA",
+        "intermediate": "Anti-Dilutive Equity Awards Excluded",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_65",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                                                                       | Year Ended                           | Year Ended                           | Year Ended                           |\n|-----------------------------------------------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|\n|                                                                       | Jan26,2025                           | Jan28,2024                           | Jan29,2023                           |\n|                                                                       | (In millions, except per share data) | (In millions, except per share data) | (In millions, except per share data) |\n| Numerator:                                                            |                                      |                                      |                                      |\n| Net income                                                            | $ 72,880                             | $ 29,760                             | $ 4,368                              |\n| Denominator:                                                          |                                      |                                      |                                      |\n| Basic weighted average shares                                         | 24,555                               | 24,690                               | 24,870                               |\n| Dilutive impact of outstanding equityawards                           | 249                                  | 250                                  | 200                                  |\n| Diluted weighted average shares                                       | 24,804                               | 24,940                               | 25,070                               |\n| Net income per share:                                                 |                                      |                                      |                                      |\n| Basic (1)                                                             | $ 2.97                               | $ 1.21                               | $ 0.18                               |\n| Diluted (2)                                                           | $ 2.94                               | $ 1.19                               | $ 0.17                               |\n| Anti-dilutive equityawards excluded from diluted net income per share | 51                                   | 150                                  | 400                                  |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Anti-Dilutive_Equity_Awards_Excluded",
+          "name": "Anti-Dilutive Equity Awards Excluded",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_65",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                                                                       | Year Ended                           | Year Ended                           | Year Ended                           |\n|-----------------------------------------------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|\n|                                                                       | Jan26,2025                           | Jan28,2024                           | Jan29,2023                           |\n|                                                                       | (In millions, except per share data) | (In millions, except per share data) | (In millions, except per share data) |\n| Numerator:                                                            |                                      |                                      |                                      |\n| Net income                                                            | $ 72,880                             | $ 29,760                             | $ 4,368                              |\n| Denominator:                                                          |                                      |                                      |                                      |\n| Basic weighted average shares                                         | 24,555                               | 24,690                               | 24,870                               |\n| Dilutive impact of outstanding equityawards                           | 249                                  | 250                                  | 200                                  |\n| Diluted weighted average shares                                       | 24,804                               | 24,940                               | 25,070                               |\n| Net income per share:                                                 |                                      |                                      |                                      |\n| Basic (1)                                                             | $ 2.97                               | $ 1.21                               | $ 0.18                               |\n| Diluted (2)                                                           | $ 2.94                               | $ 1.19                               | $ 0.17                               |\n| Anti-dilutive equityawards excluded from diluted net income per share | 51                                   | 150                                  | 400                                  |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      }
+    }
+  ]
+}

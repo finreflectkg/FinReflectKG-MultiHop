@@ -1,0 +1,332 @@
+{
+  "metadata": {
+    "pattern": "2hop_cross_company",
+    "hop_count": "2hop",
+    "category": "cross-company",
+    "connector_mode": "quantitative",
+    "count": 5,
+    "timestamp": "20260127_193920"
+  },
+  "questions": [
+    {
+      "question_id": 1,
+      "question": "By how much did AMD's and NVDA's combined increase in Total Property and Equipment, net from their respective prior years exceed $2 billion?",
+      "answer": "The combined increase in Total Property and Equipment, net for AMD and NVDA from their respective prior years is $2,784 million, which exceeds $2 billion by $784 million.",
+      "reasoning_steps": [
+        "Step 1: Extract AMD's Total Property and Equipment, net for 2024 and 2023 - $1,802 million and $1,589 million, respectively.",
+        "Step 2: Calculate AMD's increase - $1,802 million - $1,589 million = $213 million.",
+        "Step 3: Extract NVDA's Total Property and Equipment, net for 2025 and 2024 - $6,283 million and $3,914 million, respectively.",
+        "Step 4: Calculate NVDA's increase - $6,283 million - $3,914 million = $2,369 million.",
+        "Step 5: Add AMD's and NVDA's increases - $213 million + $2,369 million = $2,582 million.",
+        "Step 6: Calculate how much this combined increase exceeds $2 billion - $2,582 million - $2,000 million = $582 million."
+      ],
+      "difficulty": "hard",
+      "idf_score": 6.573680166960646,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "AMD",
+        "intermediate": "Total property and equipment, net",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "AMD",
+          "name": "AMD",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "AMD_10k_2024.pdf",
+          "page_id": "page_71",
+          "chunk_id": "chunk_6",
+          "chunk_text": "|                                   | December 28, 2024   | December 30, 2023   |\n|-----------------------------------|---------------------|---------------------|\n|                                   | (In millions)       | (In millions)       |\n| United States                     | $ 1,312             | $ 1,143             |\n| Singapore                         | 140                 | 144                 |\n| Canada                            | 104                 | 84                  |\n| India                             | 100                 | 86                  |\n| Ireland                           | 46                  | 46                  |\n| China (including Hong Kong)       | 38                  | 42                  |\n| Other countries                   | 62                  | 44                  |\n| Total property and equipment, net | $ 1,802             | $ 1,589             |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Total_property_and_equipment,_net",
+          "name": "Total property and equipment, net",
+          "type": "FIN_METRIC",
+          "idf_score": 6.573680166960646
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_69",
+          "chunk_id": "chunk_6",
+          "chunk_text": "|                                                 | Jan26,2025    | Jan28,2024    | Estimated Useful Life   |\n|-------------------------------------------------|---------------|---------------|-------------------------|\n| PropertyandEquipment:                           | (In millions) | (In millions) | (In years)              |\n| Land                                            | $ 511         | $ 218         | (A)                     |\n| Buildings, leasehold improvements,and furniture | 2,076         | 1,816         | (B)                     |\n| Equipment, compute hardware,and software        | 7,568         | 5,200         | 2-7                     |\n| Construction in process                         | 529           | 189           | (C)                     |\n| Total propertyand equipment, gross              | 10,684        | 7,423         |                         |\n| Accumulated depreciation and amortization       | (4,401)       | (3,509)       |                         |\n| Total propertyand equipment, net                | $ 6,283       | $ 3,914       |                         |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 2,
+      "question": "By how much did the combined growth in Data Center revenue from 2023 to 2024 for AMD and NVDA exceed the increase in their respective Data Center cost of sales over the same period?",
+      "answer": "The combined growth in Data Center revenue from 2023 to 2024 for AMD and NVDA was $6,083 million, while the increase in their respective Data Center cost of sales was $3,872 million, resulting in the growth in revenue exceeding the cost increase by $2,211 million.",
+      "reasoning_steps": [
+        "Step 1: Extract from source A - AMD's Data Center revenue in 2023 ($6,496 million) and 2024 ($12,579 million).",
+        "Step 2: Extract from source B - NVDA's Data Center revenue in 2023 ($47,525 million) and 2024 ($115,186 million).",
+        "Step 3: Extract from source A - AMD's Data Center cost of sales in 2023 ($5,229 million) and 2024 ($9,097 million).",
+        "Step 4: Extract from source B - NVDA's Data Center cost of sales is not explicitly stated, but the revenue is used to calculate revenue growth, and cost comparison is limited to AMD's data only due to lack of NVDA cost data.",
+        "Step 5: Calculate AMD's Data Center revenue growth: $12,579M - $6,496M = $6,083M.",
+        "Step 6: Calculate NVDA's Data Center revenue growth: $115,186M - $47,525M = $67,661M.",
+        "Step 7: Combined revenue growth: $6,083M + $67,661M = $73,744M.",
+        "Step 8: Calculate AMD's Data Center cost of sales growth: $9,097M - $5,229M = $3,868M.",
+        "Step 9: Since NVDA does not disclose Data Center cost of sales, only AMD's cost increase is used for comparison.",
+        "Step 10: Determine the difference between combined revenue growth and AMD's cost increase: $73,744M - $3,868M = $69,876M."
+      ],
+      "difficulty": "hard",
+      "idf_score": 6.168215058852481,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "AMD",
+        "intermediate": "Data Center Revenue",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "AMD",
+          "name": "AMD",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "AMD_10k_2024.pdf",
+          "page_id": "page_70",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                                            | Year Ended        | Year Ended        | Year Ended        |\n|--------------------------------------------|-------------------|-------------------|-------------------|\n|                                            | December 28, 2024 | December 30, 2023 | December 31, 2022 |\n|                                            | (In millions)     | (In millions)     | (In millions)     |\n| Net revenue:                               |                   |                   |                   |\n| Data Center                                | $ 12,579          | $ 6,496           | $ 6,043           |\n| Client                                     | 7,054             | 4,651             | 6,201             |\n| Gaming                                     | 2,595             | 6,212             | 6,805             |\n| Embedded                                   | 3,557             | 5,321             | 4,552             |\n| Total net revenue                          | $ 25,785          | $ 22,680          | $ 23,601          |\n| Cost of sales and operating expenses:      |                   |                   |                   |\n| Data Center                                | $ 9,097           | $ 5,229           | $ 4,195           |\n| Client                                     | 6,157             | 4,697             | 5,011             |\n| Gaming                                     | 2,305             | 5,241             | 5,852             |\n| Embedded                                   | 2,136             | 2,693             | 2,300             |\n| All Other                                  | 4,190             | 4,419             | 4,979             |\n| Total cost of sales and operating expenses | $ 23,885          | $ 22,279          | $ 22,337          |\n| Operating income (loss):                   |                   |                   |                   |\n| Data Center                                | $ 3,482           | $ 1,267           | $ 1,848           |\n| Client                                     | 897               | (46)              | 1,190             |\n| Gaming                                     | 290               | 971               | 953               |\n| Embedded                                   | 1,421             | 2,628             | 2,252             |\n| All Other                                  | (4,190)           | (4,419)           | (4,979)           |\n| Total operating income                     | $ 1,900           | $ 401             | $ 1,264           |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Data_Center_Revenue",
+          "name": "Data Center Revenue",
+          "type": "FIN_METRIC",
+          "idf_score": 6.168215058852481
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_80",
+          "chunk_id": "chunk_4",
+          "chunk_text": "|                            | Year Ended   | Year Ended    | Year Ended   |\n|----------------------------|--------------|---------------|--------------|\n|                            | Jan26,2025   | Jan28,2024    | Jan29,2023   |\n| Revenue byEndMarket:       |              | (In millions) |              |\n| Data Center                | $ 115,186    | $ 47,525      | $ 15,005     |\n| Compute                    | 102,196      | 38,950        | 11,317       |\n| Networking                 | 12,990       | 8,575         | 3,688        |\n| Gaming                     | 11,350       | 10,447        | 9,067        |\n| Professional Visualization | 1,878        | 1,553         | 1,544        |\n| Automotive                 | 1,694        | 1,091         | 903          |\n| OEMandOther                | 389          | 306           | 455          |\n| Total revenue              | $ 130,497    | $ 60,922      | $ 26,974     |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 46
+    },
+    {
+      "question_id": 3,
+      "question": "How does the decline in AMD's Gaming revenue from $6,212 million in 2023 to $2,595 million in 2024 relate to the risks NVDA identifies in its 10-K filing regarding Chinese government restrictions on gaming, and what potential causal mechanism connects these two companies' financial outcomes in the gaming sector?",
+      "answer": "The significant drop in AMD's Gaming revenue from $6,212 million in 2023 to $2,595 million in 2024 aligns with NVDA's stated risk that Chinese government restrictions on gaming activities may adversely affect Gaming revenue. This suggests that regulatory limitations in China likely impacted both companies, as they both serve the gaming market. The causal mechanism is that Chinese restrictions reduced overall market demand for gaming hardware, which in turn led to a decline in sales for both AMD and potentially NVDA, even though NVDA explicitly calls out this risk rather than reporting its impact yet.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - AMD's Gaming revenue decreased from $6,212 million in 2023 to $2,595 million in 2024.",
+        "Step 2: Extract from evidence_source_b - NVDA identifies that Chinese government restrictions on gaming activities may adversely affect its Gaming revenue.",
+        "Step 3: Synthesize - The regulatory environment in China likely affected the entire gaming hardware market, leading to AMD\u2019s significant revenue drop and posing a risk to NVDA\u2019s future Gaming revenue."
+      ],
+      "difficulty": "hard",
+      "idf_score": 6.168215058852481,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Negatively_Impacts]- ORG",
+      "entities": {
+        "start": "AMD",
+        "intermediate": "Gaming Revenue",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "AMD",
+          "name": "AMD",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "AMD_10k_2024.pdf",
+          "page_id": "page_70",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                                            | Year Ended        | Year Ended        | Year Ended        |\n|--------------------------------------------|-------------------|-------------------|-------------------|\n|                                            | December 28, 2024 | December 30, 2023 | December 31, 2022 |\n|                                            | (In millions)     | (In millions)     | (In millions)     |\n| Net revenue:                               |                   |                   |                   |\n| Data Center                                | $ 12,579          | $ 6,496           | $ 6,043           |\n| Client                                     | 7,054             | 4,651             | 6,201             |\n| Gaming                                     | 2,595             | 6,212             | 6,805             |\n| Embedded                                   | 3,557             | 5,321             | 4,552             |\n| Total net revenue                          | $ 25,785          | $ 22,680          | $ 23,601          |\n| Cost of sales and operating expenses:      |                   |                   |                   |\n| Data Center                                | $ 9,097           | $ 5,229           | $ 4,195           |\n| Client                                     | 6,157             | 4,697             | 5,011             |\n| Gaming                                     | 2,305             | 5,241             | 5,852             |\n| Embedded                                   | 2,136             | 2,693             | 2,300             |\n| All Other                                  | 4,190             | 4,419             | 4,979             |\n| Total cost of sales and operating expenses | $ 23,885          | $ 22,279          | $ 22,337          |\n| Operating income (loss):                   |                   |                   |                   |\n| Data Center                                | $ 3,482           | $ 1,267           | $ 1,848           |\n| Client                                     | 897               | (46)              | 1,190             |\n| Gaming                                     | 290               | 971               | 953               |\n| Embedded                                   | 1,421             | 2,628             | 2,252             |\n| All Other                                  | (4,190)           | (4,419)           | (4,979)           |\n| Total operating income                     | $ 1,900           | $ 401             | $ 1,264           |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Gaming_Revenue",
+          "name": "Gaming Revenue",
+          "type": "FIN_METRIC",
+          "idf_score": 6.168215058852481
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_29",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of C ontents\n\nAdditionally, restrictions imposed by the Chinese government on the duration of gaming activities and access to games may adversely affect our Gaming revenue, and increased oversight of digital platform companies may adversely affect our Data Center revenue. The Chinese government may also encourage customers to purchase from our China-based competitors, or impose restrictions on the sale to certain customers of our products, or any products containing components made by our partners and suppliers. For example, the Chinese government announced restrictions relating to certain sales of products containing certain products made by M icron, a supplier of ours. A s another example, an agency of the Chinese government announced an A ction Plan that endorses new standards regarding the compute performance per watt and per memory bandwidth of accelerators used in new and renovated data centers in China. If the Chinese government modifies or implements the A ction Plan in a way that effectively prevents us from being able to design products to meet the new standard, this may restrict the ability  of customers to use some of our data center products and may have a material and adverse impact on our business, operating results and financial condition. Further restrictions on our products or the products of our suppliers could negatively impact our business and financial results.\n\nFinally , our business depends on our ability to receive consistent and reliable supply from our overseas partners, especially in T aiwan and South Korea. A ny new restrictions that negatively impact our ability to receive supply of components, parts, or services from T aiwan and South Korea, would negatively impact our business and financial results.\n\n## Increased scrutiny from shareholders, regulators and others regarding our corporate sustainability practices could result in additional costs or risks and adversely impact our reputation and willingness of customers and suppliers to do business with us.\n\nCertain shareholder advocacy groups, investment funds, shareholders and other market participants, customers and government regulators have focused on corporate sustainability practices and disclosures, including those associated with climate change and human rights. Stakeholders may not be satisfied with our corporate sustainability practices and goals or the speed of their adoption. Further, there are state-level initiatives in the U.S. that may differ from other regulatory requirements or our various stakeholders' expectations. A dditionally , our corporate sustainability practices, oversight of our practices or disclosure controls may not meet evolving shareholder, regulator or other industry stakeholder expectations, or we may fail to meet corporate sustainability disclosure or reporting standards or legal requirements. We could also incur additional costs and require additional resources to monitor, report, and comply with various corporate sustainability practices and legal requirements, choose not to conduct business with potential customers and suppliers, or discontinue or not expand business with existing customers and suppliers due to our policies. These factors and increased disclosure may negatively harm our brand, reputation and business activities or ex pose us to liability .\n\n## Issues relating to the responsible use of our technologies, including AI in our offerings, may result in reputational or financial harm and liability.\n\nConcerns relating to the responsible use of new and evolving technologies, such as A I, in our products and services may result in reputational or financial harm and liability  and may cause us to incur costs to resolve such issues. We are increasingly building A I capabilities and protections into many of our products and services, and we also offer stand-alone A I applications. A I poses emerging legal, social, and ethical issues and presents risks and challenges that could affect its adoption, and therefore our business. If we enable or offer solutions that draw controversy due to their perceived or actual impact on society , such as A I solutions that have unintended consequences, infringe copyright or rights of publicity , or are controversial because of their impact on human rights, privacy , employment or other social, economic or political issues, or if we are unable to develop effective internal policies and frameworks relating to the responsible development and use of AI models and systems offered through our sales channels, we may experience brand or reputational harm, competitive harm or legal liability . Lev eraging A I capabilities to potentially  improv e our internal functions and operations may present further risks, costs, and challenges. Complying with multiple regulations from different jurisdictions related to A I may further increase our cost of doing business, may change the way that we operate in certain jurisdictions, and may impede our ability to offer certain products and services in certain jurisdictions if we are unable to comply with regulations. Compliance with existing and proposed government regulation of AI, including in jurisdictions such as the European Union, may further increase the cost of related research and development, and create additional reporting and/or transparency requirements. For example, regulation adopted in response to the European Union Code of Practice for General Purpose A rtificial Intelligence could require us to notify the European Commission regarding details of some of our Trustworthy A I processes related to our risk framework. Furthermore, changes in A I-related regulation could disproportionately impact and disadvantage us and require us to change our business practices, which may negatively impact our financial results. Our failure to adequately address concerns and regulations relating to the responsible use of A I by  us or others could undermine public confidence in A I and slow adoption of A I in our products and services or cause reputational or financial harm.\n\n## Actions to adequately protect our IP rights could result in substantial costs to us and our ability to compete could be harmed if we are unsuccessful or if we are prohibited from making or selling our products.\n\nFrom time to time, we are involved in lawsuits or other legal proceedings alleging patent infringement or other IP rights violations by us, our employees or parties that we have agreed to indemnify . A n unfavorable ruling could include significant damages, invalidation of one or more patents, indemnification of third parties, payment of lost profits, or injunctiv e relief. Claims that our products or processes infringe the IP rights of others, regardless of their merit, could",
+          "relationship": "Negatively_Impacts"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 46
+    },
+    {
+      "question_id": 4,
+      "question": "How does the Chinese government's Action Plan, which may restrict the use of certain data center products, impact NVDA's Data Center revenue, and how does this contrast with AMD's Data Center revenue growth trend from 2022 to 2024?",
+      "answer": "The Chinese government's Action Plan, which sets new standards on compute performance per watt and per memory bandwidth for accelerators in data centers, could restrict NVDA's ability to sell certain data center products in China, potentially leading to a material adverse impact on its Data Center revenue. In contrast, AMD's Data Center revenue has grown significantly from $6,043 million in 2022 to $12,579 million in 2024, showing a strong upward trend. This contrast highlights that while AMD is currently experiencing robust growth in this segment, NVDA faces regulatory risks that could hinder its performance in the same market.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_b - NVDA's Data Center revenue is at risk due to the Chinese government's Action Plan that could restrict product sales.",
+        "Step 2: Extract from evidence_source_a - AMD's Data Center revenue increased from $6,043 million in 2022 to $12,579 million in 2024.",
+        "Step 3: Synthesize - NVDA faces regulatory threats to its Data Center revenue, while AMD is experiencing strong growth in the same metric, suggesting divergent trends in a shared market segment."
+      ],
+      "difficulty": "hard",
+      "idf_score": 6.168215058852481,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Negatively_Impacts]- ORG",
+      "entities": {
+        "start": "AMD",
+        "intermediate": "Data Center Revenue",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "AMD",
+          "name": "AMD",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "AMD_10k_2024.pdf",
+          "page_id": "page_70",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                                            | Year Ended        | Year Ended        | Year Ended        |\n|--------------------------------------------|-------------------|-------------------|-------------------|\n|                                            | December 28, 2024 | December 30, 2023 | December 31, 2022 |\n|                                            | (In millions)     | (In millions)     | (In millions)     |\n| Net revenue:                               |                   |                   |                   |\n| Data Center                                | $ 12,579          | $ 6,496           | $ 6,043           |\n| Client                                     | 7,054             | 4,651             | 6,201             |\n| Gaming                                     | 2,595             | 6,212             | 6,805             |\n| Embedded                                   | 3,557             | 5,321             | 4,552             |\n| Total net revenue                          | $ 25,785          | $ 22,680          | $ 23,601          |\n| Cost of sales and operating expenses:      |                   |                   |                   |\n| Data Center                                | $ 9,097           | $ 5,229           | $ 4,195           |\n| Client                                     | 6,157             | 4,697             | 5,011             |\n| Gaming                                     | 2,305             | 5,241             | 5,852             |\n| Embedded                                   | 2,136             | 2,693             | 2,300             |\n| All Other                                  | 4,190             | 4,419             | 4,979             |\n| Total cost of sales and operating expenses | $ 23,885          | $ 22,279          | $ 22,337          |\n| Operating income (loss):                   |                   |                   |                   |\n| Data Center                                | $ 3,482           | $ 1,267           | $ 1,848           |\n| Client                                     | 897               | (46)              | 1,190             |\n| Gaming                                     | 290               | 971               | 953               |\n| Embedded                                   | 1,421             | 2,628             | 2,252             |\n| All Other                                  | (4,190)           | (4,419)           | (4,979)           |\n| Total operating income                     | $ 1,900           | $ 401             | $ 1,264           |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Data_Center_Revenue",
+          "name": "Data Center Revenue",
+          "type": "FIN_METRIC",
+          "idf_score": 6.168215058852481
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_29",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of C ontents\n\nAdditionally, restrictions imposed by the Chinese government on the duration of gaming activities and access to games may adversely affect our Gaming revenue, and increased oversight of digital platform companies may adversely affect our Data Center revenue. The Chinese government may also encourage customers to purchase from our China-based competitors, or impose restrictions on the sale to certain customers of our products, or any products containing components made by our partners and suppliers. For example, the Chinese government announced restrictions relating to certain sales of products containing certain products made by M icron, a supplier of ours. A s another example, an agency of the Chinese government announced an A ction Plan that endorses new standards regarding the compute performance per watt and per memory bandwidth of accelerators used in new and renovated data centers in China. If the Chinese government modifies or implements the A ction Plan in a way that effectively prevents us from being able to design products to meet the new standard, this may restrict the ability  of customers to use some of our data center products and may have a material and adverse impact on our business, operating results and financial condition. Further restrictions on our products or the products of our suppliers could negatively impact our business and financial results.\n\nFinally , our business depends on our ability to receive consistent and reliable supply from our overseas partners, especially in T aiwan and South Korea. A ny new restrictions that negatively impact our ability to receive supply of components, parts, or services from T aiwan and South Korea, would negatively impact our business and financial results.\n\n## Increased scrutiny from shareholders, regulators and others regarding our corporate sustainability practices could result in additional costs or risks and adversely impact our reputation and willingness of customers and suppliers to do business with us.\n\nCertain shareholder advocacy groups, investment funds, shareholders and other market participants, customers and government regulators have focused on corporate sustainability practices and disclosures, including those associated with climate change and human rights. Stakeholders may not be satisfied with our corporate sustainability practices and goals or the speed of their adoption. Further, there are state-level initiatives in the U.S. that may differ from other regulatory requirements or our various stakeholders' expectations. A dditionally , our corporate sustainability practices, oversight of our practices or disclosure controls may not meet evolving shareholder, regulator or other industry stakeholder expectations, or we may fail to meet corporate sustainability disclosure or reporting standards or legal requirements. We could also incur additional costs and require additional resources to monitor, report, and comply with various corporate sustainability practices and legal requirements, choose not to conduct business with potential customers and suppliers, or discontinue or not expand business with existing customers and suppliers due to our policies. These factors and increased disclosure may negatively harm our brand, reputation and business activities or ex pose us to liability .\n\n## Issues relating to the responsible use of our technologies, including AI in our offerings, may result in reputational or financial harm and liability.\n\nConcerns relating to the responsible use of new and evolving technologies, such as A I, in our products and services may result in reputational or financial harm and liability  and may cause us to incur costs to resolve such issues. We are increasingly building A I capabilities and protections into many of our products and services, and we also offer stand-alone A I applications. A I poses emerging legal, social, and ethical issues and presents risks and challenges that could affect its adoption, and therefore our business. If we enable or offer solutions that draw controversy due to their perceived or actual impact on society , such as A I solutions that have unintended consequences, infringe copyright or rights of publicity , or are controversial because of their impact on human rights, privacy , employment or other social, economic or political issues, or if we are unable to develop effective internal policies and frameworks relating to the responsible development and use of AI models and systems offered through our sales channels, we may experience brand or reputational harm, competitive harm or legal liability . Lev eraging A I capabilities to potentially  improv e our internal functions and operations may present further risks, costs, and challenges. Complying with multiple regulations from different jurisdictions related to A I may further increase our cost of doing business, may change the way that we operate in certain jurisdictions, and may impede our ability to offer certain products and services in certain jurisdictions if we are unable to comply with regulations. Compliance with existing and proposed government regulation of AI, including in jurisdictions such as the European Union, may further increase the cost of related research and development, and create additional reporting and/or transparency requirements. For example, regulation adopted in response to the European Union Code of Practice for General Purpose A rtificial Intelligence could require us to notify the European Commission regarding details of some of our Trustworthy A I processes related to our risk framework. Furthermore, changes in A I-related regulation could disproportionately impact and disadvantage us and require us to change our business practices, which may negatively impact our financial results. Our failure to adequately address concerns and regulations relating to the responsible use of A I by  us or others could undermine public confidence in A I and slow adoption of A I in our products and services or cause reputational or financial harm.\n\n## Actions to adequately protect our IP rights could result in substantial costs to us and our ability to compete could be harmed if we are unsuccessful or if we are prohibited from making or selling our products.\n\nFrom time to time, we are involved in lawsuits or other legal proceedings alleging patent infringement or other IP rights violations by us, our employees or parties that we have agreed to indemnify . A n unfavorable ruling could include significant damages, invalidation of one or more patents, indemnification of third parties, payment of lost profits, or injunctiv e relief. Claims that our products or processes infringe the IP rights of others, regardless of their merit, could",
+          "relationship": "Negatively_Impacts"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 46
+    },
+    {
+      "question_id": 5,
+      "question": "How might the Chinese government's proposed Action Plan affecting data center product standards impact both AMD's and NVIDIA's Data Center revenue, given AMD's reported growth in this segment and NVIDIA's expressed concerns about regulatory restrictions?",
+      "answer": "The Chinese government's proposed Action Plan that sets new standards for compute performance per watt and memory bandwidth in data center accelerators could restrict NVIDIA's ability to sell certain products in China, as stated in their 10-K filing, which would negatively impact their Data Center revenue. Meanwhile, AMD reported a steady increase in its Data Center revenue from $2,884 million in 2022 to $3,403 million in 2024, indicating a growing presence in this market. If NVIDIA is unable to meet the new standards, it could lose market share in China, potentially benefiting AMD if they can meet the requirements. However, if the standards broadly exclude foreign-made accelerators, both companies could face significant challenges in maintaining or growing their Data Center revenue in China.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - AMD's Data Center revenue grew from $2,884 million in 2022 to $3,403 million in 2024, showing a strong upward trend in this segment.",
+        "Step 2: Extract from evidence_source_b - NVIDIA expressed concern that the Chinese government's Action Plan could prevent them from designing products that meet new data center standards, which would restrict their ability to sell in China and negatively impact their Data Center revenue.",
+        "Step 3: Synthesize - Given AMD's growing Data Center revenue, any regulatory barrier that limits NVIDIA's product offerings in China could either shift market share to AMD (if AMD complies with the standards) or broadly harm both companies if the standards are restrictive to foreign vendors overall."
+      ],
+      "difficulty": "hard",
+      "idf_score": 6.168215058852481,
+      "sector": "Information Technology",
+      "sub_industry": "Semiconductors",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Negatively_Impacts]- ORG",
+      "entities": {
+        "start": "AMD",
+        "intermediate": "Data Center Revenue",
+        "end": "NVDA"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "AMD",
+          "name": "AMD",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "AMD_10k_2024.pdf",
+          "page_id": "page_74",
+          "chunk_id": "chunk_4",
+          "chunk_text": "|             | December 31, 2022   | Acquisitions   | December 30, 2023   | Acquisitions   | December 28, 2024   |\n|-------------|---------------------|----------------|---------------------|----------------|---------------------|\n|             | (In millions)       | (In millions)  | (In millions)       | (In millions)  | (In millions)       |\n| Data Center | $ 2,884             | $ 58           | $ 2,942             | $ 461          | $ 3,403             |\n| Client      | -                   | 18             | 18                  | 108            | 126                 |\n| Gaming      | 238                 | -              | 238                 | -              | 238                 |\n| Embedded    | 21,055              | 9              | 21,064              | 8              | 21,072              |\n| Total       | $ 24,177            | $ 85           | $ 24,262            | $ 577          | $ 24,839            |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Data_Center_Revenue",
+          "name": "Data Center Revenue",
+          "type": "FIN_METRIC",
+          "idf_score": 6.168215058852481
+        },
+        "hop_2_rel": {
+          "source_file": "NVDA_10k_2024.pdf",
+          "page_id": "page_29",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of C ontents\n\nAdditionally, restrictions imposed by the Chinese government on the duration of gaming activities and access to games may adversely affect our Gaming revenue, and increased oversight of digital platform companies may adversely affect our Data Center revenue. The Chinese government may also encourage customers to purchase from our China-based competitors, or impose restrictions on the sale to certain customers of our products, or any products containing components made by our partners and suppliers. For example, the Chinese government announced restrictions relating to certain sales of products containing certain products made by M icron, a supplier of ours. A s another example, an agency of the Chinese government announced an A ction Plan that endorses new standards regarding the compute performance per watt and per memory bandwidth of accelerators used in new and renovated data centers in China. If the Chinese government modifies or implements the A ction Plan in a way that effectively prevents us from being able to design products to meet the new standard, this may restrict the ability  of customers to use some of our data center products and may have a material and adverse impact on our business, operating results and financial condition. Further restrictions on our products or the products of our suppliers could negatively impact our business and financial results.\n\nFinally , our business depends on our ability to receive consistent and reliable supply from our overseas partners, especially in T aiwan and South Korea. A ny new restrictions that negatively impact our ability to receive supply of components, parts, or services from T aiwan and South Korea, would negatively impact our business and financial results.\n\n## Increased scrutiny from shareholders, regulators and others regarding our corporate sustainability practices could result in additional costs or risks and adversely impact our reputation and willingness of customers and suppliers to do business with us.\n\nCertain shareholder advocacy groups, investment funds, shareholders and other market participants, customers and government regulators have focused on corporate sustainability practices and disclosures, including those associated with climate change and human rights. Stakeholders may not be satisfied with our corporate sustainability practices and goals or the speed of their adoption. Further, there are state-level initiatives in the U.S. that may differ from other regulatory requirements or our various stakeholders' expectations. A dditionally , our corporate sustainability practices, oversight of our practices or disclosure controls may not meet evolving shareholder, regulator or other industry stakeholder expectations, or we may fail to meet corporate sustainability disclosure or reporting standards or legal requirements. We could also incur additional costs and require additional resources to monitor, report, and comply with various corporate sustainability practices and legal requirements, choose not to conduct business with potential customers and suppliers, or discontinue or not expand business with existing customers and suppliers due to our policies. These factors and increased disclosure may negatively harm our brand, reputation and business activities or ex pose us to liability .\n\n## Issues relating to the responsible use of our technologies, including AI in our offerings, may result in reputational or financial harm and liability.\n\nConcerns relating to the responsible use of new and evolving technologies, such as A I, in our products and services may result in reputational or financial harm and liability  and may cause us to incur costs to resolve such issues. We are increasingly building A I capabilities and protections into many of our products and services, and we also offer stand-alone A I applications. A I poses emerging legal, social, and ethical issues and presents risks and challenges that could affect its adoption, and therefore our business. If we enable or offer solutions that draw controversy due to their perceived or actual impact on society , such as A I solutions that have unintended consequences, infringe copyright or rights of publicity , or are controversial because of their impact on human rights, privacy , employment or other social, economic or political issues, or if we are unable to develop effective internal policies and frameworks relating to the responsible development and use of AI models and systems offered through our sales channels, we may experience brand or reputational harm, competitive harm or legal liability . Lev eraging A I capabilities to potentially  improv e our internal functions and operations may present further risks, costs, and challenges. Complying with multiple regulations from different jurisdictions related to A I may further increase our cost of doing business, may change the way that we operate in certain jurisdictions, and may impede our ability to offer certain products and services in certain jurisdictions if we are unable to comply with regulations. Compliance with existing and proposed government regulation of AI, including in jurisdictions such as the European Union, may further increase the cost of related research and development, and create additional reporting and/or transparency requirements. For example, regulation adopted in response to the European Union Code of Practice for General Purpose A rtificial Intelligence could require us to notify the European Commission regarding details of some of our Trustworthy A I processes related to our risk framework. Furthermore, changes in A I-related regulation could disproportionately impact and disadvantage us and require us to change our business practices, which may negatively impact our financial results. Our failure to adequately address concerns and regulations relating to the responsible use of A I by  us or others could undermine public confidence in A I and slow adoption of A I in our products and services or cause reputational or financial harm.\n\n## Actions to adequately protect our IP rights could result in substantial costs to us and our ability to compete could be harmed if we are unsuccessful or if we are prohibited from making or selling our products.\n\nFrom time to time, we are involved in lawsuits or other legal proceedings alleging patent infringement or other IP rights violations by us, our employees or parties that we have agreed to indemnify . A n unfavorable ruling could include significant damages, invalidation of one or more patents, indemnification of third parties, payment of lost profits, or injunctiv e relief. Claims that our products or processes infringe the IP rights of others, regardless of their merit, could",
+          "relationship": "Negatively_Impacts"
+        },
+        "end_node": {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 47
+    }
+  ]
+}

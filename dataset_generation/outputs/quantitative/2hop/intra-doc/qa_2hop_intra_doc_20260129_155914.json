@@ -1,0 +1,892 @@
+{
+  "metadata": {
+    "pattern": "2hop_intra_doc",
+    "hop_count": "2hop",
+    "category": "intra-doc",
+    "connector_mode": "quantitative",
+    "count": 14,
+    "timestamp": "20260129_155914"
+  },
+  "questions": [
+    {
+      "question_id": 1,
+      "question": "What was the net impact on Linde's cash position from the issuances and purchases of ordinary shares in 2024, considering both the gross issuance amount and the net share purchase activity?",
+      "answer": "The net impact on Linde's cash position from ordinary share activity in 2024 was a net cash outflow of $4,451 million, calculated from the $31 million gross issuance of ordinary shares and the $4,482 million purchases of ordinary shares.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - The net cash impact from 'Issuances (purchases) of ordinary shares - net' was $(4,451) million for 2024.",
+        "Step 2: Extract from evidence_source_b - Linde reported gross 'Issuances of ordinary shares' of $31 million and 'Purchases of ordinary shares' of $4,482 million for 2024.",
+        "Step 3: Synthesize - By combining the gross issuance and purchase figures from evidence_source_b, we can calculate the net share activity: $31 million - $4,482 million = -$4,451 million, which matches the 'net' figure in evidence_source_a."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Issuances of Ordinary Shares",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_30",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| (Millions of dollars) Year Ended December 31,                    | 2024      | 2023      |\n|------------------------------------------------------------------|-----------|-----------|\n| Net Cash Providedby (Usedfor)                                    |           |           |\n| Operating Activities                                             |           |           |\n| Net income (including noncontrolling interests)                  | $ 6,737   | $ 6,341   |\n| Non-cash charges (credits):                                      |           |           |\n| Add:Cost reduction programand other charges, net of payments (a) | 31        | (118)     |\n| Add:Depreciation and amortization                                | 3,780     | 3,816     |\n| Add (Less): Deferred income taxes                                | (142)     | (84)      |\n| Add (Less): Non-cash charges and other                           | 88        | 184       |\n| Net income adjusted for non-cash charges and other               | 10,494    | 10,139    |\n| Less: Pension contributions                                      | (35)      | (46)      |\n| Add (Less): Working capital                                      | (845)     | (483)     |\n| Add (Less): Other                                                | (191)     | (305)     |\n| Net cash provided by (used for) operating activities             | $ 9,423   | $ 9,305   |\n| Investing Activities                                             |           |           |\n| Capital expenditures                                             | $ (4,497) | $ (3,787) |\n| Acquisitions, net of cash acquired                               | (317)     | (953)     |\n| Divestitures, net of cash divested and asset sales               | 170       | 70        |\n| Net cash provided by (used for) investing activities             | $ (4,644) | $ (4,670) |\n| Financing Activities                                             |           |           |\n| Debt increases (decreases) - net                                 | $ 3,167   | $ 1,060   |\n| Issuances (purchases) of ordinary shares - net                   | (4,451)   | (3,925)   |\n| Cash dividends - Linde plc shareholders                          | (2,655)   | (2,482)   |\n| Noncontrolling interest transactions and other                   | (420)     | (53)      |\n| Net cash provided by (used for) financing activities             | $ (4,359) | $ (5,400) |\n| Effect of exchange rate changes on cash                          | $ (234)   | $ (7)     |\n| Cash andcash equivalents, end-of-period                          | $ 4,850   | $ 4,664   |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Issuances_of_Ordinary_Shares",
+          "name": "Issuances of Ordinary Shares",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_48",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| Year EndedDecember 31,                                                            | 2024    | 2023    | 2022    |\n|-----------------------------------------------------------------------------------|---------|---------|---------|\n| Increase (Decrease) in Cash andCash Equivalents                                   |         |         |         |\n| Operations                                                                        |         |         |         |\n| Net income - Linde plc                                                            | $ 6,565 | $ 6,199 | $ 4,147 |\n| Add:Noncontrolling interests                                                      | 172     | 142     | 134     |\n| Net Income (including noncontrolling interests)                                   | $ 6,737 | $ 6,341 | $ 4,281 |\n| Adjustments to reconcile net income to net cash provided by operating activities: |         |         |         |\n| Cost reduction programand other charges                                           | 31      | (118)   | 902     |\n| Depreciation and amortization                                                     | 3,780   | 3,816   | 4,204   |\n| Deferred income taxes                                                             | (142)   | (84)    | (383)   |\n| Share-based compensation                                                          | 160     | 141     | 107     |\n| Non-cash charges and other                                                        | (72)    | 43      | (49)    |\n| Working capital                                                                   |         |         |         |\n| Accounts receivable                                                               | (160)   | (86)    | (423)   |\n| Contract assets and liabilities, net                                              | (409)   | (168)   | 310     |\n| Inventory                                                                         | 56      | (127)   | (347)   |\n| Prepaid and other current assets                                                  | (55)    | 66      | (157)   |\n| Payables and accruals                                                             | (277)   | (168)   | 307     |\n| Pension contributions                                                             | (35)    | (46)    | (51)    |\n| Long-termassets, liabilities and other                                            | (191)   | (305)   | 163     |\n| Net cash provided by operating activities                                         | 9,423   | 9,305   | 8,864   |\n| Investing                                                                         |         |         |         |\n| Capital expenditures                                                              | (4,497) | (3,787) | (3,173) |\n| Acquisitions, net of cash acquired                                                | (317)   | (953)   | (110)   |\n| Divestitures, net of cash divested and asset sales                                | 170     | 70      | 195     |\n| Net cash used for investing activities                                            | (4,644) | (4,670) | (3,088) |\n| Financing                                                                         |         |         |         |\n| Short-termdebt borrowings (repayments) - net                                      | (372)   | 554     | 3,050   |\n| Long-termdebt borrowings                                                          | 4,844   | 2,188   | 3,210   |\n| Long-termdebt repayments                                                          | (1,305) | (1,682) | (1,785) |\n| Issuances of ordinary shares                                                      | 31      | 33      | 36      |\n| Purchases of ordinary shares                                                      | (4,482) | (3,958) | (5,168) |\n| Cash dividends - Linde plc shareholders                                           | (2,655) | (2,482) | (2,344) |\n| Noncontrolling interest transactions and other                                    | (420)   | (53)    | (88)    |\n| Net cash used for financing activities                                            | (4,359) | (5,400) | (3,089) |\n| Effect of exchange rate changes on cash and cash equivalents                      | (234)   | (7)     | (74)    |\n| Change in cash and cash equivalents                                               | 186     | (772)   | 2,613   |\n| Cash and cash equivalents, beginning-of-period                                    | 4,664   | 5,436   | 2,823   |\n| Cash and cash equivalents, end-of-period                                          | $ 4,850 | $ 4,664 | $ 5,436 |\n| Supplemental Data                                                                 |         |         |         |\n| Income taxes paid                                                                 | $ 2,216 | $ 1,955 | $ 1,735 |\n| Interest paid, net of capitalized interest                                        | $ 443   | $ 451   | $ 170   |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 2,
+      "question": "What is the total amount of 'Cost reduction program and other charges' recognized in both the income statement and the cash flow statement for Linde plc in 2024, and how does this combined figure reflect the company's overall cost management efforts during the year?",
+      "answer": "The total amount of 'Cost reduction program and other charges' recognized in both the income statement and the cash flow statement for Linde plc in 2024 is $176 million. This includes $145 million from the income statement and $31 million from the cash flow statement. This combined figure reflects the company's significant cost management efforts as it actively pursued cost reduction initiatives during the year, although the cash outflow related to these charges was much smaller compared to the total charges recognized in the income statement.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - The income statement shows that Linde plc recognized $145 million in 'Cost reduction program and other charges' for 2024.",
+        "Step 2: Extract from evidence_source_b - The cash flow statement shows that $31 million was reported under 'Cost reduction program and other charges' as part of adjustments to net income for 2024.",
+        "Step 3: Synthesize - Adding the two amounts ($145 million + $31 million = $176 million) provides the total charges related to the cost reduction program across both financial statements. The relatively small cash outflow compared to the total charge indicates that a large portion of these charges were non-cash expenses, aligning with strategic cost management efforts."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Cost Reduction Program and Other Charges",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_19",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| (Millions of dollars, except per share data) Year EndedDecember 31,   | 2024   |         | 2023   | Variance   |       |\n|-----------------------------------------------------------------------|--------|---------|--------|------------|-------|\n| Reported Amounts                                                      |        |         |        |            |       |\n| Sales                                                                 | $      | 33,005  | $      | 32,854     | - %   |\n| Cost of sales, exclusive of depreciation and amortization             | $      | 17,143  | $      | 17,492 (2) | %     |\n| As a percent of sales                                                 |        | 51.9%   |        | 53.2%      |       |\n| Selling, general and administrative                                   | $      | 3,337   | $      | 3,295      | 1 %   |\n| As a percent of sales                                                 |        | 10.1%   |        | 10.0%      |       |\n| Depreciation and amortization                                         | $      | 3,780   | $      | 3,816      | (1) % |\n| Cost reduction programand other charges (a)                           | $      | 145     | $      | 40         | 263 % |\n| Other income (expense) - net                                          | $      | 185     | $      | (41)       | 551 % |\n| Operating profit                                                      | $      | 8,635   | $      | 8,024      | 8 %   |\n| Operating margin                                                      |        | 26.2%   |        | 24.4%      |       |\n| Interest expense - net                                                | $      | 256     | $      | 200        | 28 %  |\n| Net pension and OPEBcost (benefit), excluding service cost            | $      | (190)   | $      | (164)      | 16 %  |\n| Effective taxrate                                                     |        | 23.4%   |        | 22.7%      |       |\n| Income fromequity investments                                         | $      | 170     | $      | 167        | 2 %   |\n| Noncontrolling interests                                              | $      | (172)   | $      | (142)      | 21 %  |\n| Net Income - Linde plc                                                | $      | 6,565   | $      | 6,199      | 6 %   |\n| Diluted earnings per share                                            | $      | 13.62   | $      | 12.59      | 8 %   |\n| Diluted shares outstanding                                            |        | 482,092 |        | 492,290    | (2) % |\n| Number of employees                                                   |        | 65,289  |        | 66,323     | (2) % |\n| Adjusted Amounts (b)                                                  |        |         |        |            |       |\n| Operating profit                                                      | $      | 9,720   | $      | 9,070      | 7 %   |\n| Operating margin                                                      |        | 29.5%   |        | 27.6%      |       |\n| Net Income - Linde plc                                                | $      | 7,475   | $      | 6,989      | 7 %   |\n| Diluted earnings per share                                            | $      | 15.51   | $      | 14.20      | 9 %   |\n| Other Financial Data (b)                                              |        |         |        |            |       |\n| EBITDA                                                                | $      | 12,585  | $      | 12,007     | 5 %   |\n| As percent of sales                                                   |        | 38.1%   |        | 36.5%      |       |\n| Adjusted EBITDA                                                       | $      | 12,819  | $      | 12,133     | 6 %   |\n| As percent of sales                                                   |        | 38.8%   |        | 36.9%      |       |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Cost_Reduction_Program_and_Other_Charges",
+          "name": "Cost Reduction Program and Other Charges",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_48",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| Year EndedDecember 31,                                                            | 2024    | 2023    | 2022    |\n|-----------------------------------------------------------------------------------|---------|---------|---------|\n| Increase (Decrease) in Cash andCash Equivalents                                   |         |         |         |\n| Operations                                                                        |         |         |         |\n| Net income - Linde plc                                                            | $ 6,565 | $ 6,199 | $ 4,147 |\n| Add:Noncontrolling interests                                                      | 172     | 142     | 134     |\n| Net Income (including noncontrolling interests)                                   | $ 6,737 | $ 6,341 | $ 4,281 |\n| Adjustments to reconcile net income to net cash provided by operating activities: |         |         |         |\n| Cost reduction programand other charges                                           | 31      | (118)   | 902     |\n| Depreciation and amortization                                                     | 3,780   | 3,816   | 4,204   |\n| Deferred income taxes                                                             | (142)   | (84)    | (383)   |\n| Share-based compensation                                                          | 160     | 141     | 107     |\n| Non-cash charges and other                                                        | (72)    | 43      | (49)    |\n| Working capital                                                                   |         |         |         |\n| Accounts receivable                                                               | (160)   | (86)    | (423)   |\n| Contract assets and liabilities, net                                              | (409)   | (168)   | 310     |\n| Inventory                                                                         | 56      | (127)   | (347)   |\n| Prepaid and other current assets                                                  | (55)    | 66      | (157)   |\n| Payables and accruals                                                             | (277)   | (168)   | 307     |\n| Pension contributions                                                             | (35)    | (46)    | (51)    |\n| Long-termassets, liabilities and other                                            | (191)   | (305)   | 163     |\n| Net cash provided by operating activities                                         | 9,423   | 9,305   | 8,864   |\n| Investing                                                                         |         |         |         |\n| Capital expenditures                                                              | (4,497) | (3,787) | (3,173) |\n| Acquisitions, net of cash acquired                                                | (317)   | (953)   | (110)   |\n| Divestitures, net of cash divested and asset sales                                | 170     | 70      | 195     |\n| Net cash used for investing activities                                            | (4,644) | (4,670) | (3,088) |\n| Financing                                                                         |         |         |         |\n| Short-termdebt borrowings (repayments) - net                                      | (372)   | 554     | 3,050   |\n| Long-termdebt borrowings                                                          | 4,844   | 2,188   | 3,210   |\n| Long-termdebt repayments                                                          | (1,305) | (1,682) | (1,785) |\n| Issuances of ordinary shares                                                      | 31      | 33      | 36      |\n| Purchases of ordinary shares                                                      | (4,482) | (3,958) | (5,168) |\n| Cash dividends - Linde plc shareholders                                           | (2,655) | (2,482) | (2,344) |\n| Noncontrolling interest transactions and other                                    | (420)   | (53)    | (88)    |\n| Net cash used for financing activities                                            | (4,359) | (5,400) | (3,089) |\n| Effect of exchange rate changes on cash and cash equivalents                      | (234)   | (7)     | (74)    |\n| Change in cash and cash equivalents                                               | 186     | (772)   | 2,613   |\n| Cash and cash equivalents, beginning-of-period                                    | 4,664   | 5,436   | 2,823   |\n| Cash and cash equivalents, end-of-period                                          | $ 4,850 | $ 4,664 | $ 5,436 |\n| Supplemental Data                                                                 |         |         |         |\n| Income taxes paid                                                                 | $ 2,216 | $ 1,955 | $ 1,735 |\n| Interest paid, net of capitalized interest                                        | $ 443   | $ 451   | $ 170   |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 3,
+      "question": "How did Linde's 2024 cost reduction program charges compare in magnitude to the combined 2023 charges and the specific impact of the Russia-Ukraine conflict on 2022 charges, particularly considering the $787 million loss from deconsolidation of Russian subsidiaries?",
+      "answer": "Linde's 2024 cost reduction program charges were $145 million. This compares to $40 million in 2023 charges and a significantly higher $1 billion in 2022 charges, which included a $787 million loss from deconsolidation of Russian subsidiaries due to the Russia-Ukraine conflict. The combined 2023 and 2022 charges totaled $1.04 billion, making the 2024 charges only 13.9% of that amount. This highlights how the Russia-Ukraine conflict in 2022 caused an exceptional spike in cost reduction program expenses compared to both the prior and subsequent years.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - 'Cost reduction program and other charges were $145 million and $40 million for 2024 and 2023, respectively.'",
+        "Step 2: Extract from evidence_source_b - 'Cost reduction program and other charges were $1 billion ($896 million, after tax and noncontrolling interests) for the year ended December 31, 2022, largely attributable to the Russia-Ukraine conflict.' and 'The deconsolidation of the company's Russian gas and engineering business entities resulted in a loss of $787 million ($730 million after tax).'",
+        "Step 3: Calculate comparison - $145 million (2024 charges) vs. $40 million (2023 charges) + $1 billion (2022 charges) = $1.04 billion",
+        "Step 4: Synthesize - The Russia-Ukraine conflict in 2022 led to an exceptional $787 million loss from deconsolidation of Russian subsidiaries, which was a major component of the $1 billion total cost reduction charges for that year, making 2022 an outlier compared to both 2023 and 2024"
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Cost Reduction Program Charges",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_20",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\n## 2024 Compared With 2023\n\n## Sales\n\nLinde sales were flat for the 2024 year versus 2023. Sales grew 2% from higher price attainment. Volumes were flat, as new project start-ups were largely offset by base volume declines. Cost pass-through, representing the contractual billing of energy cost variances primarily to onsite customers decreased sales by 1%, with minimal impact on operating profit. Currency translation decreased sales by 1%, primarily due to the weakening of the Brazilian real, Chinese yuan, and Mexican peso against the U.S. dollar.\n\n## Cost of sales, exclusive of depreciation and amortization\n\nCost of sales, ex clusive of depreciation and amortization, decreased $349 million, or 2%, for the year primarily due to lower cost pass-through and productivity gains, which more than offset cost inflation. Cost of sales, exclusive of depreciation and amortization, was 51.9% and 53.2% of sales, in 2024 and 2023, respectively. The decrease as a percentage of sales was primarily due to higher pricing and lower cost pass-through.\n\n## Selling, general and administrative expenses\n\nSelling, general and administrative expense (\"SG &amp;A\") increased $42 million, or 1%, from $3,295 million in 2023 to $3,337 million in 2024 driven by higher costs. SG &amp;A was 10.1% of sales in 2024 versus 10.0% in 2023. Currency impacts decreased SG&amp;A by approximately $28 million in 2024.\n\n## Depreciation and amortization\n\nReported depreciation and amortization expense decreased $36 million, or 1%, versus 2023. The decrease is due to lower depreciation and amortization of assets acquired in the merger partially offset by the net impact of new project start ups.\n\nOn an adjusted basis, depreciation and amortization expense increased $32 million, or 1%, versus 2023. Currency impacts decreased depreciation and amortization by $17 million in 2024. Ex cluding currency, underlying depreciation and amortization increased due to the net impact of new project start ups.\n\n## Cost reduction program and other charges\n\nCost reduction program and other charges were $145 million and $40 million for 2024 and 2023, respectively. 2024 includes severance charges of $165 million, other cost reduction charges of $23 million, and other benefit of $43 million related to a divestiture in APAC. In 2023, the costs primarily related to severance in the Engineering segment and expenses incurred due to the intercompany reorganization.\n\nOn an adjusted basis, these charges have been excluded in both periods.\n\n## Other income (expense) - net\n\nReported other income (expense) - net was a benefit of $185 million in 2024 and expense of $41 million in 2023. In 2024, other income included a benefit of $41 million related to a settlement with a supplier in the Americas and $45 million in insurance recoveries primarily within the Other segment (Note 7).\n\n## Operating profit",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Cost_Reduction_Program_Charges",
+          "name": "Cost Reduction Program Charges",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_54",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table of Contents\n\nThe fair value of the previously held equity interest was based upon a purchase price valuation (excluding debt) multiplied by the company's previously held ownership interest adjusted by a discount for lack of marketability.  The fair value of property, plant &amp; equipment, net was based on assumptions that market participants would use in pricing an asset, based on the most advantageous market for the asset (i.e., its highest and best use). The cost approach, adjusted for the age and condition of the property, plant and equipment, was used to estimate fair value.\n\nIdentifiable intangible assets primarily consisted of customer relationships of approximately $245 million that will be amortized over their estimated useful life of 20 years. The fair value of the customer relationships intangible asset was valued using a multi-period excess earnings method, a form of the income approach, which incorporates the estimated future cash flows to be generated from nexAir, LLC's existing customer base. There were no indefinite-lived intangible assets identified in conjunction with the acquisition.\n\nThe excess of the consideration for the acquisition over the preliminary fair value of net assets acquired was recorded as goodwill. The acquisition resulted in $485 million of goodwill, the majority of which is ex pected to be deductible for tax  purposes. The goodwill balance is primarily attributable to the assembled workforce and operating synergies expected to result from the acquisition. The goodwill recorded as a result of the acquisition was allocated to the Americas reportable segment, which represents the reportable segment anticipated to experience operating synergies as a result of the acquisition.\n\n## Divestitures\n\nDivestitures, net of cash divested and asset sales were $170 million, $70 million, and $195 million for the years ended December 31, 2024, 2023 and 2022, respectively. Divestiture proceeds in 2024 include $69 million in net proceeds for a divestiture in APAC and a settlement with a supplier in the Americas.\n\n## 2022 Sale of GIST business\n\nIn the third quarter of 2022, the company completed the sale of its GIST business. Proceeds from the sale were $184 million, net of cash divested of $75 million, for net proceeds of $109 million. The sale resulted in a loss of $21 million (benefit of $3 million, after tax ), recorded within cost reduction program and other charges in the consolidated statement of income (see Note 3).\n\n## NOTE 3. COST REDUCTION PROGRAM AND OTHER CHARGES\n\n## 2024 Charges\n\nCost reduction program and other charges were $145 million for the year ended December 31, 2024. Costs include severance of $165 million, other cost reduction charges of $23 million, and a benefit of $43 million related to a divestiture in APAC. Cost reduction program and other charges for 2024 included an income tax benefit of $35 million.\n\n## 2023 Charges\n\nCost reduction program and other charges were $40 million for the year ended December 31, 2023. Costs primarily related to severance in the Engineering segment and expenses incurred due to the intercompany reorganization for the year ended December 31, 2023. Cost reduction program and other charges for 2023 included an income tax benefit of $81 million primarily comprised of a benefit of $124 million related to the resolution of an income tax audit, partially offset by an accrual of $85 million for the potential settlement of an international income tax  matter.\n\n## 2022 Charges\n\nCost  reduction  program  and  other  charges  were  $1  billion  ($896  million,  after  tax   and  noncontrolling  interests)  for  the  year  ended  December  31,  2022,  largely attributable to the Russia-Ukraine conflict.\n\n## Russia-Ukraine Conflict\n\nIn response to the Russian invasion of Ukraine, multiple jurisdictions, including Europe and the U.S., have imposed several tranches of economic sanctions on Russia. As a result, Linde reassessed its ability to control its Russian subsidiaries and determined that as of June 30, 2022 it can no longer ex ercise control over these entities. As such, Linde deconsolidated its Russian gas and engineering business entities as of June 30, 2022. The deconsolidation of the company's Russian gas and engineering business entities resulted in a loss of $787 million ($730 million after tax ).\n\nThe fair value of Linde's Russian subsidiaries was determined using a probability weighted discounted cash flow model, which resulted in the recognition of a $407 million loss on deconsolidation when compared to the carrying value of the entities. This loss is recorded within cost reduction program and other charges in the consolidated statements of income.",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 46
+    },
+    {
+      "question_id": 4,
+      "question": "What is the total net cash impact from issuances and purchases of ordinary shares for Linde plc in 2024, and how does this compare to the change in cash and cash equivalents for the same period?",
+      "answer": "The total net cash impact from issuances and purchases of ordinary shares for Linde plc in 2024 is -$4,451 million (issuances of $31 million minus purchases of $4,482 million). This net cash outflow is a significant component of the overall net cash used for financing activities, which totaled $4,359 million. The company ended the year with $4,850 million in cash and cash equivalents, reflecting a small increase of $186 million from the beginning-of-period balance despite the large outflows from share repurchases.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - 'Purchases of ordinary shares' in 2024 total $4,482 million.",
+        "Step 2: Extract from evidence_source_b - 'Issuances of ordinary shares' in 2024 total $31 million.",
+        "Step 3: Calculate net cash impact from issuances and purchases: $31 million (inflow) - $4,482 million (outflow) = -$4,451 million.",
+        "Step 4: Extract from evidence_source_b - 'Change in cash and cash equivalents' in 2024 is $186 million, with 'Cash and cash equivalents, end-of-period' at $4,850 million.",
+        "Step 5: Synthesize - Despite a large net cash outflow from share transactions (-$4,451 million), the overall cash and equivalents balance increased slightly due to positive cash flows from operations ($9,423 million)."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Issuances of Ordinary Shares",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_49",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                                              | Lin de plc Shareh old ers' Equity   | Lin de plc Shareh old ers' Equity   | Lin de plc Shareh old ers' Equity   | Lin de plc Shareh old ers' Equity   | Lin de plc Shareh old ers' Equity   | Lin de plc Shareh old ers' Equity                 | Lin de plc Shareh old ers' Equity   | Lin de plc Shareh old ers' Equity   | Lin de plc Shareh old ers' Equity   |                           |              |\n|----------------------------------------------|-------------------------------------|-------------------------------------|-------------------------------------|-------------------------------------|-------------------------------------|---------------------------------------------------|-------------------------------------|-------------------------------------|-------------------------------------|---------------------------|--------------|\n|                                              |                                     |                                     |                                     | Addition al Paid -in                |                                     | Accum ulated Other Com preh ensive Incom e (Loss) | Treasu                              | Treasu                              | Lin de plc                          |                           |              |\n| Activity                                     | Ordin Shares                        | aryshares Amounts                   | aryshares Amounts                   | Capital                             | Retained Earnin gs                  | (Note 7)                                          | Shares                              | ryStock Amounts                     | Shareh old ers' Equity              | Noncontrolling In terests | Total Equity |\n| Balance,December 31,2021                     | 552,013                             | $                                   | 1                                   | $ 40,180                            | $ 18,710                            | (5,048)                                           | 43,332                              | $ (9,808)                           | $ 44,035                            | $ 1,393                   | $ 45,428     |\n| Net Incom eavailablef orLindeplcshareholders |                                     |                                     |                                     |                                     | 4,147                               |                                                   |                                     |                                     | 4,147                               | 134                       | 4,281        |\n| Othercom prehensiveincom e(loss)             |                                     |                                     |                                     |                                     |                                     | (734)                                             |                                     |                                     | (734)                               | (44)                      | (778)        |\n| Noncontrolling interests:                    |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     |                                     |                           |              |\n| Dividends and other capital reductions       |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     | -                                   | (81)                      | (81)         |\n| Additions (Reductions)(Note14)               |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     | -                                   | (56)                      | (56)         |\n| Dividends ($4.68 per ordinary share)         |                                     |                                     |                                     |                                     | (2,344)                             |                                                   |                                     |                                     | (2,344)                             |                           | (2,344)      |\n| Issuances ofordinary shares:                 |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     |                                     |                           |              |\n| Forem ployeesavings and incentiveplans       |                                     |                                     |                                     | (282)                               | 28                                  |                                                   | (811)                               | 198                                 | (56)                                |                           | (56)         |\n| Purchases ofordinary shares                  |                                     |                                     |                                     |                                     |                                     |                                                   | 17,034                              | (5,127)                             | (5,127)                             |                           | (5,127)      |\n| Share-basedcom pensation                     |                                     |                                     |                                     | 107                                 |                                     |                                                   |                                     |                                     | 107                                 |                           | 107          |\n| Balance,December 31,2022                     | 552,013                             | $                                   | 1                                   | $ 40,005                            | $ 20,541                            | (5,782)                                           | 59,555                              | $ (14,737)                          | $ 40,028                            | $ 1,346                   | $ 41,374     |\n| Net Incom eavailablef orLindeplcshareholders |                                     |                                     |                                     |                                     | 6,199                               |                                                   |                                     |                                     | 6,199                               | 142                       | 6,341        |\n| Othercom prehensiveincom e(loss)             |                                     |                                     |                                     |                                     |                                     | (23)                                              |                                     |                                     | (23)                                | (12)                      | (35)         |\n| Noncontrolling interests:                    |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     |                                     |                           |              |\n| Dividends and other capital reductions       |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     | -                                   | (113)                     | (113)        |\n| Additions (Reductions)                       |                                     |                                     |                                     | (12)                                |                                     |                                                   |                                     |                                     | (12)                                | (1)                       | (13)         |\n| Dividends ($5.10 per ordinary share)         |                                     |                                     |                                     |                                     | (2,482)                             |                                                   |                                     |                                     | (2,482)                             |                           | (2,482)      |\n| Issuances ofordinary shares:                 |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     |                                     |                           |              |\n| Forem ployeesavings and incentiveplans       |                                     |                                     |                                     | (322)                               | (113)                               |                                                   | (924)                               | 307                                 | (128)                               |                           | (128)        |\n| Purchases ofordinary shares                  |                                     |                                     |                                     |                                     |                                     |                                                   | 10,937                              | (4,003)                             | (4,003)                             |                           | (4,003)      |\n| Share-basedcom pensation                     |                                     |                                     |                                     | 141                                 |                                     |                                                   |                                     |                                     | 141                                 |                           | 141          |\n| Intercom pany reorganization (Note14)        | (61,246)                            |                                     |                                     |                                     | (15,300)                            |                                                   | (61,246)                            | 15,300                              |                                     |                           | -            |\n| Balance,December 31,2023                     | 490,767                             | $                                   | 1                                   | $ 39,812                            | $ 8,845                             | (5,805)                                           | 8,322                               | $ (3,133)                           | $ 39,720                            | $ 1,362                   | $ 41,082     |\n| Net Incom eavailablef orLindeplcshareholders |                                     |                                     |                                     |                                     | 6,565                               |                                                   |                                     |                                     | 6,565                               | 172                       | 6,737        |\n| Othercom prehensiveincom e(loss)             |                                     |                                     |                                     |                                     |                                     | (1,089)                                           |                                     |                                     | (1,089)                             | (37)                      | (1,126)      |\n| Noncontrolling interests:                    |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     |                                     |                           |              |\n| Dividends and other capital reductions       |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     | -                                   | (133)                     | (133)        |\n| Additions (Reductions)                       |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     | -                                   | 19                        | 19           |\n| Dividends ($5.56 per ordinary share)         |                                     |                                     |                                     |                                     | (2,655)                             |                                                   |                                     |                                     | (2,655)                             |                           | (2,655)      |\n| Issuances ofordinary shares:                 |                                     |                                     |                                     |                                     |                                     |                                                   |                                     |                                     |                                     |                           |              |\n| Forem ployeesavings and incentiveplans       |                                     |                                     |                                     | (369)                               | (121)                               |                                                   | (868)                               | 340                                 | (150)                               |                           | (150)        |\n| Purchases ofordinary shares                  |                                     |                                     |                                     |                                     |                                     |                                                   | 10,076                              | (4,459)                             | (4,459)                             |                           | (4,459)      |\n| Share-basedcom pensation                     |                                     |                                     |                                     | 160                                 |                                     |                                                   |                                     |                                     | 160                                 |                           | 160          |\n| Balance,December 31,2024                     | 490,767                             | $                                   | 1                                   | $ 39,603                            | $ 12,634                            | (6,894)                                           | 17,530                              | $ (7,252)                           | $ 38,092                            | $ 1,383                   | $ 39,475     |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Issuances_of_Ordinary_Shares",
+          "name": "Issuances of Ordinary Shares",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_48",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| Year EndedDecember 31,                                                            | 2024    | 2023    | 2022    |\n|-----------------------------------------------------------------------------------|---------|---------|---------|\n| Increase (Decrease) in Cash andCash Equivalents                                   |         |         |         |\n| Operations                                                                        |         |         |         |\n| Net income - Linde plc                                                            | $ 6,565 | $ 6,199 | $ 4,147 |\n| Add:Noncontrolling interests                                                      | 172     | 142     | 134     |\n| Net Income (including noncontrolling interests)                                   | $ 6,737 | $ 6,341 | $ 4,281 |\n| Adjustments to reconcile net income to net cash provided by operating activities: |         |         |         |\n| Cost reduction programand other charges                                           | 31      | (118)   | 902     |\n| Depreciation and amortization                                                     | 3,780   | 3,816   | 4,204   |\n| Deferred income taxes                                                             | (142)   | (84)    | (383)   |\n| Share-based compensation                                                          | 160     | 141     | 107     |\n| Non-cash charges and other                                                        | (72)    | 43      | (49)    |\n| Working capital                                                                   |         |         |         |\n| Accounts receivable                                                               | (160)   | (86)    | (423)   |\n| Contract assets and liabilities, net                                              | (409)   | (168)   | 310     |\n| Inventory                                                                         | 56      | (127)   | (347)   |\n| Prepaid and other current assets                                                  | (55)    | 66      | (157)   |\n| Payables and accruals                                                             | (277)   | (168)   | 307     |\n| Pension contributions                                                             | (35)    | (46)    | (51)    |\n| Long-termassets, liabilities and other                                            | (191)   | (305)   | 163     |\n| Net cash provided by operating activities                                         | 9,423   | 9,305   | 8,864   |\n| Investing                                                                         |         |         |         |\n| Capital expenditures                                                              | (4,497) | (3,787) | (3,173) |\n| Acquisitions, net of cash acquired                                                | (317)   | (953)   | (110)   |\n| Divestitures, net of cash divested and asset sales                                | 170     | 70      | 195     |\n| Net cash used for investing activities                                            | (4,644) | (4,670) | (3,088) |\n| Financing                                                                         |         |         |         |\n| Short-termdebt borrowings (repayments) - net                                      | (372)   | 554     | 3,050   |\n| Long-termdebt borrowings                                                          | 4,844   | 2,188   | 3,210   |\n| Long-termdebt repayments                                                          | (1,305) | (1,682) | (1,785) |\n| Issuances of ordinary shares                                                      | 31      | 33      | 36      |\n| Purchases of ordinary shares                                                      | (4,482) | (3,958) | (5,168) |\n| Cash dividends - Linde plc shareholders                                           | (2,655) | (2,482) | (2,344) |\n| Noncontrolling interest transactions and other                                    | (420)   | (53)    | (88)    |\n| Net cash used for financing activities                                            | (4,359) | (5,400) | (3,089) |\n| Effect of exchange rate changes on cash and cash equivalents                      | (234)   | (7)     | (74)    |\n| Change in cash and cash equivalents                                               | 186     | (772)   | 2,613   |\n| Cash and cash equivalents, beginning-of-period                                    | 4,664   | 5,436   | 2,823   |\n| Cash and cash equivalents, end-of-period                                          | $ 4,850 | $ 4,664 | $ 5,436 |\n| Supplemental Data                                                                 |         |         |         |\n| Income taxes paid                                                                 | $ 2,216 | $ 1,955 | $ 1,735 |\n| Interest paid, net of capitalized interest                                        | $ 443   | $ 451   | $ 170   |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 5,
+      "question": "How did the Cost Reduction Program and Other Charges impact both Adjusted EBITDA and cash flow from operations in 2024, and what was the net effect on Linde's cash position?",
+      "answer": "The Cost Reduction Program and Other Charges contributed $145 million to Adjusted EBITDA and $31 million to cash flow from operations in 2024. This resulted in a net positive impact of $176 million to Linde's cash position, as reflected in the $186 million increase in cash and cash equivalents by year-end.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - The Cost Reduction Program and Other Charges added $145 million to Adjusted EBITDA in 2024.",
+        "Step 2: Extract from evidence_source_b - The same program contributed $31 million to cash flow from operations in 2024.",
+        "Step 3: Synthesize - Adding both impacts results in a $176 million total contribution to cash, aligning with the $186 million increase in cash and cash equivalents reported at year-end."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Cost Reduction Program and Other Charges",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_37",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| Year EndedDecember 31,                                         | 2024     | 2023   |\n|----------------------------------------------------------------|----------|--------|\n| Add:Pension settlement charge                                  | 0.02     | 0.03   |\n| Add:Cost reduction programand other charges                    | 0.26     | (0.08) |\n| Add:Purchase accounting impacts - Linde AG(c)                  | 1.61     | 1.66   |\n| Total adjustments                                              | 1.89     | 1.61   |\n| Adjusted diluted EPS                                           | $ 15.51  | 14.20  |\n| Reported percentage change                                     | 8%       |        |\n| Adjusted percentage change                                     | 9%       |        |\n| AdjustedEBITDAand% of Sales                                    |          |        |\n| Net Income - Linde plc                                         | $ 6,565  | 6,199  |\n| Add:Noncontrolling interests                                   | 172      | 142    |\n| Add:Net pension and OPEBcost (benefit), excluding service cost | (190)    | (164)  |\n| Add:Interest expense                                           | 256      | 200    |\n| Add:Income taxes                                               | 2,002    | 1,814  |\n| Add:Depreciation and amortization                              | 3,780    | 3,816  |\n| EBITDA                                                         | 12,585   | 12,007 |\n| Add:Cost reduction programand other charges                    | 145      | 40     |\n| Add:Purchase accounting impacts - Linde AG(c)                  | 89       | 86     |\n| Total adjustments                                              | 234      | 126    |\n| Adjusted EBITDA                                                | $ 12,819 | 12,133 |\n| Reported sales                                                 | $ 33,005 | 32,854 |\n| %ofsales                                                       |          |        |\n| EBITDA                                                         | 38.1%    | 36.5%  |\n| Adjusted EBITDA as a %ofSales                                  | 38.8%    | 36.9%  |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Cost_Reduction_Program_and_Other_Charges",
+          "name": "Cost Reduction Program and Other Charges",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2024.pdf",
+          "page_id": "page_48",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| Year EndedDecember 31,                                                            | 2024    | 2023    | 2022    |\n|-----------------------------------------------------------------------------------|---------|---------|---------|\n| Increase (Decrease) in Cash andCash Equivalents                                   |         |         |         |\n| Operations                                                                        |         |         |         |\n| Net income - Linde plc                                                            | $ 6,565 | $ 6,199 | $ 4,147 |\n| Add:Noncontrolling interests                                                      | 172     | 142     | 134     |\n| Net Income (including noncontrolling interests)                                   | $ 6,737 | $ 6,341 | $ 4,281 |\n| Adjustments to reconcile net income to net cash provided by operating activities: |         |         |         |\n| Cost reduction programand other charges                                           | 31      | (118)   | 902     |\n| Depreciation and amortization                                                     | 3,780   | 3,816   | 4,204   |\n| Deferred income taxes                                                             | (142)   | (84)    | (383)   |\n| Share-based compensation                                                          | 160     | 141     | 107     |\n| Non-cash charges and other                                                        | (72)    | 43      | (49)    |\n| Working capital                                                                   |         |         |         |\n| Accounts receivable                                                               | (160)   | (86)    | (423)   |\n| Contract assets and liabilities, net                                              | (409)   | (168)   | 310     |\n| Inventory                                                                         | 56      | (127)   | (347)   |\n| Prepaid and other current assets                                                  | (55)    | 66      | (157)   |\n| Payables and accruals                                                             | (277)   | (168)   | 307     |\n| Pension contributions                                                             | (35)    | (46)    | (51)    |\n| Long-termassets, liabilities and other                                            | (191)   | (305)   | 163     |\n| Net cash provided by operating activities                                         | 9,423   | 9,305   | 8,864   |\n| Investing                                                                         |         |         |         |\n| Capital expenditures                                                              | (4,497) | (3,787) | (3,173) |\n| Acquisitions, net of cash acquired                                                | (317)   | (953)   | (110)   |\n| Divestitures, net of cash divested and asset sales                                | 170     | 70      | 195     |\n| Net cash used for investing activities                                            | (4,644) | (4,670) | (3,088) |\n| Financing                                                                         |         |         |         |\n| Short-termdebt borrowings (repayments) - net                                      | (372)   | 554     | 3,050   |\n| Long-termdebt borrowings                                                          | 4,844   | 2,188   | 3,210   |\n| Long-termdebt repayments                                                          | (1,305) | (1,682) | (1,785) |\n| Issuances of ordinary shares                                                      | 31      | 33      | 36      |\n| Purchases of ordinary shares                                                      | (4,482) | (3,958) | (5,168) |\n| Cash dividends - Linde plc shareholders                                           | (2,655) | (2,482) | (2,344) |\n| Noncontrolling interest transactions and other                                    | (420)   | (53)    | (88)    |\n| Net cash used for financing activities                                            | (4,359) | (5,400) | (3,089) |\n| Effect of exchange rate changes on cash and cash equivalents                      | (234)   | (7)     | (74)    |\n| Change in cash and cash equivalents                                               | 186     | (772)   | 2,613   |\n| Cash and cash equivalents, beginning-of-period                                    | 4,664   | 5,436   | 2,823   |\n| Cash and cash equivalents, end-of-period                                          | $ 4,850 | $ 4,664 | $ 5,436 |\n| Supplemental Data                                                                 |         |         |         |\n| Income taxes paid                                                                 | $ 2,216 | $ 1,955 | $ 1,735 |\n| Interest paid, net of capitalized interest                                        | $ 443   | $ 451   | $ 170   |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2024
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 6,
+      "question": "What was the total amount of Synergy Cost Accruals recorded on both the Other Long-term Liabilities and Other Current Liabilities sections of LIN's 2021 financial statements, and how much did it increase by compared to 2020?",
+      "answer": "The total Synergy Cost Accruals for LIN in 2021 were $453 million ($253 million in long-term liabilities and $200 million in current liabilities). In 2020, the total was $369 million ($170 million in long-term liabilities and $199 million in current liabilities). This represents an increase of $84 million.",
+      "reasoning_steps": [
+        "Step 1: From evidence_source_a, extract the Synergy Cost Accruals under Other Long-term Liabilities for 2021: $253 million.",
+        "Step 2: From evidence_source_b, extract the Synergy Cost Accruals under Other Current Liabilities for 2021: $200 million.",
+        "Step 3: From evidence_source_a, extract the Synergy Cost Accruals under Other Long-term Liabilities for 2020: $170 million.",
+        "Step 4: From evidence_source_b, extract the Synergy Cost Accruals under Other Current Liabilities for 2020: $199 million.",
+        "Step 5: Calculate the total Synergy Cost Accruals for 2021: $253 million + $200 million = $453 million.",
+        "Step 6: Calculate the total Synergy Cost Accruals for 2020: $170 million + $199 million = $369 million.",
+        "Step 7: Calculate the increase: $453 million - $369 million = $84 million."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Synergy Cost Accruals",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_72",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| December 31,                                                | 2021    | 2020    |\n|-------------------------------------------------------------|---------|---------|\n| Other Long-term Liabilities                                 |         |         |\n| Pension and postretirement (Note 16)                        | $ 1,802 | $ 2,963 |\n| Tax liabilities for uncertain tax positions (Note 5)        | 302     | 355     |\n| Tax Act liabilities for deemed repatriation (Note 5)        | 178     | 204     |\n| Lease liability (Note 4)                                    | 747     | 794     |\n| Interest and penalties for uncertain tax positions (Note 5) | 40      | 99      |\n| Insurance reserves                                          | 56      | 33      |\n| Asset retirement obligation                                 | 305     | 302     |\n| Unrealized losses on derivatives (Note 12)                  | 8       | 11      |\n| Synergy cost accruals (Note 3)                              | 253     | 170     |\n| Other                                                       | 497     | 588     |\n|                                                             | $ 4,188 | $ 5,519 |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Synergy_Cost_Accruals",
+          "name": "Synergy Cost Accruals",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_71",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| December 31,                                              | 2021    | 2020    |\n|-----------------------------------------------------------|---------|---------|\n| Inventories                                               |         |         |\n| Raw materials and supplies                                | $ 399   | $ 411   |\n| Work in process                                           | 334     | 337     |\n| Finished goods                                            | 1,000   | 981     |\n|                                                           | $ 1,733 | $ 1,729 |\n| December 31,                                              | 2021    | 2020    |\n| Prepaid and Other Current Assets                          |         |         |\n| Prepaid and other deferred charges (d)                    | $ 527   | $ 516   |\n| VAT recoverable                                           | 196     | 261     |\n| Unrealized gains on derivatives (Note 12)                 | 101     | 110     |\n| Assets held for sale (Note 2)                             | -       | 4       |\n| Other                                                     | 146     | 221     |\n|                                                           | $ 970   | $ 1,112 |\n| December 31,                                              | 2021    | 2020    |\n| Other Long-term Assets                                    |         |         |\n| Pension assets (Note 16)                                  | $ 139   | $ 55    |\n| Insurance contracts (e)                                   | 46      | 61      |\n| Long-term receivables, net (f)                            | 105     | 201     |\n| Lease assets (Note 4)                                     | 1,016   | 1,090   |\n| Deposits                                                  | 43      | 47      |\n| Investments carried at cost                               | 18      | 23      |\n| Deferred charges                                          | 62      | 96      |\n| Deferred income taxes (Note 5)                            | 242     | 268     |\n| Unrealized gains on derivatives (Note 12)                 | 35      | 90      |\n| Other                                                     | 278     | 217     |\n|                                                           | $ 1,984 | $ 2,148 |\n| December 31,                                              | 2021    | 2020    |\n| Other Current Liabilities                                 |         |         |\n| Accrued expenses                                          | $ 1,248 | $ 1,226 |\n| Payroll                                                   | 710     | 653     |\n| VAT payable                                               | 295     | 336     |\n| Pension and postretirement (Note 16)                      | 38 102  | 34 135  |\n| Interest payable                                          | 262     | 275     |\n| Lease liability (Note 4)                                  |         | 38      |\n| Insurance reserves                                        | 19      |         |\n| Unrealized losses on derivatives (Note 12)                | 27      | 70      |\n| Noncontrolling interest redemption and dividend (Note 14) | -       | 231     |\n| Synergy cost accruals (Note 3)                            | 200     | 199     |\n| Other                                                     | 998     | 1,135   |\n|                                                           | $ 3,899 | $ 4,332 |",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        }
+      },
+      "quality_score": 48
+    },
+    {
+      "question_id": 7,
+      "question": "What was the total impact of Linde AG purchase accounting on noncontrolling interests from continuing operations over the three-year period from 2019 to 2021, and how did this compare to the impact on depreciation and amortization expense in 2021?",
+      "answer": "The total impact of Linde AG purchase accounting on noncontrolling interests from continuing operations over the three-year period from 2019 to 2021 was $126 million ($54 million in 2019 + $57 million in 2020 + $15 million in 2021). In 2021, the impact on depreciation and amortization expense was $1,245 million for depreciation and $618 million for amortization, totaling $1,863 million. This means the 2021 purchase accounting impact on depreciation and amortization was significantly higher than the cumulative impact on noncontrolling interests over the three-year period.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - Noncontrolling interests from continuing operations included $54 million in 2019, $57 million in 2020, and $15 million in 2021 of Linde AG purchase accounting impacts.",
+        "Step 2: Extract from evidence_source_b - Depreciation and amortization expense in 2021 included $1,245 million for depreciation and $618 million for amortization related to Linde AG purchase accounting impacts.",
+        "Step 3: Calculate the total impact on noncontrolling interests over the three-year period: $54 million + $57 million + $15 million = $126 million.",
+        "Step 4: Calculate the total impact on depreciation and amortization in 2021: $1,245 million + $618 million = $1,863 million.",
+        "Step 5: Compare the two figures to understand the relative magnitude of purchase accounting impacts across different financial statement line items."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Linde AG Purchase Accounting Impact",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_72",
+          "chunk_id": "chunk_5",
+          "chunk_text": "\n(a) Depreciation and amortization expense in 2021 include $1,245 million and $618 million, respectively, of Linde AG purchase accounting impacts. In 2020, depreciation and amortization expense include $1,267 million and $653 million, respectively, of Linde AG purchase accounting impacts.\n\n(b) In December 2020, the company repaid $500 million of 4.05% notes and $500 million of 3.00% notes that were due in 2021 resulting in a $16 million interest charge.\n\n(c) In 2021, 2020 and 2019 noncontrolling interests from continuing operations includes $15 million, $57 million and $54 million, respectively, of Linde AG purchase accounting impacts. The decrease in 2021 is primarily related to the deconsolidation of a joint venture with operations in APAC (see Note 2) and the buyout of minority interests in the Republic of South Africa (see Note 14).\n\n(d)    Includes estimated income tax payments of $122 million in 2021 and $115 million in 2020.\n\n(e)    Consists primarily of insurance contracts and other investments to be utilized for non-qualified pension and OPEB obligations.",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Linde_AG_Purchase_Accounting_Impact",
+          "name": "Linde AG Purchase Accounting Impact",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_72",
+          "chunk_id": "chunk_5",
+          "chunk_text": "\n(a) Depreciation and amortization expense in 2021 include $1,245 million and $618 million, respectively, of Linde AG purchase accounting impacts. In 2020, depreciation and amortization expense include $1,267 million and $653 million, respectively, of Linde AG purchase accounting impacts.\n\n(b) In December 2020, the company repaid $500 million of 4.05% notes and $500 million of 3.00% notes that were due in 2021 resulting in a $16 million interest charge.\n\n(c) In 2021, 2020 and 2019 noncontrolling interests from continuing operations includes $15 million, $57 million and $54 million, respectively, of Linde AG purchase accounting impacts. The decrease in 2021 is primarily related to the deconsolidation of a joint venture with operations in APAC (see Note 2) and the buyout of minority interests in the Republic of South Africa (see Note 14).\n\n(d)    Includes estimated income tax payments of $122 million in 2021 and $115 million in 2020.\n\n(e)    Consists primarily of insurance contracts and other investments to be utilized for non-qualified pension and OPEB obligations.",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 8,
+      "question": "Based on LIN's pension disclosures, how does the 2021 fair value of U.S. pension assets compare to the 2020 accumulated benefit obligation, and what does this indicate about the funding status of the U.S. pension plan?",
+      "answer": "The 2021 fair value of U.S. pension assets was $2,317 million, while the 2020 accumulated benefit obligation (ABO) was $2,518 million. This indicates that the U.S. pension plan was underfunded in 2020, as the fair value of plan assets was less than the ABO, suggesting a funding shortfall of $201 million.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - The 2020 accumulated benefit obligation (ABO) for U.S. pensions is $2,518 million.",
+        "Step 2: Extract from evidence_source_b - The 2021 fair value of plan assets for U.S. pensions is $2,317 million.",
+        "Step 3: Compare the two figures - The 2021 fair value of assets is less than the 2020 ABO, resulting in a shortfall of $201 million ($2,518M - $2,317M).",
+        "Step 4: Interpret the result - Since the fair value of plan assets is less than the ABO, the U.S. pension plan is underfunded."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Accumulated Benefit Obligation U.S.",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_88",
+          "chunk_id": "chunk_8",
+          "chunk_text": "|                                        | Pensions   | Pensions   | Pensions   | Pensions   |\n|----------------------------------------|------------|------------|------------|------------|\n| (Millions of dollars)                  | 2021       | 2021       | 2020       | 2020       |\n| Year Ended December 31,                | U.S.       | Non-U.S.   | U.S.       | Non-U.S.   |\n| Accumulated benefit obligation (\"ABO\") | $ 2,387    | $ 8,404    | $ 2,518    | $ 8,694    |\n| Fair value of plan assets              | $ 2,317    | $ 6,947    | $ 2,180    | $ 6,254    |",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Accumulated_Benefit_Obligation_U.S.",
+          "name": "Accumulated Benefit Obligation U.S.",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_88",
+          "chunk_id": "chunk_8",
+          "chunk_text": "|                                        | Pensions   | Pensions   | Pensions   | Pensions   |\n|----------------------------------------|------------|------------|------------|------------|\n| (Millions of dollars)                  | 2021       | 2021       | 2020       | 2020       |\n| Year Ended December 31,                | U.S.       | Non-U.S.   | U.S.       | Non-U.S.   |\n| Accumulated benefit obligation (\"ABO\") | $ 2,387    | $ 8,404    | $ 2,518    | $ 8,694    |\n| Fair value of plan assets              | $ 2,317    | $ 6,947    | $ 2,180    | $ 6,254    |",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        }
+      },
+      "quality_score": 48
+    },
+    {
+      "question_id": 9,
+      "question": "What was the total cumulative hedge accounting adjustment to carrying value related to interest rate swaps as of December 31, 2021, and how much did it decrease from the prior year as disclosed in the 2022 10-K filing?",
+      "answer": "The total cumulative hedge accounting adjustment to carrying value related to interest rate swaps was $42 million as of December 31, 2021, which represented a decrease of $37 million from the $79 million adjustment reported as of December 31, 2020.",
+      "reasoning_steps": [
+        "Step 1: Extract from source A - The 2022 10-K filing discloses that as of December 31, 2021, there was a cumulative $42 million adjustment to carrying value related to hedge accounting of interest rate swaps.",
+        "Step 2: Extract from source B - The same filing also states that as of December 31, 2020, the cumulative adjustment was $79 million.",
+        "Step 3: Synthesize - By comparing the two disclosed figures, we calculate the change in the cumulative adjustment from 2020 to 2021: $79 million (2020) - $42 million (2021) = $37 million decrease."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Hedge Accounting Adjustment",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_76",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n(a) Amounts are net of unamortized discounts, premiums and/or debt issuance costs as applicable.\n\n(b) December 31, 2021 and 2020 included a cumulative $42 million and $79 million adjustment to carrying value, respectively, related to hedge accounting of interest rate swaps.\n\n(c) In June 2021, the company repaid \u20ac600 million of 3.875% note that became due.",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Hedge_Accounting_Adjustment",
+          "name": "Hedge Accounting Adjustment",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_76",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n(a) Amounts are net of unamortized discounts, premiums and/or debt issuance costs as applicable.\n\n(b) December 31, 2021 and 2020 included a cumulative $42 million and $79 million adjustment to carrying value, respectively, related to hedge accounting of interest rate swaps.\n\n(c) In June 2021, the company repaid \u20ac600 million of 3.875% note that became due.",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 10,
+      "question": "What was the total amount of 2021 Cost Reduction Programs and Other Charges related to the Total Cost Reduction Program, and how much of this amount remained unpaid as of December 31, 2021, after accounting for both cash payments and non-cash charges?",
+      "answer": "The total amount of 2021 Cost Reduction Programs and Other Charges related to the Total Cost Reduction Program was $338 million. After accounting for cash payments of $138 million and non-cash charges of $41 million, the unpaid amount as of December 31, 2021, was $159 million.",
+      "reasoning_steps": [
+        "Step 1: From evidence_source_a, extract the 2021 'Total cost reduction program related charges' which amounted to $338 million.",
+        "Step 2: From evidence_source_b, extract the '2021 Cost Reduction Programs and Other Charges' line showing $338 million, confirming consistency with the first source.",
+        "Step 3: From evidence_source_b, extract the 'Less: Cash payments' under 2021, which was $138 million.",
+        "Step 4: From evidence_source_b, extract the 'Less: Non-cash charges' under 2021, which was $41 million.",
+        "Step 5: Calculate the unpaid amount by subtracting both cash and non-cash charges from the total: $338 million - $138 million - $41 million = $159 million."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Total Cost Reduction Program Related Charges",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_61",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                       | Year Ended December 31, 2021   | Year Ended December 31, 2021   | Year Ended December 31, 2021                 | Year Ended December 31, 2021     |       |\n|-----------------------|--------------------------------|--------------------------------|----------------------------------------------|----------------------------------|-------|\n| (millions of dollars) | Severance costs                | Other cost reduction charges   | Total cost reduction program related charges | Merger related and other charges | Total |\n| Americas              | $ 4                            | $ 2                            | 6                                            | (6)                              | $ -   |\n| EMEA                  | 204                            | 33                             | 237                                          | 1                                | 238   |\n| APAC                  | 16                             | 12                             | 28                                           | (50)                             | (22)  |\n| Engineering           | 20                             | 6                              | 26                                           | -                                | 26    |\n| Other                 | 15                             | 26                             | 41                                           | (10)                             | 31    |\n| Total                 | $ 259                          | $ 79                           | $ 338                                        | $ (65)                           | $ 273 |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Total_Cost_Reduction_Program_Related_Charges",
+          "name": "Total Cost Reduction Program Related Charges",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2022.pdf",
+          "page_id": "page_62",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| (millions of dollars)                          | Severance costs   | Other cost reduction charges   | Total cost reduction program related charges   | Merger related and other charges   | Total   |\n|------------------------------------------------|-------------------|--------------------------------|------------------------------------------------|------------------------------------|---------|\n| Balance, December 31, 2019                     | $ 117             | $ 16                           | $ 133                                          | $ 67                               | $ 200   |\n| 2020 Cost Reduction Programs and Other Charges | 298               | 93                             | 391                                            | 115                                | 506     |\n| Less: Cash payments                            | (156)             | (20)                           | (176)                                          | (45)                               | (221)   |\n| Less: Non-cash charges                         | -                 | (68)                           | (68)                                           | (82)                               | (150)   |\n| Foreign currency translation and other         | 24                | 1                              | 25                                             | 9                                  | 34      |\n| Balance, December 31, 2020                     | $ 283             | $ 22                           | $ 305                                          | $ 64                               | $ 369   |\n| 2021 Cost Reduction Programs and Other Charges | 259               | 79                             | 338                                            | (65)                               | 273     |\n| Less: Cash payments                            | (138)             | (15)                           | (153)                                          | (22)                               | (175)   |\n| Less: Non-cash charges                         | -                 | (41)                           | (41)                                           | 54                                 | 13      |\n| Foreign currency translation and other         | (20)              | (7)                            | (27)                                           | -                                  | (27)    |\n| Balance, December 31, 2021                     | $ 384             | $ 38                           | $ 422                                          | $ 31                               | $ 453   |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2022
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 11,
+      "question": "What was the total cumulative impact of purchase accounting adjustments related to Linde AG on adjusted net income in both years presented?",
+      "answer": "The total cumulative impact of purchase accounting adjustments related to Linde AG on adjusted net income over the two years presented was $1,968 million. In the first year, the adjustment added $818 million, and in the second year, it added $1,150 million. Adding these together gives a total impact of $1,968 million.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - The purchase accounting impacts - Linde AG contributed $818 million to adjusted net income in the first year.",
+        "Step 2: Extract from evidence_source_b - The purchase accounting impacts - Linde AG contributed $1,150 million to adjusted net income in the second year.",
+        "Step 3: Synthesize - To determine the total cumulative impact over both years, sum the two specific contributions: $818 million + $1,150 million = $1,968 million."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Purchase Accounting Impacts - Linde AG",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_41",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| Adjusted Income Taxes (a)                                  |         | $       | 1,434   |\n|------------------------------------------------------------|---------|---------|---------|\n| Add: Purchase accounting impacts - Linde AG (c)            | 232     |         | 374     |\n| Add: Pension settlement charges                            |         | 3       | 1       |\n| Add: Other charges (a)                                     | 81      |         | 136     |\n| Total adjustments                                          | 316     |         | 511     |\n| Adjusted income taxes                                      | $ 2,130 | $       | 1,945   |\n| Adjusted Effective Tax Rate (a)                            |         |         |         |\n| Reported income before income taxes and equity investments | $ 7,988 | $       | 5,543   |\n| Add: Pension settlement charge                             | 16      |         | 6       |\n| Add: Purchase accounting impacts - Linde AG (c)            | 990     |         | 1,471   |\n| Add: Other charges (a)                                     | 40      |         | 1,029   |\n| Total adjustments                                          | 1,046   |         | 2,506   |\n| Adjusted income before income taxes and equity investments | $ 9,034 | $       | 8,049   |\n| Reported Income taxes                                      | $       | 1,814 $ | 1,434   |\n| Reported effective tax rate                                | 22.7%   |         | 25.9%   |\n| Adjusted income taxes                                      | $ 2,130 | $       | 1,945   |\n| Adjusted effective tax rate                                | 23.6%   |         | 24.2%   |\n| Income from Equity Investments                             |         |         |         |\n| Reported income from equity investments                    | $ 167   | $       | 172     |\n| Add: Purchase accounting impacts - Linde AG (c)            | 72      |         | 75      |\n| Total adjustments                                          | 72      |         | 75      |\n| Adjusted income from equity investments                    | $ 239   | $       | 247     |\n| Adjusted Noncontrolling Interests                          |         |         |         |\n| Reported noncontrolling interests                          | $ (142) | $       | (134)   |\n| Add: Purchase accounting impacts - Linde AG (c)            | (12)    |         | (22)    |\n| Adjusted noncontrolling interests                          | $ (154) | $       | (156)   |\n| Adjusted Net Income - Linde plc (b)                        |         |         |         |\n| Reported net income                                        | $ 6,199 | $       | 4,147   |\n| Add: Pension settlement charge                             | 13      |         | 5       |\n| Add: Other charges (a)                                     | (41)    |         | 893     |\n| Add: Purchase accounting impacts - Linde AG (c)            | 818     |         | 1,150   |\n| Total adjustments                                          | 790     |         | 2,048   |\n| Adjusted net income - Linde plc                            | $ 6,989 | $       | 6,195   |\n| Adjusted Diluted EPS (b)                                   |         |         |         |\n| Reported diluted                                           | $ 12.59 | $       | 8.23    |\n| EPS Add: Pension settlement charge                         | 0.03    |         | 0.01    |\n| Add: Other charges (a)                                     | (0.08)  |         | 1.77    |",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Purchase_Accounting_Impacts_-_Linde_AG",
+          "name": "Purchase Accounting Impacts - Linde AG",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_41",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| Adjusted Income Taxes (a)                                  |         | $       | 1,434   |\n|------------------------------------------------------------|---------|---------|---------|\n| Add: Purchase accounting impacts - Linde AG (c)            | 232     |         | 374     |\n| Add: Pension settlement charges                            |         | 3       | 1       |\n| Add: Other charges (a)                                     | 81      |         | 136     |\n| Total adjustments                                          | 316     |         | 511     |\n| Adjusted income taxes                                      | $ 2,130 | $       | 1,945   |\n| Adjusted Effective Tax Rate (a)                            |         |         |         |\n| Reported income before income taxes and equity investments | $ 7,988 | $       | 5,543   |\n| Add: Pension settlement charge                             | 16      |         | 6       |\n| Add: Purchase accounting impacts - Linde AG (c)            | 990     |         | 1,471   |\n| Add: Other charges (a)                                     | 40      |         | 1,029   |\n| Total adjustments                                          | 1,046   |         | 2,506   |\n| Adjusted income before income taxes and equity investments | $ 9,034 | $       | 8,049   |\n| Reported Income taxes                                      | $       | 1,814 $ | 1,434   |\n| Reported effective tax rate                                | 22.7%   |         | 25.9%   |\n| Adjusted income taxes                                      | $ 2,130 | $       | 1,945   |\n| Adjusted effective tax rate                                | 23.6%   |         | 24.2%   |\n| Income from Equity Investments                             |         |         |         |\n| Reported income from equity investments                    | $ 167   | $       | 172     |\n| Add: Purchase accounting impacts - Linde AG (c)            | 72      |         | 75      |\n| Total adjustments                                          | 72      |         | 75      |\n| Adjusted income from equity investments                    | $ 239   | $       | 247     |\n| Adjusted Noncontrolling Interests                          |         |         |         |\n| Reported noncontrolling interests                          | $ (142) | $       | (134)   |\n| Add: Purchase accounting impacts - Linde AG (c)            | (12)    |         | (22)    |\n| Adjusted noncontrolling interests                          | $ (154) | $       | (156)   |\n| Adjusted Net Income - Linde plc (b)                        |         |         |         |\n| Reported net income                                        | $ 6,199 | $       | 4,147   |\n| Add: Pension settlement charge                             | 13      |         | 5       |\n| Add: Other charges (a)                                     | (41)    |         | 893     |\n| Add: Purchase accounting impacts - Linde AG (c)            | 818     |         | 1,150   |\n| Total adjustments                                          | 790     |         | 2,048   |\n| Adjusted net income - Linde plc                            | $ 6,989 | $       | 6,195   |\n| Adjusted Diluted EPS (b)                                   |         |         |         |\n| Reported diluted                                           | $ 12.59 | $       | 8.23    |\n| EPS Add: Pension settlement charge                         | 0.03    |         | 0.01    |\n| Add: Other charges (a)                                     | (0.08)  |         | 1.77    |",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 12,
+      "question": "What was the total financial impact on Linde in 2022 from the deconsolidation of its Russian gas and engineering business, including both the loss on deconsolidation and the write-off of receivables?",
+      "answer": "The total financial impact on Linde in 2022 from the deconsolidation of its Russian gas and engineering business was $1,167 million, which includes a $787 million loss on deconsolidation and a $380 million write-off of receivables.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_b - Linde recorded a loss of $787 million on the deconsolidation of its Russian gas and engineering business as of June 30, 2022.",
+        "Step 2: Extract from evidence_source_b - Linde also wrote off approximately $380 million in receivables, primarily loans receivable, from the deconsolidated Russian entities.",
+        "Step 3: Synthesize - Adding the $787 million loss and the $380 million write-off results in a total financial impact of $1,167 million directly tied to the deconsolidation of the Russian gas and engineering business."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Deconsolidates]-> SEGMENT <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Russian Gas and Engineering Business",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "SEGMENT",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_84",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## Table\tof\tContents\n\nterminate\ton\tthe\tearlier\tof\tthe\tdate\tas\tthe\tmaximum\tauthority\tunder\tthe\t2023\tprogram\tis\treached\tor\tthe\tboard\tterminates\tthe 2023\tprogram.\n\n## Noncontrolling\tInterests\n\nNoncontrolling\t interest\t ownership\t changes\t are\t presented\t within\t the\t consolidated\t statements\t of\t equity.\t 2022\t includes\t the impact\tof\tdeconsolidating\tthe\tcompany's\tRussian\tgas\tand\tengineering\tbusiness\tentities\t(see\tNote\t3).\n\n## Redeemable\tNoncontrolling\tInterests\n\nNoncontrolling\tinterests\twith\tredemption\tfeatures,\tsuch\tas\tput/sell\toptions,\tthat\tare\tnot\tsolely\twithin\tthe\tcompany's\tcontrol ('redeemable\tnoncontrolling\tinterests')\tare\treported\tseparately\tin\tthe\tconsolidated\tbalance\tsheets\tat\tthe\tgreater\tof\tcarrying value\t or\t redemption\t value.\t For\t redeemable\t noncontrolling\t interests\t that\t are\t not\t yet\t exercisable,\t Linde\t calculates\t the redemption\tvalue\tby\taccreting\tthe\tcarrying\tvalue\tto\tthe\tredemption\tvalue\tover\tthe\tperiod\tuntil\texercisable.\tIf\tthe\tredemption value\tis\tgreater\tthan\tthe\tcarrying\tvalue,\tany\tincrease\tis\tadjusted\tdirectly\tto\tretained\tearnings\tand\tdoes\tnot\timpact\tnet income.\tAt\tDecember\t31,\t2023\tand\t2022,\tthe\tredeemable\tnoncontrolling\tinterest\tbalance\tincludes\tan\tindustrial\tgas\tbusiness\tin EMEA\twhere\tthe\tnoncontrolling\tshareholders\thave\tput\toptions.",
+          "relationship": "Deconsolidates"
+        },
+        "intermediate_node": {
+          "id": "Russian_Gas_and_Engineering_Business",
+          "name": "Russian Gas and Engineering Business",
+          "type": "SEGMENT",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_62",
+          "chunk_id": "chunk_1",
+          "chunk_text": "## NOTE\t3.\tOther\tCharges\n\n## 2023\tCharges\n\nOther\tcharges\twere\t$40\tmillion\tfor\tthe\tyear\tended\tDecember\t31,\t2023.\tCosts\tprimarily\trelated\tto\tseverance\tin\tthe\tEngineering segment\tand\texpenses\tincurred\tdue\tto\tthe\tintercompany\treorganization\tfor\tthe\tyear\tended\tDecember\t31,\t2023.\tOther\tcharges\tfor 2023\tincluded\tan\tincome\ttax\tbenefit\tof\t$81\tmillion\tprimarily\tcomprised\tof\ta\tbenefit\tof\t$124\tmillion\trelated\tto\tthe\tresolution of\tan\tincome\ttax\taudit,\tpartially\toffset\tby\tan\taccrual\tof\t$85\tmillion\tfor\tthe\tpotential\tsettlement\tof\tan\tinternational\tincome tax\tmatter,\tboth\trecorded\tin\tthe\tfirst\tquarter.\n\n## 2022\tCharges\n\nOther\tcharges\twere\t$1\tbillion\t($896\tmillion,\tafter\ttax\tand\tnoncontrolling\tinterests)\tfor\tthe\tyear\tended\tDecember\t31,\t2022, largely\tattributable\tto\tthe\tRussia-Ukraine\tconflict.\n\n## Russia-Ukraine\tConflict\n\nIn\tresponse\tto\tthe\tRussian\tinvasion\tof\tUkraine,\tmultiple\tjurisdictions,\tincluding\tEurope\tand\tthe\tU.S.,\thave\timposed\tseveral tranches\tof\teconomic\tsanctions\ton\tRussia.\tAs\ta\tresult,\tLinde\treassessed\tits\tability\tto\tcontrol\tits\tRussian\tsubsidiaries\tand determined\tthat\tas\tof\tJune\t30,\t2022\tit\tcan\tno\tlonger\texercise\tcontrol\tover\tthese\tentities.\tAs\tsuch,\tLinde\tdeconsolidated\tits Russian\t gas\t and\t engineering\t business\t entities\t as\t of\t June\t 30,\t 2022.\t The\t deconsolidation\t of\t the\t company's\t Russian\t gas\t and engineering\tbusiness\tentities\tresulted\tin\ta\tloss\tof\t$787\tmillion\t($730\tmillion\tafter\ttax).\n\nThe\tfair\tvalue\tof\tLinde's\tRussian\tsubsidiaries\twas\tdetermined\tusing\ta\tprobability\tweighted\tdiscounted\tcash\tflow\tmodel,\twhich resulted\tin\tthe\trecognition\tof\ta\t$407\tmillion\tloss\ton\tdeconsolidation\twhen\tcompared\tto\tthe\tcarrying\tvalue\tof\tthe\tentities. This\tloss\tis\trecorded\twithin\tOther\tcharges\tin\tthe\tconsolidated\tstatements\tof\tincome.\n\nUpon\tdeconsolidation\tan\tinvestment\twas\trecorded,\twhich\trepresents\tthe\tfair\tvalue\tof\tnet\tassets.\tThe\tcompany\tdid\tnot\treceive any\t consideration,\t cash\t or\t otherwise,\t as\t part\t of\t the\t deconsolidation.\t Linde\t will\t maintain\t its\t interest\t in\t its\t Russian subsidiaries\tand\twill\tcontinue\tto\tcomply\twith\tsanctions\tand\tgovernment\trestrictions.\tThe\tinvestment\twill\tbe\tmonitored\tfor impairment\tin\tfuture\tperiods.\n\nReceivables,\tprimarily\tloans\treceivable,\twith\tnewly\tdeconsolidated\tentities\twere\treassessed\tfor\tcollectability\tresulting\tin\ta write-off\tof\tapproximately\t$380\tmillion.\n\n## Other\tRussia\trelated\tcharges\n\nOther\t charges\t related\t specifically\t to\t the\t Russia-Ukraine\t conflict\t were\t $103\t million\t ($73\t million\t after\t tax)\t for\t the\t year ended\tDecember\t31,\t2022,\tand\tare\tprimarily\tcomprised\tof\timpairments\tof\tassets\twhich\tare\tmaintained\tby\tinternational\tentities in\tsupport\tof\tthe\tRussian\tbusiness.\n\n## Merger-Related\tCosts\tand\tOther\tCharges\n\nMerger-related\t costs\t and\t other\t charges\t were\t $139\t million\t ($93\t million,\t after\t tax)\t for\t the\t year\t ended\t December\t 31,\t 2022, primarily\trelated\tto\tseverance\tactions\twithin\tthe\tEngineering\tsegment\trecorded\tduring\tthe\tfourth\tquarter,\tthe\timpairment\tof an\tequity\tmethod\tinvestment\tin\tthe\tEMEA\tsegment,\tand\tthe\tsale\tof\tthe\tGIST\tbusiness\tcompleted\ton\tSeptember\t30,\t2022\t(see\tNote 2).\n\nThe\tfollowing\ttable\tprovides\ta\tsummary\tof\tthe\tpre-tax\tcharges\tby\treportable\tsegment\tfor\tthe\tyear\tended\tDecember\t31,\t2022:",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        }
+      },
+      "quality_score": 48
+    },
+    {
+      "question_id": 13,
+      "question": "What was the net impact of the pension and OPEB cost (benefit), excluding service cost, on Linde plc's Income Before Income Taxes and Equity Investments in 2023, and how does this compare to the 2022 net effect on operating profit?",
+      "answer": "In 2023, Linde plc experienced a net pension and OPEB cost (benefit), excluding service cost, of $(164) million, which reduced Operating Profit and was then reflected in the Income Before Income Taxes and Equity Investments of $7,988 million. In 2022, the net pension and OPEB cost (benefit), excluding service cost, was $(237) million, which had a larger negative impact on Operating Profit. The 2023 net effect was less negative than in 2022 by $73 million.",
+      "reasoning_steps": [
+        "Step 1: From evidence_source_a, extract the Net pension and OPEB cost (benefit), excluding service cost for 2023: $(164) million and for 2022: $(237) million.",
+        "Step 2: From evidence_source_b, identify the Income Before Income Taxes and Equity Investments for 2023: $7,988 million and confirm that the pension and OPEB cost (benefit) is a direct adjustment to Operating Profit.",
+        "Step 3: Calculate the difference between the 2023 and 2022 net pension and OPEB costs: $(164) million - $(237) million = $73 million less negative impact in 2023."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Discloses]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Net Pension and OPEB Cost (Benefit)",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_88",
+          "chunk_id": "chunk_2",
+          "chunk_text": "|                                                                                  | Year Ended December 31,   | Year Ended December 31,   | Year Ended December 31,   |\n|----------------------------------------------------------------------------------|---------------------------|---------------------------|---------------------------|\n| (Millions of dollars)                                                            | 2023                      | 2022                      | 2021                      |\n| Amount recognized in Operating Profit                                            |                           |                           |                           |\n| Service cost                                                                     | $ 84                      | $ 127                     | $ 157                     |\n| Amount recognized in Net pension and OPEB cost (benefit), excluding service cost |                           |                           |                           |\n| Interest cost                                                                    | 373                       | 201                       | 154                       |\n| Expected return on plan assets                                                   | (523)                     | (518)                     | (521)                     |\n| Net amortization and deferral                                                    | (30)                      | 74                        | 171                       |\n| Settlement charges (a)                                                           | 16                        | 6                         | 4                         |\n|                                                                                  | $ (164)                   | $ (237)                   | $ (192)                   |\n| Net periodic benefit cost (benefit)                                              | $ (80)                    | $ (110)                   | $ (35)                    |\n",
+          "relationship": "Discloses"
+        },
+        "intermediate_node": {
+          "id": "Net_Pension_and_OPEB_Cost_(Benefit)",
+          "name": "Net Pension and OPEB Cost (Benefit)",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_51",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| Year Ended December 31,                                                | 2023     | 2022     | 2021     |\n|------------------------------------------------------------------------|----------|----------|----------|\n| Sales                                                                  | $ 32,854 | $ 33,364 | $ 30,793 |\n| Cost of sales, exclusive of depreciation and amortization              | 17,492   | 19,450   | 17,543   |\n| Selling, general and administrative                                    | 3,295    | 3,107    | 3,189    |\n| Depreciation and amortization                                          | 3,816    | 4,204    | 4,635    |\n| Research and development                                               | 146      | 143      | 143      |\n| Other charges                                                          | 40       | 1,029    | 273      |\n| Other income (expenses) - net                                          | (41)     | (62)     | (26)     |\n| Operating Profit                                                       | 8,024    | 5,369    | 4,984    |\n| Interest expense - net                                                 | 200      | 63       | 77       |\n| Net pension and OPEB cost (benefit), excluding service cost            | (164)    | (237)    | (192)    |\n| Income Before Income Taxes and Equity Investments                      | 7,988    | 5,543    | 5,099    |\n| Income taxes                                                           | 1,814    | 1,434    | 1,262    |\n| Income From Continuing Operations Before Equity Investments            | 6,174    | 4,109    | 3,837    |\n| Income from equity investments                                         | 167      | 172      | 119      |\n| Income From Continuing Operations (Including Noncontrolling Interests) | 6,341    | 4,281    | 3,956    |\n| Income from discontinued operations, net of tax                        | -        | -        | 5        |\n| Net Income (Including Noncontrolling Interests)                        | 6,341    | 4,281    | 3,961    |\n| Less: noncontrolling interests from continuing operations              | (142)    | (134)    | (135)    |\n| Net Income - Linde plc                                                 | $ 6,199  | $ 4,147  | $ 3,826  |\n| Net Income - Linde plc                                                 |          |          |          |\n| Income from continuing operations                                      | $ 6,199  | $ 4,147  | $ 3,821  |\n| Income from discontinued operations                                    | $ -      | $ -      | $ 5      |\n| Per Share Data - Linde plc Shareholders                                |          |          |          |\n| Basic earnings per share from continuing operations                    | $ 12.70  | $ 8.30   | $ 7.39   |\n| Basic earnings per share from discontinued operations                  | -        | -        | 0.01     |\n| Basic earnings per share                                               | $ 12.70  | $ 8.30   | $ 7.40   |\n| Diluted earnings per share from continuing operations                  | $ 12.59  | $ 8.23   | $ 7.32   |\n| Diluted earnings per share from discontinued operations                | -        | -        | 0.01     |\n| Diluted earnings per share                                             | $ 12.59  | $ 8.23   | $ 7.33   |\n| Weighted Average Shares Outstanding (000's):                           |          |          |          |\n| Basic shares outstanding                                               | 488,191  | 499,736  | 516,896  |\n| Diluted shares outstanding                                             | 492,290  | 504,038  | 521,875  |\n",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        }
+      },
+      "quality_score": 47
+    },
+    {
+      "question_id": 14,
+      "question": "By how much did purchase accounting adjustments from the Linde AG merger increase adjusted pre-tax income relative to adjusted net income in 2023, and why does this difference matter for investor analysis?",
+      "answer": "Purchase accounting adjustments from the Linde AG merger increased adjusted pre-tax income by $990 million and adjusted net income by $818 million in 2023. This results in a $172 million higher impact on pre-tax income compared to net income. The difference matters because the adjustments are subject to tax implications, as noted in the tax reconciliation, where the tax effect of purchase accounting adjustments reduces the net income impact. Investors need to understand how these non-GAAP adjustments influence financial performance before and after taxes to assess the company's true operational results.",
+      "reasoning_steps": [
+        "Step 1: Extract from evidence_source_a - The company explains that purchase accounting adjustments impact both pre-tax and after-tax financial metrics, and that tax effects are applied based on jurisdiction-specific rates, which affects how adjustments influence net income versus pre-tax income.",
+        "Step 2: Extract from evidence_source_b - The quantitative impact of purchase accounting adjustments on adjusted pre-tax income is $990 million, while the impact on adjusted net income is $818 million.",
+        "Step 3: Synthesize - The $172 million difference between the pre-tax and net income adjustments reflects the tax effect applied to the purchase accounting impacts, which investors must understand to properly interpret non-GAAP performance metrics."
+      ],
+      "difficulty": "hard",
+      "idf_score": 7.266827347520591,
+      "sector": "Materials",
+      "sub_industry": "Industrial Gases",
+      "pattern": "ORG -[Excludes]-> FIN_METRIC <-[Discloses]- ORG",
+      "entities": {
+        "start": "LIN",
+        "intermediate": "Purchase Accounting Impacts - Linde AG",
+        "end": "LIN"
+      },
+      "entity_types": {
+        "start": "ORG",
+        "intermediate": "FIN_METRIC",
+        "end": "ORG"
+      },
+      "hop_count": 2,
+      "document_relationship": "inter_document_cross_company",
+      "path_data": {
+        "start_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        },
+        "hop_1_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_42",
+          "chunk_id": "chunk_3",
+          "chunk_text": "\n(a)\tThe\tincome\ttax\texpense\t(benefit)\ton\tthe\tnon-GAAP\tpre-tax\tadjustments\twas\tdetermined\tusing\tthe\tapplicable\ttax\trates\tfor the\tjurisdictions\tthat\twere\tutilized\tin\tcalculating\tthe\tGAAP\tincome\ttax\texpense\t(benefit)\tand\tincluded\tboth\tcurrent\tand deferred\tincome\ttax\tamounts.\n\n(b)\tNet\tof\tincome\ttaxes\twhich\tare\tshown\tseparately\tin\t'Adjusted\tIncome\tTaxes\tand\tEffective\tTax\tRate'.\n\n(c)\tThe\tcompany\tbelieves\tthat\tits\tnon-GAAP\tmeasures\texcluding\tPurchase\taccounting\timpacts\t-\tLinde\tAG\tare\tuseful\tto\tinvestors because:\t(i)\tthe\tbusiness\tcombination\twas\ta\tmerger\tof\tequals\tin\tan\tall-stock\tmerger\ttransaction,\twith\tno\tcash\tconsideration, (ii)\tthe\tcompany\tis\tmanaged\ton\ta\tgeographic\tbasis\tand\tthe\tresults\tof\tcertain\tgeographies\tare\tmore\theavily\timpacted\tby purchase\taccounting\tthan\tothers,\tcausing\tresults\tthat\tare\tnot\tcomparable\tat\tthe\treportable\tsegment\tlevel,\ttherefore,\tthe impacts\tof\tpurchasing\taccounting\tadjustments\tto\teach\tsegment\tvary\tand\tare\tnot\tcomparable\twithin\tthe\tcompany\tand\twhen\tcompared to\tother\tcompanies\tin\tsimilar\tregions,\t(iii)\tbusiness\tmanagement\tis\tevaluated\tand\tvariable\tcompensation\tis\tdetermined\tbased on\tresults\texcluding\tpurchase\taccounting\timpacts,\tand;\t(iv)\tit\tis\timportant\tto\tinvestors\tand\tanalysts\tto\tunderstand\tthe purchase\taccounting\timpacts\tto\tthe\tfinancial\tstatements.\n\nA\tsummary\tof\teach\tof\tthe\tadjustments\tmade\tfor\tPurchase\taccounting\timpacts\t-\tLinde\tAG\tare\tas\tfollows: Adjusted\tOperating\tProfit\tand\tMargin: The\tpurchase\taccounting\tadjustments\tfor\tthe\tperiods\tpresented\trelate\tprimarily\tto depreciation\tand\tamortization\trelated\tto\tthe\tfair\tvalue\tstep\tup\tof\tfixed\tassets\tand\tintangible\tassets\t(primarily\tcustomer related)\tacquired\tin\tthe\tmerger\tand\tthe\tallocation\tof\tfair\tvalue\tstep-up\tfor\tongoing\tLinde\tAG\tasset\tdisposals\t(reflected\tin Other\tIncome/(Expense)).\n\nAdjusted\tIncome\tfrom\tEquity\tInvestments: Represents\tthe\tamortization\tof\tincreased\tfair\tvalue\ton\tequity\tinvestments\trelated\tto depreciable\tand\tamortizable\tassets.\n\nAdjusted\tInterest\tExpense\t-\tNet :\tRelates\tto\tthe\tamortization\tof\tthe\tfair\tvalue\tof\tdebt\tacquired\tin\tthe\tmerger. Adjusted\tIncome\tTaxes\tand\tEffective\tTax\tRate: Relates\tto\tthe\tcurrent\tand\tdeferred\tincome\ttax\timpact\ton\tthe\tadjustments discussed\tabove.\tThe\tincome\ttax\texpense\t(benefit)\ton\tthe\tnon-GAAP\tpre-tax\tadjustments\twas\tdetermined\tusing\tthe\tapplicable\ttax rates\tfor\tthe\tjurisdictions\tthat\twere\tutilized\tin\tcalculating\tthe\tGAAP\tincome\ttax\texpense\t(benefit)\tand\tincluded\tboth\tcurrent and\tdeferred\tincome\ttax\tamounts.\n\nAdjusted\tNoncontrolling\tInterests\tfrom\tContinuing\tOperations: Represents\tthe\tnoncontrolling\tinterests'\townership\tportion\tof the\tadjustments\tdescribed\tabove\tdetermined\ton\tan\tentity\tby\tentity\tbasis.",
+          "relationship": "Excludes"
+        },
+        "intermediate_node": {
+          "id": "Purchase_Accounting_Impacts_-_Linde_AG",
+          "name": "Purchase Accounting Impacts - Linde AG",
+          "type": "FIN_METRIC",
+          "idf_score": 7.266827347520591
+        },
+        "hop_2_rel": {
+          "source_file": "LIN_10k_2023.pdf",
+          "page_id": "page_41",
+          "chunk_id": "chunk_2",
+          "chunk_text": "| Adjusted Income Taxes (a)                                  |         | $       | 1,434   |\n|------------------------------------------------------------|---------|---------|---------|\n| Add: Purchase accounting impacts - Linde AG (c)            | 232     |         | 374     |\n| Add: Pension settlement charges                            |         | 3       | 1       |\n| Add: Other charges (a)                                     | 81      |         | 136     |\n| Total adjustments                                          | 316     |         | 511     |\n| Adjusted income taxes                                      | $ 2,130 | $       | 1,945   |\n| Adjusted Effective Tax Rate (a)                            |         |         |         |\n| Reported income before income taxes and equity investments | $ 7,988 | $       | 5,543   |\n| Add: Pension settlement charge                             | 16      |         | 6       |\n| Add: Purchase accounting impacts - Linde AG (c)            | 990     |         | 1,471   |\n| Add: Other charges (a)                                     | 40      |         | 1,029   |\n| Total adjustments                                          | 1,046   |         | 2,506   |\n| Adjusted income before income taxes and equity investments | $ 9,034 | $       | 8,049   |\n| Reported Income taxes                                      | $       | 1,814 $ | 1,434   |\n| Reported effective tax rate                                | 22.7%   |         | 25.9%   |\n| Adjusted income taxes                                      | $ 2,130 | $       | 1,945   |\n| Adjusted effective tax rate                                | 23.6%   |         | 24.2%   |\n| Income from Equity Investments                             |         |         |         |\n| Reported income from equity investments                    | $ 167   | $       | 172     |\n| Add: Purchase accounting impacts - Linde AG (c)            | 72      |         | 75      |\n| Total adjustments                                          | 72      |         | 75      |\n| Adjusted income from equity investments                    | $ 239   | $       | 247     |\n| Adjusted Noncontrolling Interests                          |         |         |         |\n| Reported noncontrolling interests                          | $ (142) | $       | (134)   |\n| Add: Purchase accounting impacts - Linde AG (c)            | (12)    |         | (22)    |\n| Adjusted noncontrolling interests                          | $ (154) | $       | (156)   |\n| Adjusted Net Income - Linde plc (b)                        |         |         |         |\n| Reported net income                                        | $ 6,199 | $       | 4,147   |\n| Add: Pension settlement charge                             | 13      |         | 5       |\n| Add: Other charges (a)                                     | (41)    |         | 893     |\n| Add: Purchase accounting impacts - Linde AG (c)            | 818     |         | 1,150   |\n| Total adjustments                                          | 790     |         | 2,048   |\n| Adjusted net income - Linde plc                            | $ 6,989 | $       | 6,195   |\n| Adjusted Diluted EPS (b)                                   |         |         |         |\n| Reported diluted                                           | $ 12.59 | $       | 8.23    |\n| EPS Add: Pension settlement charge                         | 0.03    |         | 0.01    |\n| Add: Other charges (a)                                     | (0.08)  |         | 1.77    |",
+          "relationship": "Discloses"
+        },
+        "end_node": {
+          "id": "LIN",
+          "name": "LIN",
+          "type": "ORG",
+          "year": 2023
+        }
+      },
+      "quality_score": 47
+    }
+  ]
+}
