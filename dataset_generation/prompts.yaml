@@ -1,0 +1,1858 @@
+# =============================================================================
+# Multi-hop QA Generation Prompts
+# ============================================================================= 
+# Features:
+# - Detailed requirements and constraints
+# - Bad/Good examples for guidance
+# - Self-validation checklists
+# - Quality gate (NO FORCED GENERATION)
+# - Financial calculation templates
+# - Comprehensive validation with 0-10 scoring
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# TYPE 1: Cross-Company Comparison Questions (2-Hop)
+# Same year, different companies sharing a connector entity
+# -----------------------------------------------------------------------------
+
+cross_company:
+  system: |
+    You are an expert financial analyst and question generation specialist tasked with creating multi-hop reasoning questions from SEC 10-K filing excerpts.
+
+    <role>
+    Generate high-quality multi-hop questions that require synthesizing information from different companies' 10-K filings connected through a shared entity.
+    </role>
+
+    <critical_requirements>
+    1. INSIGHTFUL SYNTHESIS: Question must force synthesis of information from all provided chunks to reveal a connection, contradiction, or cumulative effect - not just combine facts
+    2. MANDATORY MULTI-HOP JOIN: Question must explicitly require joining information from all sources to form complete answer
+    3. GROUNDED CAUSAL REASONING: Questions testing cause-and-effect MUST have the causal link STATED in the evidence, not invented. Do NOT fabricate connections like "could disrupt ecosystem" or "might affect industry" - these are speculative.
+    4. MECHANISM UNDERSTANDING: Focus on WHY and HOW relationships lead to financial impacts - but ONLY when the mechanism is explicitly described in the evidence
+    5. MULTI-CHUNK DEPENDENCY: Questions MUST be unanswerable if any chunk is removed
+    6. NO PARTIAL GROUNDING: Each chunk must contribute meaningfully to the logical reasoning chain, not just be superficially mentioned
+    7. VERIFY CONNECTOR MEANINGFULNESS: Do NOT blindly trust that the connector creates a real relationship. Generic terms like "Cash", "Revenue", "Operating Expenses", "Risk" connecting two companies do NOT mean they have a business relationship. Ask: "Does the evidence show these companies actually affect each other?"
+    8. CROSS-ENTITY CONNECTIONS MUST BE EXPLICIT: Only create cross-company questions when evidence explicitly shows a business relationship (supplier-customer, competitor, partner, regulatory peer). Do NOT invent "industry dynamics" or "ecosystem effects" that aren't stated.
+    9. FINANCIAL CALCULATIONS PREFERRED: When meaningful metrics exist (revenues, costs, percentages), prioritize calculation-based questions using ONLY numbers from chunks
+    10. EXPLICIT INFORMATION ONLY: Use only information directly stated in the chunks - NO speculation about how one company's issues "could affect" another
+    11. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them, focusing on concepts and entities, not document locations.
+    </critical_requirements>
+
+    <quality_gate>
+    NO FORCED GENERATION: If chunks do not contain meaningful interconnected information supporting genuine multi-hop reasoning, you MUST return "no meaningful question can be generated" rather than forcing artificial connections.
+
+    Do NOT generate questions when:
+    - Chunks contain unrelated information with no logical connection
+    - Triplets suggest connections but chunk content doesn't support meaningful reasoning
+    - Information is too generic for multi-hop reasoning
+    - No meaningful causal or logical relationships exist between chunks
+    - Connections would be artificial or superficial
+    - GENERIC CONNECTOR: Both companies mention a common term (e.g., "cash resources", "operating expenses", "risk factors") but have NO stated business relationship. Just because Cisco and Qualcomm both discuss "cash" does NOT mean Qualcomm's issues affect Cisco.
+    - SPECULATIVE CAUSATION: You would need to use phrases like "could affect", "might impact", "may disrupt" to connect the companies - this means the connection is NOT grounded in evidence.
+    </quality_gate>
+
+    <question_types>
+    - Causal impact: "How do [actions/relationships] influence [outcomes]?"
+    - Mechanism: "What processes lead to the impacts shown?"
+    - Consequence: "Why would [changes in A] affect how [B] performs?"
+    - Process: "Through what mechanism do [relationships] translate to [results]?"
+    - Calculation: "What is the [sum/difference/average] between [metrics]?"
+    - Quantitative impact: "By how much did [action] affect [metric]?"
+    </question_types>
+
+    <answer_requirements>
+    - Explain causal mechanism: Show HOW entity actions lead to outcomes across the chain
+    - Use transitional reasoning: "This leads to...", "As a result...", "Consequently..."
+    - Connect all entities in the path: Follow the reasoning chain through all hops
+    - Ground in chunk content: Base reasoning on specific details from all provided chunks
+    - Show calculations clearly: "$100M + $50M = $150M" format
+    - Use ALL chunks: Every provided chunk must contribute essential information
+    </answer_requirements>
+
+    <avoid>
+    - Fact combination without reasoning: "What [A] is mentioned AND what [C] was reported?"
+    - Single chunk answerable questions
+    - Disconnected queries not exploring relationships
+    - Generic questions applicable to any document
+    - Calculations using numbers not in chunks
+    - Speculative math with estimated figures
+    - Chunk references in questions ("chunk 1", "chunk 2")
+    - PARTIAL GROUNDING: Artificially forcing connections where chunk is only superficially mentioned
+    - FABRICATED CROSS-COMPANY CAUSATION: "How might Company A's issues affect Company B?" when evidence shows NO business relationship - just shared generic term
+    - SPECULATIVE ECOSYSTEM EFFECTS: "This could disrupt the broader industry" or "might impact the technology sector" - unless evidence explicitly states this
+    - INVENTED SUPPLY CHAIN LINKS: Claiming companies are connected through supply chain when evidence doesn't show supplier-customer relationship
+    </avoid>
+
+    <output_format>
+    Return ONLY valid JSON:
+    {
+      "question": "Your multi-hop question here",
+      "answer": "Complete answer synthesizing all provided chunks",
+      "reasoning_steps": [
+        "Step 1: Extract from source 1 - [specific info needed]",
+        "Step 2: Extract from source 2 - [specific info needed]",
+        "Step N: Synthesize - [how they connect to form answer]"
+      ],
+      "chunk_dependencies": {
+        "chunk_1": "What information from chunk 1 is needed",
+        "chunk_2": "What information from chunk 2 is needed"
+      },
+      "reasoning_type": "comparison|contrast|causal|aggregation|calculation"
+    }
+
+    If NO meaningful question possible:
+    {
+      "question": "no meaningful question can be generated",
+      "answer": "no meaningful question can be generated",
+      "chunk_dependencies": {},
+      "reasoning_type": "insufficient_interconnection"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty multi-hop question based on the shared connector entity linking the provided sources.
+    </task>
+
+    <source_a>
+    Company: {org1}
+    Year: {year1}
+    Sector: {sector}
+    Source: {org1_source_file}
+    Relationship: {org1_relationship}
+    </source_a>
+
+    <source_b>
+    Company: {org2}
+    Year: {year2}
+    Sector: {sector}
+    Source: {org2_source_file}
+    Relationship: {org2_relationship}
+    </source_b>
+
+    <connector>
+    Entity: {connector_name}
+    Type: {connector_type}
+    IDF Score: {idf_score} (higher = rarer/more specific connector)
+    </connector>
+
+    <evidence_source_a>
+    {evidence1}
+    </evidence_source_a>
+
+    <evidence_source_b>
+    {evidence2}
+    </evidence_source_b>
+
+    <grounding_requirements>
+    CRITICAL: Your question and answer MUST reference SPECIFIC facts from each evidence chunk:
+    - Extract at least ONE specific number, metric, dollar amount, percentage, or named item from EACH chunk
+    - DO NOT generate generic questions about the connector entity name alone
+    - The question should be UNANSWERABLE without the specific details in these exact chunks
+    - If chunk mentions "$500 million" - use that exact number
+    - If chunk mentions a specific product, risk, or business unit - name it specifically
+    - Different chunks about the same connector should produce DIFFERENT questions
+    </grounding_requirements>
+
+    <self_validation_checklist>
+    Before finalizing, verify:
+    [ ] Does question reference at least ONE specific fact from evidence_source_a?
+    [ ] Does question/answer reference at least ONE specific fact from evidence_source_b?
+    [ ] Would this EXACT question be impossible to generate from different chunks about the same connector?
+    [ ] Does answer include specific numbers/names from the evidence (not generic descriptions)?
+    [ ] If meaningful financial numbers present, have I included calculation?
+    [ ] Is causal relationship clear and multi-hop?
+    </self_validation_checklist>
+
+  examples:
+    - description: "BAD - Cross-Entity Confusion"
+      input:
+        pattern: "ORG1 → Connector ← ORG2"
+      bad_output: |
+        Question: "What is the total supplementary leverage buffer requirement imposed by the Federal Reserve on JPMorgan Chase Bank, N.A., and how does this compare to the depreciation expenses as a percentage of sales reported by the firm in 2023?"
+
+        Why BAD:
+        - Chunk 1: JPMorgan Chase Bank (JPM_10k_2023.pdf) - JPM data
+        - Chunk 2: Danaher Corporation (DHR_10k_2023.pdf) - DHR data from 2021
+        - Artificial cross-entity comparison: JPM's regulatory requirements vs DHR's depreciation
+        - No genuine business relationship between these unrelated companies
+        - Creates false causal relationship where none exists
+
+    - description: "BAD - Forced Artificial Connection"
+      input:
+        pattern: "ORG1 → Connector ← ORG2"
+      bad_output: |
+        Question: "Using the allowed return on equity from regulatory filings and the guaranteed lease obligation, what is the minimum equity required to cover Pepco's $25 million lease guarantee, assuming PCAOB-audited financial statements ensure accurate reporting?"
+
+        Why BAD:
+        - PCAOB oversight mentioned superficially - doesn't actually affect the ROE calculation
+        - Forced artificial connection: "PCAOB ensures accuracy" doesn't impact the math
+        - Only 2 of 3 chunks truly essential for the calculation
+        - One chunk could be removed without affecting answer's validity
+
+    - description: "BAD - Fabricated Cross-Company Causation via Generic Connector"
+      input:
+        pattern: "ORG1 → Cash Resources ← ORG2"
+        org1: "Cisco (CSCO)"
+        org2: "Qualcomm (QCOM)"
+        connector: "Cash Resources"
+      bad_output: |
+        Question: "How might Qualcomm's intellectual property enforcement challenges affect Cisco's ability to deploy cash resources toward strategic acquisitions?"
+
+        Answer: "Qualcomm's IP challenges could lead to reduced royalty revenues, which may constrain its cash flows. This could disrupt the broader technology ecosystem, potentially affecting Cisco's strategic deployment of its $13.2 billion in operating cash flow."
+
+        Why BAD:
+        - FABRICATED CONNECTION: Evidence shows CSCO uses cash for acquisitions and QCOM has IP issues affecting cash. But NOTHING in evidence says QCOM's issues affect CSCO.
+        - GENERIC CONNECTOR: "Cash Resources" is generic - every company has cash. This doesn't create a business relationship.
+        - SPECULATIVE CAUSATION: "could disrupt the broader technology ecosystem" is pure fabrication - not stated anywhere in evidence.
+        - Individual facts are grounded (CSCO's $13.2B, QCOM's IP risks) but the CONNECTION is invented.
+        - CORRECT RESPONSE: Return "no meaningful question can be generated" because companies have no stated business relationship.
+
+    - description: "GOOD - Genuine Causation"
+      input:
+        org1: "Bank A"
+        org2: "Bank A"
+        connector_name: "Capital Requirements"
+      good_output: |
+        {
+          "question": "How did the regulatory capital requirements impact the bank's lending capacity, and what was the resulting effect on net interest income in 2023?",
+          "answer": "The bank maintained a Tier 1 capital ratio of 15.2%, exceeding the regulatory minimum of 12.0% (Chunk 1). This excess capital capacity enabled $890 billion in total loans, representing a 5.2% increase from the prior year (Chunk 2). Consequently, net interest income grew to $67.5 billion in 2023, reflecting how strong capital positioning directly supports lending growth and revenue generation.",
+          "reasoning_steps": [
+            "Step 1: Extract capital ratio (15.2% vs 12.0% minimum) showing excess capacity",
+            "Step 2: Extract lending growth ($890B, +5.2%) and net interest income ($67.5B)",
+            "Step 3: Connect capital → lending → revenue as genuine causal chain"
+          ],
+          "chunk_dependencies": {
+            "chunk_1": "Tier 1 capital ratio and regulatory minimum",
+            "chunk_2": "Lending volumes and net interest income"
+          },
+          "reasoning_type": "causal"
+        }
+
+        Why GOOD:
+        - Consistent entity context enables genuine causal relationship
+        - Both chunks essential for complete understanding
+        - Calculations use only explicit numbers from chunks
+        - Demonstrates legitimate business causation: capital → lending → revenue
+
+
+# -----------------------------------------------------------------------------
+# TYPE 2: Temporal Analysis Questions (2-Hop)
+# Same company, different years - analyzing change over time
+# -----------------------------------------------------------------------------
+
+cross_year:
+  system: |
+    You are an expert financial analyst generating temporal analysis questions from SEC 10-K filings.
+
+    <role>
+    Generate high-quality multi-hop questions requiring comparison of a company's disclosures across different years to identify changes, trends, or evolution.
+    </role>
+
+    <critical_requirements>
+    1. FOCUS ON CHANGE: Questions MUST focus on CHANGE or EVOLUTION over time
+    2. ALL YEARS REQUIRED: Answers MUST compare evidence from ALL provided years
+    3. NOT SINGLE-YEAR: Do NOT generate questions answerable from single year's data
+    4. NO EXTERNAL KNOWLEDGE: Use only information in the provided evidence
+    5. CONNECTOR EVOLUTION: Focus on how the connector entity's relationship changed over time
+    6. MULTI-CHUNK DEPENDENCY: Removing any year's evidence must make question unanswerable
+    7. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them, focusing on concepts and entities, not document locations.
+    </critical_requirements>
+
+    <temporal_patterns>
+    Look for these change types:
+    - Quantitative changes (revenue increased, headcount decreased)
+    - Strategic shifts (new focus areas, discontinued initiatives)
+    - Risk evolution (new risks emerged, old risks resolved)
+    - Relationship changes (new partnerships, ended contracts)
+    - Regulatory/compliance changes (new requirements, policy updates)
+    </temporal_patterns>
+
+    <quality_gate>
+    NO FORCED GENERATION: If no meaningful change exists between years, return "no meaningful question can be generated" rather than forcing artificial temporal connections.
+    </quality_gate>
+
+    <output_format>
+    Return ONLY valid JSON:
+    {
+      "question": "Your temporal analysis question here",
+      "answer": "Answer explaining change over time with evidence from both years",
+      "reasoning_steps": [
+        "Step 1: Identify state/situation in Year 1",
+        "Step 2: Identify state/situation in Year 2",
+        "Step 3: Analyze and characterize the change"
+      ],
+      "temporal_analysis": {
+        "year1_state": "Description of earlier year state",
+        "year2_state": "Description of later year state",
+        "change_type": "increased|decreased|transformed|stable|new|discontinued",
+        "change_magnitude": "significant|moderate|minor"
+      },
+      "reasoning_type": "trend|evolution|comparison|causal"
+    }
+
+    If NO meaningful question possible:
+    {
+      "question": "no meaningful question can be generated",
+      "answer": "no meaningful question can be generated",
+      "temporal_analysis": {"year1_state": "N/A", "year2_state": "N/A", "change_type": "none", "change_magnitude": "none"},
+      "reasoning_type": "insufficient_temporal_change"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty multi-hop temporal analysis question for a company across different years.
+    </task>
+
+    <company>
+    Name: {org}
+    Sector: {sector}
+    Earlier Year: {year1}
+    Later Year: {year2}
+    </company>
+
+    <connector>
+    Entity: {connector_name}
+    Type: {connector_type}
+    Relationship Status: {relationship_changed}
+    </connector>
+
+    <evidence_year1>
+    Year: {year1}
+    Source: {org1_source_file}
+    Relationship: {org1_relationship}
+    {evidence1}
+    </evidence_year1>
+
+    <evidence_year2>
+    Year: {year2}
+    Source: {org2_source_file}
+    Relationship: {org2_relationship}
+    {evidence2}
+    </evidence_year2>
+
+    <grounding_requirements>
+    CRITICAL: Your question and answer MUST reference SPECIFIC facts from each evidence chunk:
+    - Extract at least ONE specific number, metric, dollar amount, percentage, or named item from EACH year's chunk
+    - DO NOT generate generic questions about the connector entity name alone
+    - Include specific values that changed between years (e.g., "$100M in 2022 to $150M in 2024")
+    - Different chunks about the same connector should produce DIFFERENT questions
+    </grounding_requirements>
+
+    <self_validation_checklist>
+    Before finalizing:
+    [ ] Does question reference at least ONE specific fact from evidence_year1?
+    [ ] Does question/answer reference at least ONE specific fact from evidence_year2?
+    [ ] Does question use temporal language (evolved, changed, shifted, grew)?
+    [ ] Does answer include specific numbers from BOTH years for comparison?
+    [ ] Would this EXACT question be impossible to generate from different chunks?
+    </self_validation_checklist>
+
+  examples:
+    - description: "GOOD - Temporal Evolution"
+      input:
+        org: "NVIDIA"
+        year1: 2022
+        year2: 2024
+        connector_name: "Data Center Revenue"
+      good_output: |
+        {
+          "question": "How has NVIDIA's data center business segment evolved from fiscal 2022 to fiscal 2024 in terms of revenue contribution and strategic positioning?",
+          "answer": "NVIDIA's data center segment underwent dramatic transformation. In fiscal 2022, data center generated $10.6 billion (40% of revenue), with growth drivers primarily being cloud computing and enterprise virtualization. By fiscal 2024, data center revenue exploded to $47.5 billion (80%+ of revenue), with AI and accelerated computing becoming dominant drivers. The filing language evolved from describing data center as a 'growth opportunity' in 2022 to 'primary business' in 2024.",
+          "reasoning_steps": [
+            "Step 1: 2022 state - $10.6B (40%), cloud/virtualization focus",
+            "Step 2: 2024 state - $47.5B (80%+), AI/LLM training focus",
+            "Step 3: Change represents 4.5x growth AND strategic repositioning to AI-focused"
+          ],
+          "temporal_analysis": {
+            "year1_state": "Data center as growth segment, 40% revenue, cloud-focused",
+            "year2_state": "Data center as primary business, 80%+ revenue, AI-focused",
+            "change_type": "transformed",
+            "change_magnitude": "significant"
+          },
+          "reasoning_type": "evolution"
+        }
+
+
+# -----------------------------------------------------------------------------
+# INTRA-DOC: Same Company, Same Year, Different Pages/Sections (2-Hop)
+# Pattern: ORG(page1) → Connector ← ORG(page2)
+# Questions about how a company discusses the same topic differently across sections
+# -----------------------------------------------------------------------------
+
+intra_doc:
+  system: |
+    You are an expert financial analyst generating intra-document analysis questions from SEC 10-K filings.
+
+    <role>
+    Generate high-quality multi-hop questions requiring synthesis of information from DIFFERENT SECTIONS of the SAME company's 10-K filing that discuss the same entity/topic in different contexts.
+    </role>
+
+    <critical_requirements>
+    1. FOCUS ON CONTEXTUAL DIFFERENCES: Questions MUST explore how the same topic is discussed differently across sections
+    2. ALL SECTIONS REQUIRED: Answers MUST synthesize evidence from ALL provided sections/pages
+    3. NOT SINGLE-SECTION: Do NOT generate questions answerable from a single section
+    4. NO EXTERNAL KNOWLEDGE: Use only information in the provided evidence
+    5. CONNECTOR CONTEXT: Focus on how the connector entity appears in different contexts (risks vs opportunities, quantitative vs qualitative)
+    6. MULTI-CHUNK DEPENDENCY: Removing any section's evidence must make question unanswerable
+    7. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them, focusing on concepts and entities, not document locations.
+    </critical_requirements>
+
+    <intra_document_patterns>
+    Look for these contextual differences:
+    - Risk vs Opportunity framing (same entity discussed as risk in one section, opportunity in another)
+    - Quantitative vs Qualitative treatment (numbers in one section, narrative in another)
+    - Strategic vs Operational context (high-level strategy vs day-to-day operations)
+    - Historical vs Forward-looking (past performance vs future outlook)
+    - Different business segment perspectives (how different divisions view same entity)
+    </intra_document_patterns>
+
+    <quality_gate>
+    NO FORCED GENERATION: If no meaningful contextual difference exists between sections, return "no meaningful question can be generated" rather than forcing artificial connections.
+    </quality_gate>
+
+    <output_format>
+    Return ONLY valid JSON:
+    {
+      "question": "Your intra-document analysis question here",
+      "answer": "Answer explaining how the topic is treated differently across sections",
+      "reasoning_steps": [
+        "Step 1: Identify how topic is discussed in Section/Page 1",
+        "Step 2: Identify how topic is discussed in Section/Page 2",
+        "Step 3: Analyze and synthesize the different perspectives"
+      ],
+      "contextual_analysis": {
+        "section1_context": "Description of how topic appears in first section",
+        "section2_context": "Description of how topic appears in second section",
+        "difference_type": "risk_vs_opportunity|quantitative_vs_qualitative|strategic_vs_operational|segment_perspectives",
+        "synthesis_insight": "What we learn by combining both perspectives"
+      },
+      "reasoning_type": "contextual_synthesis|perspective_comparison|comprehensive_view"
+    }
+
+    If NO meaningful question possible:
+    {
+      "question": "no meaningful question can be generated",
+      "answer": "no meaningful question can be generated",
+      "contextual_analysis": {"section1_context": "N/A", "section2_context": "N/A", "difference_type": "none", "synthesis_insight": "none"},
+      "reasoning_type": "insufficient_contextual_difference"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty multi-hop intra-document question analyzing how a company discusses the same topic across different sections of its 10-K filing.
+    </task>
+
+    <company>
+    Name: {org}
+    Year: {year}
+    Sector: {sector}
+    </company>
+
+    <connector>
+    Entity: {connector_name}
+    Type: {connector_type}
+    Contextual Variation: {relationship_changed}
+    </connector>
+
+    <evidence_section1>
+    Page: {page1}
+    Relationship: {org1_relationship}
+    {evidence1}
+    </evidence_section1>
+
+    <evidence_section2>
+    Page: {page2}
+    Relationship: {org2_relationship}
+    {evidence2}
+    </evidence_section2>
+
+    <grounding_requirements>
+    CRITICAL: Your question and answer MUST reference SPECIFIC facts from each evidence section:
+    - Extract at least ONE specific number, metric, dollar amount, or named item from EACH section
+    - DO NOT generate generic questions about the connector entity name alone
+    - Highlight specific differences in how the entity is discussed in each section
+    - Different page combinations about the same connector should produce DIFFERENT questions
+    </grounding_requirements>
+
+    <self_validation_checklist>
+    Before finalizing:
+    - Does question reference at least ONE specific fact from evidence_section1?
+    - Does question/answer reference at least ONE specific fact from evidence_section2?
+    - Does question explore how the SAME topic is discussed DIFFERENTLY?
+    - Does answer include specific details from BOTH sections?
+    - Would this EXACT question be impossible to generate from different pages?
+    </self_validation_checklist>
+
+  examples:
+    - description: "GOOD - Contextual Synthesis"
+      input:
+        org: "NVIDIA"
+        year: 2024
+        connector_name: "Supply Chain Concentration"
+      good_output: |
+        {
+          "question": "How does NVIDIA's 10-K filing present supply chain concentration both as a risk factor and as a strategic advantage, and what does synthesizing these perspectives reveal about the company's supplier relationship strategy?",
+          "answer": "In the Risk Factors section (Page 15), NVIDIA describes supply chain concentration as a significant risk, noting heavy reliance on TSMC for advanced chip manufacturing and warning that 'any disruption could materially impact our ability to meet customer demand.' However, in the Business Strategy section (Page 42), the same concentration is framed as enabling 'deep collaborative partnerships that provide early access to cutting-edge manufacturing processes.' Synthesizing these perspectives reveals NVIDIA's calculated risk acceptance: the company acknowledges concentration risk but views the competitive advantages from close supplier relationships as outweighing diversification benefits.",
+          "reasoning_steps": [
+            "Step 1: Risk Factors section presents concentration as vulnerability with specific warnings",
+            "Step 2: Business Strategy section presents same concentration as competitive advantage",
+            "Step 3: Synthesis reveals deliberate strategic choice to accept concentration risk for partnership benefits"
+          ],
+          "contextual_analysis": {
+            "section1_context": "Risk framing - concentration as vulnerability requiring disclosure",
+            "section2_context": "Strategy framing - concentration as enabling competitive advantage",
+            "difference_type": "risk_vs_opportunity",
+            "synthesis_insight": "Company's risk tolerance reflects strategic prioritization of partnership depth over supply diversification"
+          },
+          "reasoning_type": "contextual_synthesis"
+        }
+
+
+# -----------------------------------------------------------------------------
+# 3-HOP: Connector Chain Questions
+# Pattern: ORG1 → Connector1 → Connector2 ← ORG2
+# -----------------------------------------------------------------------------
+
+three_hop_cross_company_type1:
+  system: |
+    You are an expert financial analyst generating complex 3-hop reasoning questions.
+
+    <role>
+    Generate questions requiring THREE reasoning hops through a chain of two connected entities.
+    Pattern: Company A → Entity1 → Entity2 ← Company B
+    </role>
+
+    <natural_analyst_questions>
+    CRITICAL: Generate questions that a real business analyst or financial analyst would actually ask.
+
+    GOOD question examples (natural, insightful):
+    - "How does NVIDIA's reliance on TSMC for manufacturing compare to AMD's supply chain strategy, given their shared exposure to semiconductor fabrication risks?"
+    - "What is the combined revenue impact of AI chip demand on both NVIDIA and AMD's data center segments?"
+    - "How do supply chain concentration risks at TSMC affect the competitive dynamics between NVIDIA and AMD?"
+
+    BAD question examples (forced, artificial):
+    - "How does Entity1 mentioned in Company A's filing connect to Entity2 which Company B also discusses?"
+    - "What is the relationship between the connector chain starting from Company A through Entity1 to Entity2 ending at Company B?"
+    - "According to page 45 of Company A's 10-K and page 72 of Company B's 10-K, how do they relate?"
+
+    The question should sound like something asked in:
+    - An earnings call Q&A
+    - An investment research report
+    - A competitive analysis meeting
+    - A supply chain risk assessment
+    </natural_analyst_questions>
+
+    <critical_requirements>
+    1. MANDATORY 3-HOP: Question MUST require all 3 hops - not answerable with only 2
+    2. UNIQUE CONTRIBUTION: Each hop must contribute unique information to the answer
+    3. ALL CHUNKS ESSENTIAL: Answer must synthesize evidence from all 3 chunks
+    4. NO EXTERNAL KNOWLEDGE: Use only information from provided evidence
+    5. COMPLEX SYNTHESIS: Question must force synthesis across all three chunks to reveal multi-stage process
+    6. NO PARTIAL GROUNDING: Each chunk must meaningfully contribute, not just be superficially mentioned
+    7. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them, focusing on concepts and entities, not document locations.
+    8. NATURAL LANGUAGE: Question must sound like a real analyst asking a genuine business question - NOT a forced technical query about document structure.
+    9. GROUNDED CROSS-COMPANY CONNECTIONS: If comparing different companies, the evidence MUST show an explicit business relationship (supplier-customer, competitor, partner). Do NOT invent connections like "could affect the industry" or "might impact the ecosystem".
+    10. NO FABRICATED CAUSATION: The causal link between companies must be STATED in evidence. Generic connectors (e.g., "Cash", "Revenue") do NOT create business relationships.
+    </critical_requirements>
+
+    <quality_gate>
+    NO FORCED GENERATION: If chunks cannot support genuine 3-hop reasoning, return "no meaningful question can be generated".
+
+    Do NOT generate when:
+    - Only 2 of 3 chunks can be meaningfully connected
+    - The middle connection (Entity1 → Entity2) is artificial
+    - Information is too generic for 3-hop reasoning
+    - Companies share a generic term but have NO stated business relationship
+    - You would need speculative language ("could affect", "might impact") to connect the companies
+    </quality_gate>
+
+    <output_format>
+    {
+      "question": "3-hop question requiring chain reasoning",
+      "answer": "Answer synthesizing all 3 evidence chunks",
+      "reasoning_steps": [
+        "Hop 1: [ORG1] → [Entity1]: <what we learn>",
+        "Hop 2: [Entity1] → [Entity2]: <how they connect>",
+        "Hop 3: [Entity2] ← [ORG2]: <what we learn>"
+      ],
+      "chunk_dependencies": {
+        "chunk_1": "Essential info from ORG1's evidence",
+        "chunk_2": "Essential info connecting entities",
+        "chunk_3": "Essential info from ORG2's evidence"
+      },
+      "reasoning_type": "chain|cascade|multi_entity"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty 3-hop question using the connector chain pattern.
+    </task>
+
+    <path_structure>
+    {org1} → {connector1_name} → {connector2_name} ← {org2}
+    </path_structure>
+
+    <hop1_evidence>
+    Company: {org1} ({year1})
+    Entity: {connector1_name} ({connector1_type})
+    Relationship: {hop1_relationship}
+    Source: {org1_source_file}
+    {evidence1}
+    </hop1_evidence>
+
+    <hop2_evidence>
+    Entity1: {connector1_name}
+    Entity2: {connector2_name} ({connector2_type})
+    Relationship: {hop2_relationship}
+    {evidence2}
+    </hop2_evidence>
+
+    <hop3_evidence>
+    Company: {org2} ({year2})
+    Entity: {connector2_name}
+    Relationship: {hop3_relationship}
+    Source: {org2_source_file}
+    {evidence3}
+    </hop3_evidence>
+
+    <grounding_requirements>
+    CRITICAL: Your question and answer MUST reference SPECIFIC facts from each evidence chunk:
+    - Extract at least ONE specific number, metric, dollar amount, percentage, or named item from EACH chunk
+    - DO NOT generate generic questions about the entity names alone
+    - The question should be UNANSWERABLE without the specific details in these exact chunks
+    - If chunk mentions "$1,353 million" - use that exact number
+    - If chunk mentions "ZT Systems acquisition" - reference that specific acquisition
+    - If chunk mentions specific products/services - name them specifically
+    </grounding_requirements>
+
+    <self_validation_checklist>
+    [ ] Does question reference at least ONE specific fact from hop1_evidence?
+    [ ] Does question/answer reference at least ONE specific fact from hop2_evidence?
+    [ ] Does question/answer reference at least ONE specific fact from hop3_evidence?
+    [ ] Would this EXACT question be impossible to generate from different chunks about the same entities?
+    [ ] Does answer include specific numbers/names from the evidence (not generic descriptions)?
+    </self_validation_checklist>
+
+
+# -----------------------------------------------------------------------------
+# 3-HOP: Cross-Year Type 1 (Connector Chain with Temporal Analysis)
+# Pattern: ORG(y1) → Connector1 → Connector2 ← ORG(y2)
+# Same company, different years, connector chain
+# -----------------------------------------------------------------------------
+
+three_hop_cross_year_type1:
+  system: |
+    You are an expert financial analyst generating complex 3-hop temporal reasoning questions.
+
+    <role>
+    Generate questions requiring THREE reasoning hops through a chain of two connected entities, comparing the SAME company across DIFFERENT years.
+    Pattern: Company(Year1) → Entity1 → Entity2 ← Company(Year2)
+    </role>
+
+    <natural_analyst_questions>
+    CRITICAL: Generate questions that a real business analyst or financial analyst would actually ask.
+
+    GOOD question examples (natural, insightful):
+    - "How did NVIDIA's data center revenue growth from 2023 to 2024 relate to changes in their AI chip pricing strategy?"
+    - "What drove the shift in NVIDIA's supply chain risk profile between fiscal years, and how did this affect their gross margins?"
+    - "How did NVIDIA's R&D investments in 2023 translate to product segment performance improvements in 2024?"
+
+    BAD question examples (forced, artificial):
+    - "How does Entity1 in Year1 connect to Entity2 in Year2 for the same company?"
+    - "What is the temporal relationship between the connector chain across years?"
+    - "According to the 2023 and 2024 filings, how do the entities mentioned relate?"
+
+    The question should sound like something asked in:
+    - A year-over-year performance review
+    - A strategic planning session
+    - An investor update presentation
+    - A trend analysis report
+    </natural_analyst_questions>
+
+    <critical_requirements>
+    1. MANDATORY 3-HOP: Question MUST require all 3 hops - not answerable with only 2
+    2. TEMPORAL EVOLUTION: Focus on how the company's relationship with entities evolved over time
+    3. ALL CHUNKS ESSENTIAL: Answer must synthesize evidence from all 3 chunks
+    4. NO EXTERNAL KNOWLEDGE: Use only information from provided evidence
+    5. CONNECTOR CHAIN LOGIC: The Entity1 → Entity2 connection must be meaningful
+    6. NO PARTIAL GROUNDING: Each chunk must meaningfully contribute, not just be superficially mentioned
+    7. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them, focusing on concepts and entities, not document locations.
+    8. NATURAL LANGUAGE: Question must sound like a real analyst asking a genuine business question - NOT a forced technical query about document structure.
+    </critical_requirements>
+
+    <temporal_chain_patterns>
+    Look for:
+    - How company's relationship with Entity1 changed from Year1 to Year2
+    - How Entity1's connection to Entity2 evolved over time
+    - Causal chains where earlier year actions influenced later year outcomes through the entity chain
+    - Strategic evolution visible through the entity relationships
+    </temporal_chain_patterns>
+
+    <quality_gate>
+    NO FORCED GENERATION: If chunks cannot support genuine 3-hop temporal reasoning, return "no meaningful question can be generated".
+
+    Do NOT generate when:
+    - Only 2 of 3 chunks can be meaningfully connected
+    - The middle connection (Entity1 → Entity2) is artificial
+    - No meaningful temporal evolution exists
+    </quality_gate>
+
+    <output_format>
+    {
+      "question": "3-hop temporal chain question",
+      "answer": "Answer synthesizing all 3 evidence chunks with temporal analysis",
+      "reasoning_steps": [
+        "Hop 1: [ORG](year1) → [Entity1]: <earlier state>",
+        "Hop 2: [Entity1] → [Entity2]: <how they connect>",
+        "Hop 3: [Entity2] ← [ORG](year2): <later state>"
+      ],
+      "temporal_analysis": {
+        "year1_state": "Description of earlier year state",
+        "year2_state": "Description of later year state",
+        "change_type": "increased|decreased|transformed|stable|new|discontinued",
+        "entity_chain_evolution": "How the entity chain relationship evolved"
+      },
+      "chunk_dependencies": {
+        "chunk_1": "Essential info from Year1's evidence",
+        "chunk_2": "Essential info connecting entities",
+        "chunk_3": "Essential info from Year2's evidence"
+      },
+      "reasoning_type": "temporal_chain|temporal_cascade|evolution"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty 3-hop question using the temporal connector chain pattern.
+    </task>
+
+    <company>
+    Name: {org}
+    Sector: {sector}
+    Earlier Year: {year1}
+    Later Year: {year2}
+    </company>
+
+    <path_structure>
+    {org}({year1}) → {connector1_name} → {connector2_name} ← {org}({year2})
+    </path_structure>
+
+    <hop1_evidence>
+    Company: {org} ({year1})
+    Entity: {connector1_name} ({connector1_type})
+    Relationship: {hop1_relationship}
+    Source: {org1_source_file}
+    {evidence1}
+    </hop1_evidence>
+
+    <hop2_evidence>
+    Entity1: {connector1_name}
+    Entity2: {connector2_name} ({connector2_type})
+    Relationship: {hop2_relationship}
+    {evidence2}
+    </hop2_evidence>
+
+    <hop3_evidence>
+    Company: {org} ({year2})
+    Entity: {connector2_name}
+    Relationship: {hop3_relationship}
+    Source: {org2_source_file}
+    {evidence3}
+    </hop3_evidence>
+
+    <grounding_requirements>
+    CRITICAL: Your question and answer MUST reference SPECIFIC facts from each evidence chunk:
+    - Extract at least ONE specific number, metric, dollar amount, percentage, or named item from EACH chunk
+    - DO NOT generate generic questions about the entity names alone
+    - Include specific values that changed between years (e.g., "$100M in 2022 to $150M in 2024")
+    - The question should be UNANSWERABLE without the specific details in these exact chunks
+    </grounding_requirements>
+
+    <self_validation_checklist>
+    [ ] Does question reference at least ONE specific fact from hop1_evidence?
+    [ ] Does question/answer reference at least ONE specific fact from hop2_evidence?
+    [ ] Does question/answer reference at least ONE specific fact from hop3_evidence?
+    [ ] Does question focus on temporal evolution through the entity chain?
+    [ ] Does answer include specific numbers from BOTH years for comparison?
+    [ ] Would this EXACT question be impossible to generate from different chunks?
+    </self_validation_checklist>
+
+
+# -----------------------------------------------------------------------------
+# 3-HOP: Intra-Document Type 1 (Connector Chain within Same Document)
+# Pattern: ORG(p1) → Connector1 → Connector2 ← ORG(p2)
+# Same company, same year, different pages, connector chain
+# -----------------------------------------------------------------------------
+
+three_hop_intra_doc_type1:
+  system: |
+    You are an expert financial analyst generating complex 3-hop intra-document reasoning questions.
+
+    <role>
+    Generate questions requiring THREE reasoning hops through a chain of two connected entities, synthesizing information from DIFFERENT SECTIONS/PAGES of the SAME company's 10-K filing.
+    Pattern: Company(Page1) → Entity1 → Entity2 ← Company(Page2)
+    </role>
+
+    <natural_analyst_questions>
+    CRITICAL: Generate questions that a real business analyst or financial analyst would actually ask.
+
+    GOOD question examples (natural, insightful):
+    - "How does NVIDIA's characterization of TSMC as a supply chain risk factor reconcile with their reported revenue growth from products manufactured by TSMC?"
+    - "What is the relationship between NVIDIA's reported segment profitability and their disclosed manufacturing concentration risks?"
+    - "How do NVIDIA's forward-looking AI strategy investments align with their current capital expenditure allocation across business segments?"
+
+    BAD question examples (forced, artificial):
+    - "How does the entity on page 45 relate to the entity discussed on page 78?"
+    - "What is the connection between the risk factor section and the financial statements section regarding Entity1?"
+    - "According to the segment information note and the risk factors, how do they discuss Entity1 differently?"
+
+    The question should sound like something asked in:
+    - A due diligence review
+    - An internal audit assessment
+    - A comprehensive 10-K analysis
+    - A risk-adjusted valuation discussion
+    </natural_analyst_questions>
+
+    <critical_requirements>
+    1. MANDATORY 3-HOP: Question MUST require all 3 hops - not answerable with only 2
+    2. CONTEXTUAL SYNTHESIS: Focus on how different sections discuss related entities differently
+    3. ALL CHUNKS ESSENTIAL: Answer must synthesize evidence from all 3 chunks
+    4. NO EXTERNAL KNOWLEDGE: Use only information from provided evidence
+    5. CONNECTOR CHAIN LOGIC: The Entity1 → Entity2 connection must be meaningful
+    6. INTRA-DOCUMENT INSIGHT: Leverage different contexts (risk vs opportunity, quantitative vs qualitative)
+    7. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them, focusing on concepts and entities, not document locations.
+    8. NATURAL LANGUAGE: Question must sound like a real analyst asking a genuine business question - NOT a forced technical query about document structure.
+    </critical_requirements>
+
+    <intra_doc_chain_patterns>
+    Look for:
+    - How Entity1 is discussed in one section vs Entity2 in another section
+    - Risk factors section mentioning Entity1 while strategy section discusses Entity2
+    - Quantitative treatment of Entity1 vs qualitative treatment of Entity2
+    - Different business perspectives on the entity chain
+    </intra_doc_chain_patterns>
+
+    <quality_gate>
+    NO FORCED GENERATION: If chunks cannot support genuine 3-hop intra-document reasoning, return "no meaningful question can be generated".
+
+    Do NOT generate when:
+    - Only 2 of 3 chunks can be meaningfully connected
+    - The middle connection (Entity1 → Entity2) is artificial
+    - No meaningful contextual difference exists between sections
+    </quality_gate>
+
+    <output_format>
+    {
+      "question": "3-hop intra-document chain question",
+      "answer": "Answer synthesizing all 3 evidence chunks with contextual analysis",
+      "reasoning_steps": [
+        "Hop 1: [ORG](page1) → [Entity1]: <context in first section>",
+        "Hop 2: [Entity1] → [Entity2]: <how they connect>",
+        "Hop 3: [Entity2] ← [ORG](page2): <context in second section>"
+      ],
+      "contextual_analysis": {
+        "section1_context": "How Entity1 is discussed in first section",
+        "section2_context": "How Entity2 is discussed in second section",
+        "difference_type": "risk_vs_opportunity|quantitative_vs_qualitative|strategic_vs_operational",
+        "synthesis_insight": "What we learn by combining both perspectives through the chain"
+      },
+      "chunk_dependencies": {
+        "chunk_1": "Essential info from Page1's evidence",
+        "chunk_2": "Essential info connecting entities",
+        "chunk_3": "Essential info from Page2's evidence"
+      },
+      "reasoning_type": "contextual_chain|perspective_synthesis|comprehensive_chain"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty 3-hop question using the intra-document connector chain pattern.
+    </task>
+
+    <company>
+    Name: {org}
+    Year: {year}
+    Sector: {sector}
+    </company>
+
+    <path_structure>
+    {org}(page {page1}) → {connector1_name} → {connector2_name} ← {org}(page {page2})
+    </path_structure>
+
+    <hop1_evidence>
+    Company: {org} ({year})
+    Page: {page1}
+    Entity: {connector1_name} ({connector1_type})
+    Relationship: {hop1_relationship}
+    {evidence1}
+    </hop1_evidence>
+
+    <hop2_evidence>
+    Entity1: {connector1_name}
+    Entity2: {connector2_name} ({connector2_type})
+    Relationship: {hop2_relationship}
+    {evidence2}
+    </hop2_evidence>
+
+    <hop3_evidence>
+    Company: {org} ({year})
+    Page: {page2}
+    Entity: {connector2_name}
+    Relationship: {hop3_relationship}
+    {evidence3}
+    </hop3_evidence>
+
+    <grounding_requirements>
+    CRITICAL: Your question and answer MUST reference SPECIFIC facts from each evidence chunk:
+    - Extract at least ONE specific number, metric, dollar amount, or named item from EACH page's chunk
+    - DO NOT generate generic questions about the entity names alone
+    - Highlight how different sections discuss the entities differently
+    - The question should be UNANSWERABLE without the specific details in these exact chunks
+    </grounding_requirements>
+
+    <self_validation_checklist>
+    [ ] Does question reference at least ONE specific fact from hop1_evidence (page {page1})?
+    [ ] Does question/answer reference at least ONE specific fact from hop2_evidence?
+    [ ] Does question/answer reference at least ONE specific fact from hop3_evidence (page {page2})?
+    [ ] Does question explore how the entity chain is discussed differently across sections?
+    [ ] Would this EXACT question be impossible to generate from different page combinations?
+    </self_validation_checklist>
+
+
+# -----------------------------------------------------------------------------
+# 3-HOP TYPE 2 PATTERNS: Multi-Branch (3 anchors → 1 connector)
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# 3-HOP: Cross-Company Type 2 (3 ORGs → 1 Connector)
+# Pattern: ORG1 → Connector ← ORG2, Connector ← ORG3
+# 3 different companies, same year, 1 shared connector
+# -----------------------------------------------------------------------------
+
+three_hop_cross_company_type2:
+  system: |
+    You are an expert financial analyst generating complex 3-hop multi-company reasoning questions.
+
+    <role>
+    Generate questions requiring synthesis across THREE different companies that share a common connector entity.
+    Pattern: ORG1 → Connector ← ORG2, Connector ← ORG3
+    </role>
+
+    <natural_analyst_questions>
+    CRITICAL: Generate questions that a real business analyst or financial analyst would actually ask.
+
+    GOOD question examples (natural, insightful):
+    - "How do NVIDIA, AMD, and Intel each characterize their exposure to AI chip demand, and what does this reveal about their competitive positioning?"
+    - "What is the combined industry impact of semiconductor supply constraints on NVIDIA, AMD, and Qualcomm's revenue forecasts?"
+    - "How do the three major GPU vendors differ in their strategic response to data center market growth?"
+
+    BAD question examples (forced, artificial):
+    - "How do three companies relate to the same connector entity?"
+    - "What does Company A, B, and C each say about Entity X in their filings?"
+
+    The question should sound like something asked in:
+    - An industry competitive analysis
+    - A sector research report
+    - A market dynamics assessment
+    </natural_analyst_questions>
+
+    <critical_requirements>
+    1. MANDATORY 3-HOP: Question MUST require information from all 3 companies
+    2. SHARED CONNECTOR: Focus on how 3 different companies relate to the same entity
+    3. ALL CHUNKS ESSENTIAL: Answer must synthesize evidence from all 3 company disclosures
+    4. NO EXTERNAL KNOWLEDGE: Use only information from provided evidence
+    5. COMPARATIVE ANALYSIS: Compare/contrast how the 3 companies discuss the shared connector
+    6. NO PARTIAL GROUNDING: Each company's evidence must meaningfully contribute
+    7. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them, focusing on concepts and entities, not document locations.
+    8. NATURAL LANGUAGE: Question must sound like a real analyst asking a genuine business question.
+    9. MEANINGFUL CONNECTOR: The connector must be specific enough to create genuine comparison. Generic terms like "Cash", "Revenue", "Risk Factors" connecting 3 unrelated companies do NOT justify a question.
+    10. NO FABRICATED INDUSTRY DYNAMICS: Do NOT claim companies "compete" or "impact each other" unless evidence explicitly states this relationship.
+    </critical_requirements>
+
+    <multi_company_patterns>
+    Look for:
+    - Industry-wide perspectives on a shared risk/opportunity
+    - Different strategic approaches to same market condition
+    - Varying quantitative impacts across competitors
+    - Complementary viewpoints that build comprehensive understanding
+    NOTE: These patterns are valid ONLY when companies have an EXPLICIT relationship (same industry, supply chain, regulatory framework). Do NOT force connections between unrelated companies sharing generic terms.
+    </multi_company_patterns>
+
+    <quality_gate>
+    NO FORCED GENERATION: If evidence doesn't support genuine 3-company synthesis, return "no meaningful question can be generated".
+
+    Do NOT generate when:
+    - Companies share a generic term but have no stated business relationship
+    - You would need speculative language ("could affect", "might impact industry") to connect them
+    - The connector is too generic (e.g., "Operating Expenses", "Cash Flow") to justify comparison
+    </quality_gate>
+
+    <output_format>
+    {
+      "question": "3-hop question synthesizing 3 companies",
+      "answer": "Answer integrating evidence from all 3 companies",
+      "reasoning_steps": [
+        "Hop 1: [ORG1] → [Connector]: <what ORG1 reveals>",
+        "Hop 2: [ORG2] → [Connector]: <what ORG2 reveals>",
+        "Hop 3: [ORG3] → [Connector]: <what ORG3 reveals>"
+      ],
+      "comparative_analysis": {
+        "org1_perspective": "How ORG1 relates to connector",
+        "org2_perspective": "How ORG2 relates to connector",
+        "org3_perspective": "How ORG3 relates to connector",
+        "synthesis_insight": "What we learn from combining all 3 perspectives"
+      },
+      "reasoning_type": "multi_company_comparison|industry_analysis|competitive_landscape"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty 3-hop question synthesizing 3 companies' relationships to a shared connector.
+    </task>
+
+    <companies>
+    ORG1: {org1}
+    ORG2: {org2}
+    ORG3: {org3}
+    Year: {year}
+    Sector: {sector}
+    </companies>
+
+    <connector>
+    Entity: {connector_name}
+    Type: {connector_type}
+    IDF Score: {idf_score}
+    </connector>
+
+    <hop1_evidence>
+    Company: {org1}
+    Relationship: {hop1_relationship}
+    Source: {org1_source_file}
+    {evidence1}
+    </hop1_evidence>
+
+    <hop2_evidence>
+    Company: {org2}
+    Relationship: {hop2_relationship}
+    Source: {org2_source_file}
+    {evidence2}
+    </hop2_evidence>
+
+    <hop3_evidence>
+    Company: {org3}
+    Relationship: {hop3_relationship}
+    Source: {org3_source_file}
+    {evidence3}
+    </hop3_evidence>
+
+    <grounding_requirements>
+    CRITICAL: Your question and answer MUST reference SPECIFIC facts from each company's evidence:
+    - Extract at least ONE specific number, metric, dollar amount, or named item from EACH company's chunk
+    - DO NOT generate generic questions about the connector entity name alone
+    - Highlight how each company discusses the shared connector differently
+    - The question should be UNANSWERABLE without specific details from ALL THREE chunks
+    </grounding_requirements>
+
+    <self_validation_checklist>
+    [ ] Does question reference at least ONE specific fact from {org1}'s evidence?
+    [ ] Does question/answer reference at least ONE specific fact from {org2}'s evidence?
+    [ ] Does question/answer reference at least ONE specific fact from {org3}'s evidence?
+    [ ] Does answer provide comparative/synthetic insight across all 3?
+    [ ] Would this EXACT question be impossible to generate from different chunks?
+    </self_validation_checklist>
+
+
+# -----------------------------------------------------------------------------
+# 3-HOP: Cross-Year Type 2 (Same ORG, 3 Years → 1 Connector)
+# Pattern: ORG(y1) → Connector ← ORG(y2), Connector ← ORG(y3)
+# Same company, 3 different years, 1 shared connector
+# -----------------------------------------------------------------------------
+
+three_hop_cross_year_type2:
+  system: |
+    You are an expert financial analyst generating complex 3-hop temporal reasoning questions.
+
+    <role>
+    Generate questions requiring synthesis across THREE different years of a company's disclosures about the same connector entity.
+    Pattern: ORG(y1) → Connector ← ORG(y2), Connector ← ORG(y3)
+    </role>
+
+    <natural_analyst_questions>
+    CRITICAL: Generate questions that a real business analyst or financial analyst would actually ask.
+
+    GOOD question examples (natural, insightful):
+    - "How has NVIDIA's data center revenue evolved from 2022 through 2024, and what does this 3-year trend reveal about AI adoption rates?"
+    - "What was the trajectory of NVIDIA's gross margin improvement across fiscal years 2022, 2023, and 2024?"
+    - "How did NVIDIA's supply chain risk disclosures change over the three-year period as demand for AI chips accelerated?"
+
+    BAD question examples (forced, artificial):
+    - "What does the company say about the connector entity across 3 years?"
+    - "How do the year1, year2, and year3 filings discuss Entity X?"
+
+    The question should sound like something asked in:
+    - A multi-year performance review
+    - A long-term trend analysis
+    - An investment thesis validation
+    </natural_analyst_questions>
+
+    <critical_requirements>
+    1. MANDATORY 3-YEAR: Question MUST require information from all 3 years
+    2. SHARED CONNECTOR: Focus on how the company's relationship with the connector evolved across years
+    3. ALL YEARS ESSENTIAL: Answer must synthesize evidence from all 3 years
+    4. NO EXTERNAL KNOWLEDGE: Use only information from provided evidence
+    5. TEMPORAL ANALYSIS: Analyze trends, changes, and evolution over time
+    6. NO PARTIAL GROUNDING: Each year's evidence must meaningfully contribute
+    7. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them, focusing on concepts and entities, not document locations.
+    8. NATURAL LANGUAGE: Question must sound like a real analyst asking a genuine business question.
+    </critical_requirements>
+
+    <temporal_patterns>
+    Look for:
+    - Multi-year trends (improving, declining, volatile)
+    - Strategic pivots or consistency over time
+    - Quantitative changes across years
+    - Evolving risk profiles or opportunities
+    </temporal_patterns>
+
+    <quality_gate>
+    NO FORCED GENERATION: If evidence doesn't show meaningful change across years, return "no meaningful question can be generated".
+    </quality_gate>
+
+    <output_format>
+    {
+      "question": "3-hop question analyzing 3 years of change",
+      "answer": "Answer integrating evidence from all 3 years",
+      "reasoning_steps": [
+        "Hop 1: [ORG](year1) → [Connector]: <year1 state>",
+        "Hop 2: [ORG](year2) → [Connector]: <year2 state>",
+        "Hop 3: [ORG](year3) → [Connector]: <year3 state>"
+      ],
+      "temporal_analysis": {
+        "year1_state": "Description of year1",
+        "year2_state": "Description of year2",
+        "year3_state": "Description of year3",
+        "trend_type": "increasing|decreasing|volatile|stable|transforming",
+        "evolution_insight": "What we learn from the 3-year progression"
+      },
+      "reasoning_type": "temporal_trend|multi_year_evolution|longitudinal_analysis"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty 3-hop question analyzing a company's relationship with a connector across 3 years.
+    </task>
+
+    <company>
+    Name: {org}
+    Sector: {sector}
+    Years: {year1}, {year2}, {year3}
+    </company>
+
+    <connector>
+    Entity: {connector_name}
+    Type: {connector_type}
+    IDF Score: {idf_score}
+    </connector>
+
+    <hop1_evidence>
+    Year: {year1}
+    Relationship: {hop1_relationship}
+    Source: {org1_source_file}
+    {evidence1}
+    </hop1_evidence>
+
+    <hop2_evidence>
+    Year: {year2}
+    Relationship: {hop2_relationship}
+    Source: {org2_source_file}
+    {evidence2}
+    </hop2_evidence>
+
+    <hop3_evidence>
+    Year: {year3}
+    Relationship: {hop3_relationship}
+    Source: {org3_source_file}
+    {evidence3}
+    </hop3_evidence>
+
+    <grounding_requirements>
+    CRITICAL: Your question and answer MUST reference SPECIFIC facts from each year's evidence:
+    - Extract at least ONE specific number, metric, dollar amount, or named item from EACH year's chunk
+    - DO NOT generate generic questions about the connector entity name alone
+    - Include specific values showing evolution (e.g., "$100M in 2022, $120M in 2023, $150M in 2024")
+    - The question should be UNANSWERABLE without specific details from ALL THREE years
+    </grounding_requirements>
+
+    <self_validation_checklist>
+    [ ] Does question reference at least ONE specific fact from {year1}'s evidence?
+    [ ] Does question/answer reference at least ONE specific fact from {year2}'s evidence?
+    [ ] Does question/answer reference at least ONE specific fact from {year3}'s evidence?
+    [ ] Does answer analyze trend/evolution across all 3 years with specific numbers?
+    [ ] Would this EXACT question be impossible to generate from different chunks?
+    </self_validation_checklist>
+
+
+# -----------------------------------------------------------------------------
+# 3-HOP: Intra-Document Type 2 (Same ORG, Same Year, 3 Pages → 1 Connector)
+# Pattern: ORG(p1) → Connector ← ORG(p2), Connector ← ORG(p3)
+# Same company, same year, 3 different pages, 1 shared connector
+# -----------------------------------------------------------------------------
+
+three_hop_intra_doc_type2:
+  system: |
+    You are an expert financial analyst generating complex 3-hop intra-document reasoning questions.
+
+    <role>
+    Generate questions requiring synthesis across THREE different sections/pages of a company's 10-K filing about the same connector entity.
+    Pattern: ORG(p1) → Connector ← ORG(p2), Connector ← ORG(p3)
+    </role>
+
+    <natural_analyst_questions>
+    CRITICAL: Generate questions that a real business analyst or financial analyst would actually ask.
+
+    GOOD question examples (natural, insightful):
+    - "How does NVIDIA's risk factor discussion of manufacturing concentration align with their segment performance data and forward-looking strategy statements?"
+    - "What is the full picture of NVIDIA's TSMC dependency when combining their supply chain risks, segment revenue breakdown, and capital allocation strategy?"
+    - "How do NVIDIA's disclosed concentration risks reconcile with their reported profitability metrics and stated growth strategy?"
+
+    BAD question examples (forced, artificial):
+    - "How is Entity X discussed across three different pages of the 10-K?"
+    - "What does section A, section B, and section C say about the same connector?"
+
+    The question should sound like something asked in:
+    - A comprehensive filing analysis
+    - A due diligence deep-dive
+    - A holistic business assessment
+    </natural_analyst_questions>
+
+    <critical_requirements>
+    1. MANDATORY 3-PAGE: Question MUST require information from all 3 sections/pages
+    2. SHARED CONNECTOR: Focus on how the entity is discussed differently across sections
+    3. ALL SECTIONS ESSENTIAL: Answer must synthesize evidence from all 3 sections
+    4. NO EXTERNAL KNOWLEDGE: Use only information from provided evidence
+    5. CONTEXTUAL SYNTHESIS: Compare/contrast how different sections frame the same topic
+    6. NO PARTIAL GROUNDING: Each section's evidence must meaningfully contribute
+    7. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them, focusing on concepts and entities, not document locations.
+    8. NATURAL LANGUAGE: Question must sound like a real analyst asking a genuine business question.
+    </critical_requirements>
+
+    <intra_doc_patterns>
+    Look for:
+    - Risk vs Opportunity vs Strategy framing across sections
+    - Quantitative (financial statements) vs Qualitative (MD&A) treatment
+    - Historical vs Current vs Forward-looking perspectives
+    - Different business segment viewpoints on same entity
+    </intra_doc_patterns>
+
+    <quality_gate>
+    NO FORCED GENERATION: If sections don't provide meaningfully different perspectives, return "no meaningful question can be generated".
+    </quality_gate>
+
+    <output_format>
+    {
+      "question": "3-hop question synthesizing 3 sections",
+      "answer": "Answer integrating evidence from all 3 sections",
+      "reasoning_steps": [
+        "Hop 1: [ORG](page1) → [Connector]: <section1 perspective>",
+        "Hop 2: [ORG](page2) → [Connector]: <section2 perspective>",
+        "Hop 3: [ORG](page3) → [Connector]: <section3 perspective>"
+      ],
+      "contextual_analysis": {
+        "section1_context": "How topic appears in section 1",
+        "section2_context": "How topic appears in section 2",
+        "section3_context": "How topic appears in section 3",
+        "synthesis_insight": "Comprehensive understanding from all 3 perspectives"
+      },
+      "reasoning_type": "multi_section_synthesis|comprehensive_view|contextual_integration"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty 3-hop question synthesizing a company's discussion of a connector across 3 different sections.
+    </task>
+
+    <company>
+    Name: {org}
+    Year: {year}
+    Sector: {sector}
+    </company>
+
+    <connector>
+    Entity: {connector_name}
+    Type: {connector_type}
+    IDF Score: {idf_score}
+    </connector>
+
+    <hop1_evidence>
+    Page: {page1}
+    Relationship: {hop1_relationship}
+    {evidence1}
+    </hop1_evidence>
+
+    <hop2_evidence>
+    Page: {page2}
+    Relationship: {hop2_relationship}
+    {evidence2}
+    </hop2_evidence>
+
+    <hop3_evidence>
+    Page: {page3}
+    Relationship: {hop3_relationship}
+    {evidence3}
+    </hop3_evidence>
+
+    <grounding_requirements>
+    CRITICAL: Your question and answer MUST reference SPECIFIC facts from each page's evidence:
+    - Extract at least ONE specific number, metric, dollar amount, or named item from EACH page's chunk
+    - DO NOT generate generic questions about the connector entity name alone
+    - Highlight how different sections discuss the same entity differently
+    - The question should be UNANSWERABLE without specific details from ALL THREE pages
+    </grounding_requirements>
+
+    <self_validation_checklist>
+    [ ] Does question reference at least ONE specific fact from page {page1}'s evidence?
+    [ ] Does question/answer reference at least ONE specific fact from page {page2}'s evidence?
+    [ ] Does question/answer reference at least ONE specific fact from page {page3}'s evidence?
+    [ ] Does answer synthesize different contextual perspectives with specific details?
+    [ ] Would this EXACT question be impossible to generate from different page combinations?
+    </self_validation_checklist>
+
+
+# -----------------------------------------------------------------------------
+# 3-HOP: Causal Patterns (Shared Driver, Shared Outcome, Cross Anchor)
+# -----------------------------------------------------------------------------
+
+three_hop_causal_shared_driver:
+  system: |
+    You are an expert financial analyst generating 3-hop causal questions.
+
+    <role>
+    Generate questions connecting a shared driver (x1) to an outcome (x2), comparing how two companies relate to the driver.
+    Pattern: ORG1 → x1 → x2 and ORG2 → x1 (both anchor to driver)
+    </role>
+
+    <critical_requirements>
+    1. MULTI-CHUNK NECESSITY (REQUIRED): The question MUST require information from ALL 3 evidence chunks (hop1_evidence, hop2_evidence, hop3_evidence). If any chunk is removed, the question must become unanswerable or incomplete. Each chunk must contribute essential facts, numbers, or relationships that are directly used in the answer. Superficial mentions are not enough—each chunk must be logically necessary.
+       - Example of GOOD: "Given that ORG1's revenue increased by $X million (hop1), and that revenue growth typically drives margin expansion (hop2), how does ORG2's revenue trend (hop3) compare in the context of this causal relationship?"
+       - Example of BAD: "How do ORG1 and ORG2 relate to x1?" (can be answered with just hop1 and hop3, hop2 not needed)
+    
+    2. CAUSAL FOCUS: Focus on the causal relationship x1 → x2. The question must explicitly engage with how x1 drives or explains x2.
+    
+    3. COMPARE DRIVERS: Compare/contrast how ORG1 and ORG2 relate to the shared driver. The question should highlight differences, similarities, or comparative impacts.
+    
+    4. ANALYST FRAMING (REQUIRED): The question must sound like a real financial analyst would ask it—concrete, specific, and focused on quantifiable business impacts. Avoid generic macroeconomic questions. Frame it as a research question an analyst might ask in an earnings call, competitive analysis, or research report.
+       - Example of GOOD: "Given that both NVDA and AMD experienced supply chain disruptions (shared driver), and that such disruptions typically compress gross margins, what was the difference in gross margin impact between the two companies?"
+       - Example of BAD: "How do supply chain disruptions affect companies?" (too generic, not analyst-specific)
+    
+    5. NUMERIC SPECIFICITY (PREFERRED): When possible, include specific numeric values (dollar amounts, percentages, ratios, YoY changes) from the evidence chunks. Questions that require calculations or comparisons of specific figures are stronger. However, this is not a hard constraint if the evidence lacks numeric data.
+       - Example: "What was the difference in revenue growth rates between ORG1 and ORG2, given their shared exposure to x1?"
+    
+    6. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them.
+    </critical_requirements>
+
+    <output_format>
+    {
+      "question": "3-hop causal question",
+      "answer": "Answer grounded in all evidence",
+      "reasoning_steps": [
+        "Hop 1: ORG1 → x1: <driver disclosure>",
+        "Hop 2: x1 → x2: <causal link>",
+        "Hop 3: ORG2 → x1: <driver disclosure>"
+      ],
+      "reasoning_type": "causal_shared_driver"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty 3-hop causal question (shared driver pattern).
+    </task>
+
+    <entities>
+    ORG1: {org1} ({year1})
+    ORG2: {org2} ({year2})
+    Driver x1: {x1_name} ({x1_type})
+    Outcome x2: {x2_name} ({x2_type})
+    </entities>
+
+    <hop1_evidence>
+    ORG1 → x1: {hop1_relationship}
+    {evidence1}
+    </hop1_evidence>
+
+    <hop2_evidence>
+    x1 → x2: {hop2_relationship}
+    {evidence2}
+    </hop2_evidence>
+
+    <hop3_evidence>
+    ORG2 → x1: {hop3_relationship}
+    {evidence3}
+    </hop3_evidence>
+
+
+three_hop_causal_shared_outcome:
+  system: |
+    You are an expert financial analyst generating 3-hop causal questions.
+
+    <role>
+    Generate questions where both companies disclose same outcome (x2), and a driver (x1) explains that outcome.
+    Pattern: ORG1 → x2 ← ORG2 and x1 → x2
+    </role>
+
+    <critical_requirements>
+    1. MULTI-CHUNK NECESSITY (REQUIRED): The question MUST require information from ALL 3 evidence chunks (hop1_evidence, hop2_evidence, hop3_evidence). If any chunk is removed, the question must become unanswerable or incomplete. Each chunk must contribute essential facts, numbers, or relationships that are directly used in the answer. Superficial mentions are not enough—each chunk must be logically necessary.
+       - Example of GOOD: "Both ORG1 and ORG2 reported margin compression (hop1 and hop3). Given that x1 typically causes margin compression (hop2), what was the difference in the magnitude of margin impact between the two companies?"
+       - Example of BAD: "How do ORG1 and ORG2 relate to x2?" (can be answered with just hop1 and hop3, hop2 not needed)
+    
+    2. SHARED OUTCOME: Focus on how x1 explains the shared outcome x2. The question must explicitly connect the causal driver to the outcome both companies experience.
+    
+    3. COMPARE OUTCOMES: How do both companies experience/disclose the outcome? The question should highlight differences, similarities, or comparative impacts in how they experience x2.
+    
+    4. ANALYST FRAMING (REQUIRED): The question must sound like a real financial analyst would ask it—concrete, specific, and focused on quantifiable business impacts. Avoid generic macroeconomic questions. Frame it as a research question an analyst might ask in an earnings call, competitive analysis, or research report.
+       - Example of GOOD: "Both NVDA and AMD experienced margin compression in 2024. Given that raw material cost inflation typically drives margin compression, what was the difference in gross margin decline between the two companies?"
+       - Example of BAD: "How do companies experience margin compression?" (too generic, not analyst-specific)
+    
+    5. NUMERIC SPECIFICITY (PREFERRED): When possible, include specific numeric values (dollar amounts, percentages, ratios, YoY changes) from the evidence chunks. Questions that require calculations or comparisons of specific figures are stronger. However, this is not a hard constraint if the evidence lacks numeric data.
+       - Example: "What was the difference in the percentage point decline in operating margins between ORG1 and ORG2, given their shared exposure to x1?"
+    
+    6. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them.
+    </critical_requirements>
+
+    <output_format>
+    {
+      "question": "3-hop causal question",
+      "answer": "Answer grounded in all evidence",
+      "reasoning_steps": [
+        "Hop 1: ORG1 → x2: <outcome disclosure>",
+        "Hop 2: x1 → x2: <causal link>",
+        "Hop 3: ORG2 → x2: <outcome disclosure>"
+      ],
+      "reasoning_type": "causal_shared_outcome"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty 3-hop causal question (shared outcome pattern).
+    </task>
+
+    <entities>
+    ORG1: {org1} ({year1})
+    ORG2: {org2} ({year2})
+    Driver x1: {x1_name} ({x1_type})
+    Outcome x2: {x2_name} ({x2_type})
+    </entities>
+
+    <hop1_evidence>
+    ORG1 → x2: {hop1_relationship}
+    {evidence1}
+    </hop1_evidence>
+
+    <hop2_evidence>
+    x1 → x2: {hop2_relationship}
+    {evidence2}
+    </hop2_evidence>
+
+    <hop3_evidence>
+    ORG2 → x2: {hop3_relationship}
+    {evidence3}
+    </hop3_evidence>
+
+
+three_hop_causal_cross_anchor:
+  system: |
+    You are an expert financial analyst generating 3-hop causal questions.
+
+    <role>
+    Generate questions where one company anchors to driver (x1), another to outcome (x2), and x1 drives x2.
+    Pattern: ORG1 → x1 → x2 ← ORG2
+    </role>
+
+    <critical_requirements>
+    1. MULTI-CHUNK NECESSITY (REQUIRED): The question MUST require information from ALL 3 evidence chunks (hop1_evidence, hop2_evidence, hop3_evidence). If any chunk is removed, the question must become unanswerable or incomplete. Each chunk must contribute essential facts, numbers, or relationships that are directly used in the answer. Superficial mentions are not enough—each chunk must be logically necessary.
+       - Example of GOOD: "ORG1 disclosed significant exposure to x1 (hop1), and x1 is known to drive x2 (hop2). Given that ORG2 reported x2 outcomes (hop3), how does ORG2's x2 magnitude compare to what we would expect based on ORG1's x1 exposure and the causal relationship?"
+       - Example of BAD: "How do ORG1 and ORG2 relate to x1 and x2?" (can be answered with just hop1 and hop3, hop2 not needed)
+    
+    2. ASYMMETRY: Highlight that one firm emphasizes driver, other emphasizes outcome. The question should leverage this asymmetry to create a meaningful comparison or inference.
+    
+    3. CAUSAL CHAIN: x1 → x2 must be clear causal relationship. The question must explicitly engage with how x1 drives or explains x2.
+    
+    4. ANALYST FRAMING (REQUIRED): The question must sound like a real financial analyst would ask it—concrete, specific, and focused on quantifiable business impacts. Avoid generic macroeconomic questions. Frame it as a research question an analyst might ask in an earnings call, competitive analysis, or research report.
+       - Example of GOOD: "NVDA highlighted supply chain disruptions as a key risk (driver focus), while AMD reported margin compression (outcome focus). Given that supply chain disruptions typically cause margin compression, what was AMD's margin compression relative to NVDA's supply chain risk exposure?"
+       - Example of BAD: "How do supply chain issues affect margins?" (too generic, not analyst-specific)
+    
+    5. NUMERIC SPECIFICITY (PREFERRED): When possible, include specific numeric values (dollar amounts, percentages, ratios, YoY changes) from the evidence chunks. Questions that require calculations or comparisons of specific figures are stronger. However, this is not a hard constraint if the evidence lacks numeric data.
+       - Example: "Given ORG1's $X million exposure to x1 and the causal relationship to x2, what was ORG2's x2 outcome compared to the expected impact?"
+    
+    6. NO SOURCE REFERENCES IN QUESTION: NEVER mention page numbers, section numbers, source files, or document references in the question text. Questions should read naturally as an analyst would ask them.
+    </critical_requirements>
+
+    <output_format>
+    {
+      "question": "3-hop causal question",
+      "answer": "Answer grounded in all evidence",
+      "reasoning_steps": [
+        "Hop 1: ORG1 → x1: <driver disclosure>",
+        "Hop 2: x1 → x2: <causal link>",
+        "Hop 3: ORG2 → x2: <outcome disclosure>"
+      ],
+      "reasoning_type": "causal_cross_anchor"
+    }
+    </output_format>
+
+  user: |
+    <task>
+    Generate a {difficulty}-difficulty 3-hop causal question (cross anchor pattern).
+    </task>
+
+    <entities>
+    ORG1: {org1} ({year1})
+    ORG2: {org2} ({year2})
+    Driver x1: {x1_name} ({x1_type})
+    Outcome x2: {x2_name} ({x2_type})
+    </entities>
+
+    <hop1_evidence>
+    ORG1 → x1: {hop1_relationship}
+    {evidence1}
+    </hop1_evidence>
+
+    <hop2_evidence>
+    x1 → x2: {hop2_relationship}
+    {evidence2}
+    </hop2_evidence>
+
+    <hop3_evidence>
+    ORG2 → x2: {hop3_relationship}
+    {evidence3}
+    </hop3_evidence>
+
+
+# =============================================================================
+# VALIDATION PROMPT
+# Used to verify generated QA quality with reflection mechanism
+# Scoring: 0-10 per criteria (50 total) with explicit thresholds
+# =============================================================================
+
+validation:
+  system: |
+    You are a senior quality control specialist evaluating Question-Answer pairs for multi-hop reasoning benchmarks from SEC 10-K filings.
+
+    <task>
+    Evaluate whether a generated QA pair meets strict quality standards for multi-hop reasoning.
+    The question should sound like something a real financial analyst would ask.
+    </task>
+
+    <validation_checks>
+    1. CHUNK USAGE CHECK: "Does this question use information from ALL provided chunks?" If no, revise to incorporate all chunks.
+    2. DEPENDENCY CHECK: "If I removed one chunk, could this question still be answered?" If yes, needs revision.
+    3. MEANINGFUL CONTRIBUTION CHECK: "Does each chunk provide information that directly affects the answer's logic, calculation, or conclusion?" If any chunk superficially mentioned, revise.
+    4. ARTIFICIAL CONNECTION CHECK: "Are there any forced linkages where chunks are artificially connected without logical necessity?" If yes, revise.
+    5. CALCULATION CHECK: "If question involves calculations, are all numbers taken directly from the chunks?" If no, revise.
+    6. NO DOCUMENT REFERENCES CHECK: "Does the question avoid mentioning page numbers, section numbers, chunk numbers, or source file names?" If no, REJECT - questions must read naturally without document structure references.
+    7. SOURCE VALIDATION: "Are both question and answer properly grounded in source files and tickers mentioned in chunks?"
+    8. GROUNDEDNESS CHECK: "Are BOTH question AND answer fully grounded in chunks, with consistent filenames and years?"
+    9. NATURAL ANALYST CHECK: "Would a real financial analyst or business analyst ask this exact question?" If the question sounds forced, artificial, or like a database query rather than a genuine business inquiry, REJECT.
+    10. SPECIFICITY CHECK: "Does the question use specific facts, numbers, or entities from the evidence rather than generic references?" Generic questions should be rejected.
+    </validation_checks>
+
+    <red_flags>
+    IMMEDIATE REJECTION if any of these are found:
+    - Questions mentioning "page X", "section Y", "as described in", "according to the filing"
+    - Questions that reference document structure instead of business concepts
+    - Questions that sound like database queries or technical document analysis
+    - Questions answerable from single chunk
+    - Questions that ignore any connected chunk
+    - Vague or ambiguous questions
+    - Questions requiring external knowledge
+    - Simple fact extraction without reasoning
+    - Simple fact-stitching without interpretation
+    - Calculations using numbers not in chunks
+    - PARTIAL GROUNDING: Chunks artificially forced without meaningful contribution
+    - FORCED LINKAGES: "X ensures accuracy of Y" where X doesn't affect Y's logic
+    - ARTIFICIAL QUESTIONS: Questions that no real analyst would ever ask
+    - FABRICATED CAUSAL CONNECTION: Answer claims Company A affects Company B, but evidence only shows both mention a generic term (e.g., "cash", "revenue") with NO stated business relationship. Speculative phrases like "could disrupt ecosystem", "might impact industry" are red flags.
+    </red_flags>
+
+    <good_question_examples>
+    These questions would PASS validation:
+    - "How does NVIDIA's reliance on TSMC for manufacturing compare to AMD's supply chain strategy?"
+    - "What is the combined revenue impact of AI chip demand on both NVIDIA and AMD's data center segments?"
+    - "How did NVIDIA's gross margin evolve from 2023 to 2024 given changes in their product mix?"
+    </good_question_examples>
+
+    <bad_question_examples>
+    These questions would FAIL validation:
+    - "How does the information on page 45 about Entity X relate to page 78's discussion of Entity Y?"
+    - "According to the risk factors section and the financial statements, how does the company view Entity X?"
+    - "What is the relationship between the connector chain from Company A through Entity1 to Entity2?"
+    - "How does NVIDIA's treatment of X in the financial reporting section reflect its impact as described in the segment note?"
+    - "How might Qualcomm's IP challenges affect Cisco's cash deployment?" (FABRICATED CONNECTION: Both mention 'cash' but evidence shows NO business relationship between them - the 'broader ecosystem disruption' link is pure speculation)
+    </bad_question_examples>
+
+    <scoring_criteria>
+    Rate each criterion 0-10 (total 50 points):
+
+    1. MULTI_CHUNK_DEPENDENCY (0-10): Does question absolutely require ALL chunks? Can it be answered if any chunk removed?
+       - 10: Impossible to answer without all chunks
+       - 7-9: Strongly requires all chunks, minor info could be inferred
+       - 4-6: Partially answerable from subset of chunks
+       - 0-3: Mostly answerable from single chunk
+
+    2. FINANCIAL_CONTEXT (0-10): Is question specific to SEC 10-K filings and financial/regulatory context?
+       - 10: Deep financial expertise required, specific to 10-K disclosures
+       - 7-9: Good financial context, appropriate terminology
+       - 4-6: Generic business question, could apply to other domains
+       - 0-3: No financial context or incorrect terminology
+
+    3. ANSWER_GROUNDING (0-10): Is every fact in answer directly traceable to chunks? No speculation?
+       - 10: Every statement directly supported by chunk text
+       - 7-9: Well grounded with minor reasonable inferences
+       - 4-6: Some unsupported claims or external knowledge used
+       - 0-3: Significant hallucination or speculation
+
+    4. CAUSAL_CONNECTION_GROUNDING (0-10): Is the causal/logical CONNECTION between entities GROUNDED in evidence, or fabricated?
+       - 10: Causal link explicitly stated in evidence (e.g., "Company A supplies Company B", "X directly impacts Y")
+       - 7-9: Causal link strongly implied by evidence with minimal inference
+       - 4-6: Causal link partially supported, requires some speculation
+       - 1-3: Causal link is SPECULATIVE - not stated in evidence (e.g., "could disrupt ecosystem", "might affect industry")
+       - 0: Pure fabrication - companies share a generic term but have NO stated relationship in evidence
+
+       CRITICAL: Just because two companies mention the same term (e.g., "cash", "revenue", "risk") does NOT mean they have a causal relationship. The CONNECTION itself must be grounded, not just the individual facts.
+
+    5. NATURAL_ANALYST_QUALITY (0-10): Does question sound like what a real financial analyst would ask? Is it clear and specific?
+       - 10: Perfect analyst question - natural, clear, could be asked in earnings call or research report
+       - 7-9: Natural question with good business framing, clear intent
+       - 4-6: Somewhat artificial but understandable, minor ambiguity
+       - 1-3: Forced/artificial question, sounds like database query or document analysis task
+       - 0: Contains page numbers, section references, or document structure mentions (AUTOMATIC REJECTION)
+    </scoring_criteria>
+
+    <scoring_thresholds>
+    - EXCELLENT (45-50): Exemplary multi-hop question meeting all criteria - ACCEPT
+    - GOOD (35-44): Solid question with minor improvements possible - ACCEPT
+    - NEEDS_WORK (25-34): Has potential but requires significant revision - REJECT with feedback
+    - REJECT (0-24): Fundamental issues, does not meet multi-hop requirements - REJECT
+
+    CRITICAL: If NATURAL_ANALYST_QUALITY scores 0 (contains document references like page numbers), REJECT immediately regardless of total score.
+    CRITICAL: If CAUSAL_CONNECTION_GROUNDING scores 0-3 (fabricated connection between companies), REJECT - this means the synthesis is speculative, not grounded.
+    </scoring_thresholds>
+
+    <output_format>
+    {
+      "score": <total score out of 50>,
+      "breakdown": {
+        "multi_chunk_dependency": <0-10>,
+        "financial_context": <0-10>,
+        "answer_grounding": <0-10>,
+        "causal_connection_grounding": <0-10>,
+        "natural_analyst_quality": <0-10>
+      },
+      "decision": "accept|reject",
+      "explanation": "<Detailed feedback on strengths, weaknesses, specific suggestions for improvement>",
+      "issues": ["<list of specific issues found>"],
+      "suggestions": ["<list of specific improvement suggestions>"]
+    }
+    </output_format>
+
+  user: |
+    <pattern>
+    {pattern}
+    </pattern>
+
+    <entity_chain>
+    {entity_chain}
+    </entity_chain>
+
+    <question>
+    {question}
+    </question>
+
+    <answer>
+    {answer}
+    </answer>
+
+    <evidence>
+    {evidence}
+    </evidence>
+
+    <source_files>
+    {source_files}
+    </source_files>
+
+    Evaluate this QA pair against all criteria. Be strict - only ACCEPT questions scoring 35+.
+
+# =============================================================================
+# VALIDATION PROMPT V3 (BINARY)
+# Purpose: Robust PASS/FAIL evaluation for multi-hop QA pairs grounded in SEC 10-K evidence.
+# Motivation: Avoid Likert score inflation; use explicit failure modes (Hamel-style).
+# Output: Binary decision + failure tags + must-fix rewrite suggestions.
+# =============================================================================
+
+validation_v3_binary:
+  system: |
+    You are a senior QA validation specialist evaluating Question–Answer pairs
+    for a multi-hop reasoning benchmark grounded in SEC 10-K filing evidence.
+
+    Your job is to return a strict binary verdict:
+      - "pass" if the QA pair is valid, grounded, multi-hop, and analyst-natural
+      - "fail" otherwise
+
+    ----------------------------------------------------------------------
+    ACCEPTANCE DEFINITION (must satisfy ALL)
+    ----------------------------------------------------------------------
+    A QA pair PASSES only if ALL of the following are true:
+
+    A1) MULTI-CHUNK NECESSITY:
+        The question REQUIRES information from ALL provided evidence chunks.
+        If any chunk is removed, the question can no longer be fully answered.
+
+    A2) FULL ANSWERABILITY:
+        Every required component of the question is answerable using ONLY the evidence.
+        If the question asks for A and B, evidence must support both A and B.
+
+    A3) GROUNDED ANSWER:
+        Every key numeric value and factual claim in the answer is supported by evidence.
+        No new numbers. No unstated assumptions presented as fact.
+
+    A4) NO DOCUMENT STRUCTURE REFERENCES:
+        The question must NOT reference pages, sections, chunk IDs, source file names,
+        "according to the filing", or similar document-navigation language.
+
+    A5) NATURAL ANALYST QUESTION:
+        The question must sound like a real financial analyst question
+        (research note, earnings call, competitive analysis).
+        It must not sound like a database query or forced "connector stitching".
+
+    A6) NON-TRIVIAL REASONING:
+        The QA pair must involve reasoning beyond single-fact extraction.
+        Simple "lookup" questions fail.
+
+    ----------------------------------------------------------------------
+    FAIL REASONS (use tags)
+    ----------------------------------------------------------------------
+    If the QA pair FAILS, you MUST include one or more failure tags from this list:
+
+    FAIL_DOC_REFERENCE:
+      - Mentions page/section/chunk/source filename/"according to the filing"
+
+    FAIL_SINGLE_CHUNK_ANSWERABLE:
+      - Question can be answered using only one chunk
+
+    FAIL_UNUSED_CHUNK:
+      - One chunk is not meaningfully needed (superficial mention)
+
+    FAIL_UNANSWERABLE_SUBPART:
+      - Multi-part question but evidence does not support answering all parts
+      - Example: asks for margin comparison but margin not disclosed in evidence
+
+    FAIL_MATH_ERROR:
+      - Arithmetic incorrect OR computed values inconsistent with evidence
+
+    FAIL_OUT_OF_EVIDENCE_NUMBER:
+      - Answer uses a number not present in evidence
+
+    FAIL_UNGROUNDED_CLAIM:
+      - Answer asserts a factual claim not supported by evidence
+
+    FAIL_EXTERNAL_KNOWLEDGE_AS_FACT:
+      - Answer introduces external specifics (e.g., naming a deal/event) not in evidence
+        without hedging or evidence support
+
+    FAIL_AMBIGUOUS_OR_ILL_POSED:
+      - Contradictory or unclear time framing ("YoY 2022 to 2024")
+      - Unclear entities, vague references, missing year alignment when required
+
+    FAIL_NOT_ANALYST_NATURAL:
+      - Sounds artificial, forced, or like a database query
+
+    FAIL_TOO_TRIVIAL:
+      - Simple fact extraction without reasoning/synthesis
+
+    FAIL_FORCED_LINKAGE:
+      - The connection between chunks is artificial and not logically necessary
+
+    ----------------------------------------------------------------------
+    HOW TO EVALUATE (strict procedure)
+    ----------------------------------------------------------------------
+    Step 1: Read the question and identify ALL required sub-asks.
+            (e.g., "difference in revenue" AND "difference in margins")
+
+    Step 2: Check whether each sub-ask is answerable from the evidence.
+            If any required sub-ask is not answerable -> FAIL_UNANSWERABLE_SUBPART.
+
+    Step 3: Verify multi-chunk necessity:
+            Removing any chunk should make the question unanswerable or incomplete.
+            If not -> FAIL_SINGLE_CHUNK_ANSWERABLE or FAIL_UNUSED_CHUNK.
+
+    Step 4: Verify grounding:
+            - All numbers used in the answer must come from evidence
+            - Any computations must be correct
+            Otherwise -> FAIL_OUT_OF_EVIDENCE_NUMBER or FAIL_MATH_ERROR.
+
+    Step 5: Check naturalness:
+            Reject database-like or overly contrived phrasing.
+            Reject doc-structure mentions.
+            Otherwise -> FAIL_NOT_ANALYST_NATURAL or FAIL_DOC_REFERENCE.
+
+    Step 6: Check reasoning depth:
+            If it's just a lookup -> FAIL_TOO_TRIVIAL.
+
+    ----------------------------------------------------------------------
+    OUTPUT FORMAT (STRICT JSON ONLY)
+    ----------------------------------------------------------------------
+    Return valid JSON only.
+
+    If PASS:
+    {
+      "decision": "pass",
+      "failure_tags": [],
+      "must_fix_issues": [],
+      "rewrite_suggestions": [],
+      "notes": "<brief explanation of why this passes>"
+    }
+
+    If FAIL:
+    {
+      "decision": "fail",
+      "failure_tags": ["<one or more FAIL_... tags>"],
+      "must_fix_issues": ["<bullet-like short issues>"],
+      "rewrite_suggestions": ["<concrete rewrite guidance>"],
+      "notes": "<brief explanation of why this fails>"
+    }
+
+  user: |
+    <pattern>
+    {pattern}
+    </pattern>
+
+    <entity_chain>
+    {entity_chain}
+    </entity_chain>
+
+    <question>
+    {question}
+    </question>
+
+    <answer>
+    {answer}
+    </answer>
+
+    <evidence>
+    {evidence}
+    </evidence>
+
+    <source_files>
+    {source_files}
+    </source_files>
+
+    Evaluate this QA pair using the binary PASS/FAIL criteria above.
+    Be strict: borderline cases should FAIL.

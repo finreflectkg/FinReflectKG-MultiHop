@@ -1,0 +1,409 @@
+# Multi-hop QA Generation Pipeline Configuration
+
+# =============================================================================
+# HOP CONFIGURATION
+# =============================================================================
+
+# Which hop patterns to generate QA for
+hop_settings:
+  # Enable/disable specific hop counts
+  enabled_hops:
+    - 2
+    - 3
+
+  # 2-hop patterns: ORG1 → Connector → ORG2
+  two_hop:
+    enabled: true
+    # Pattern types for 2-hop
+    patterns:
+      - name: "cross_company"           # Type 1: Cross-Company (different companies, same year)
+        description: "ORG1 → Connector ← ORG2"
+        enabled: true
+      - name: "cross_year"              # Type 2: Cross-Year (same company, different years)
+        description: "ORG(year1) → Connector ← ORG(year2)"
+        enabled: true
+      - name: "intra_doc"               # Type 3: Intra-Document (same company, same year, different pages)
+        description: "ORG(page1) → Connector ← ORG(page2)"
+        enabled: true
+
+  # 3-hop patterns: Extended chains through multiple entities
+  # See docs/3hop-implementation-plan.md for detailed documentation
+  three_hop:
+    enabled: true
+    patterns:
+      # Cross Company Type 1: Connector Chain (2 different ORGs)
+      - name: "cross_company_type1"
+        description: "ORG1 → Connector1 → Connector2 ← ORG2"
+        enabled: true
+        intermediate_types:
+          - "COMP"
+          - "RISK_FACTOR"
+          - "RAW_MATERIAL"
+          - "MACRO_CONDITION"
+
+      # Cross Company Type 2: 3 ORGs, 1 Connector
+      - name: "cross_company_type2"
+        description: "ORG1 → Connector ← ORG2, Connector ← ORG3"
+        enabled: true
+
+      # Cross Year Type 1: Connector Chain (same ORG, different years)
+      - name: "cross_year_type1"
+        description: "ORG(y1) → Connector1 → Connector2 ← ORG(y2)"
+        enabled: true
+
+      # Cross Year Type 2: 3 Years, 1 Connector
+      - name: "cross_year_type2"
+        description: "ORG(y1) → Connector ← ORG(y2), Connector ← ORG(y3)"
+        enabled: true
+
+      # Intra Doc Type 1: Connector Chain (same ORG, same year, different pages)
+      - name: "intra_doc_type1"
+        description: "ORG(p1) → Connector1 → Connector2 ← ORG(p2)"
+        enabled: true
+
+      # Intra Doc Type 2: 3 Pages, 1 Connector
+      - name: "intra_doc_type2"
+        description: "ORG(p1) → Connector ← ORG(p2), Connector ← ORG(p3)"
+        enabled: true
+
+# =============================================================================
+# TEMPORAL SETTINGS
+# =============================================================================
+
+# Available years in the graph
+available_years:
+  - 2022
+  - 2023
+  - 2024
+
+# Type 1: Same year, cross-company pairs
+# Which years to generate Type 1 pairs for
+cross_company_years:
+  - 2022
+  - 2023
+  - 2024
+
+# Type 2: Same company, different years (temporal pairs)
+# Which year combinations to use
+# Format: [earlier_year, later_year]
+cross_year_combinations:
+  - [2022, 2023]
+  - [2023, 2024]
+  - [2022, 2024]
+
+# Type 3: Same company, same year, different pages (intra-doc pairs)
+# Which years to generate Type 3 pairs for
+intra_doc_years:
+  - 2024
+  - 2023
+  - 2022
+
+# =============================================================================
+# PAIR GENERATION SETTINGS
+# =============================================================================
+
+# Minimum companies in a sub-industry to generate pairs
+min_companies_per_subindustry: 2
+
+# Include cross-sector pairs (different sectors)
+include_cross_sector: false
+
+# Limit per sector pair for cross-sector (if enabled)
+cross_sector_limit_per_pair: 5
+
+# =============================================================================
+# VALIDATION SETTINGS (IDF Thresholds)
+# =============================================================================
+
+# IDF thresholds for difficulty tiers
+idf_thresholds:
+  hard: 5.0      # IDF > 5.0 = hard connectors
+  medium: 4.0    # IDF > 4.0 = medium connectors
+  easy: 3.5      # IDF > 3.5 = easy connectors
+
+# Minimum connectors required for a pair to be valid
+validation:
+  min_hard_connectors: 1
+  min_total_connectors: 5
+
+# =============================================================================
+# QA QUALITY VALIDATION (Reflection Mechanism)
+# =============================================================================
+
+qa_validation:
+  # Prompt variant to use: "default" (scoring 0-50) or "v3_binary" (pass/fail)
+  # - "default": Uses scoring system (0-50), requires quality_threshold
+  # - "v3_binary": Uses binary pass/fail with failure tags, ignores quality_threshold
+  prompt_variant: "default"  # Options: "default", "v3_binary"
+
+  # Minimum score to accept a QA pair (out of 50)
+  # Only used when prompt_variant is "default"
+  # Scoring: 5 criteria x 10 points each = 50 max
+  # Thresholds: EXCELLENT (45-50), GOOD (35-44), NEEDS_WORK (25-34), REJECT (0-24)
+  quality_threshold: 45
+
+  # Maximum generation attempts before giving up
+  max_attempts: 3
+
+  # Temperature settings for retries (increases with each attempt)
+  base_temperature: 0.3
+  temperature_increment: 0.1  # temp = base + (attempt * increment)
+
+# =============================================================================
+# NEO4J CONNECTION
+# =============================================================================
+
+neo4j:
+  uri: "<YOUR_NEO4J_URI>"
+  username: "<YOUR_NEO4J_USERNAME>"
+  password: "<YOUR_NEO4J_PASSWORD>"
+  database: "neo4j"
+
+# Total ORGs in graph (for IDF calculation)
+total_orgs: 1432
+
+# =============================================================================
+# LLM SETTINGS
+# =============================================================================
+#
+# Model reasoning output formats (from notebook testing):
+# - Separate fields (msg.reasoning): GPT-OSS-120B, GPT-OSS-20B, Qwen3-32B, Nemotron-Nano-30B
+# - <think> tags in content: Qwen3-8B, Qwen3-235B, Nemotron-Super-49B
+# - Raw thinking in content: Nemotron-Nano-9B
+#
+# Reasoning control methods:
+# - enable_thinking: true/false in extra_body.chat_template_kwargs
+# - /no_think or /think in system prompt (Nemotron-Super-49B, Nemotron-Nano-9B)
+
+llm:
+  default_model: "qwen3-235b"
+
+  models:
+    # =========================================================================
+    # GPT-OSS-120B
+    # Non-reasoning: Chat API with enable_thinking: false
+    # Reasoning: Harmony API with ReasoningEffort.HIGH
+    # =========================================================================
+    gpt-oss-120b:
+      base_url: "<YOUR_GPT_OSS_120B_ENDPOINT>"
+      model: "openai/gpt-oss-120b"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens
+      temperature: 0.3
+      # Non-reasoning: Use chat API with enable_thinking: false
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+    gpt-oss-120b-reasoning:
+      base_url: "<YOUR_GPT_OSS_120B_ENDPOINT>"
+      model: "openai/gpt-oss-120b"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens - tested successfully
+      temperature: 0.3
+      # Reasoning: Use Harmony API with ReasoningEffort.HIGH
+      use_harmony_api: true
+
+    # =========================================================================
+    # GPT-OSS-20B
+    # Non-reasoning: Chat API with enable_thinking: false
+    # Reasoning: Harmony API with ReasoningEffort.HIGH
+    # =========================================================================
+    gpt-oss-20b:
+      base_url: "<YOUR_GPT_OSS_20B_ENDPOINT>"
+      model: "openai/gpt-oss-20b"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens
+      temperature: 0.3
+      # Non-reasoning: Use chat API with enable_thinking: false
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+    gpt-oss-20b-reasoning:
+      base_url: "<YOUR_GPT_OSS_20B_ENDPOINT>"
+      model: "openai/gpt-oss-20b"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens - tested successfully
+      temperature: 0.3
+      # Reasoning: Use Harmony API with ReasoningEffort.HIGH
+      use_harmony_api: true
+
+    # =========================================================================
+    # Qwen3-32B - Reasoning in separate msg.reasoning field
+    # =========================================================================
+    qwen3-32b:
+      base_url: "<YOUR_QWEN3_32B_ENDPOINT>"
+      model: "Qwen/Qwen3-32B"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 40960  # 40K tokens
+      temperature: 0.3
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+    qwen3-32b-reasoning:
+      base_url: "<YOUR_QWEN3_32B_ENDPOINT>"
+      model: "Qwen/Qwen3-32B"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 32000
+      context_limit: 40960
+      temperature: 0.3
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: true
+
+    # =========================================================================
+    # Qwen3-8B - Reasoning in <think> tags in content
+    # =========================================================================
+    qwen3-8b:
+      base_url: "<YOUR_QWEN3_8B_ENDPOINT>"
+      model: "Qwen/Qwen3-8B"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 40960  # 40K tokens
+      temperature: 0.3
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+    qwen3-8b-reasoning:
+      base_url: "<YOUR_QWEN3_8B_ENDPOINT>"
+      model: "Qwen/Qwen3-8B"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 32000
+      context_limit: 40960  # 40K tokens - tested
+      temperature: 0.3
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: true
+
+    # =========================================================================
+    # Qwen3-235B - Reasoning in <think> tags in content
+    # =========================================================================
+    qwen3-235b:
+      base_url: "<YOUR_QWEN3_235B_ENDPOINT>"
+      model: "Qwen/Qwen3-235B-A22B-Instruct-2507"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 40960  # 40K tokens (assumed same as other qwen3)
+      temperature: 0.3
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+    qwen3-235b-reasoning:
+      base_url: "<YOUR_QWEN3_235B_ENDPOINT>"
+      model: "Qwen/Qwen3-235B-A22B-Instruct-2507"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 32000
+      context_limit: 40960  # 40K tokens (assumed same as other qwen3)
+      temperature: 0.3
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: true
+
+    # =========================================================================
+    # Nemotron-Nano-30B - Reasoning in separate msg.reasoning field
+    # =========================================================================
+    nemotron-nano-30b:
+      base_url: "<YOUR_NEMOTRON_NANO_30B_ENDPOINT>"
+      model: "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens - tested successfully
+      temperature: 0.3
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+    nemotron-nano-30b-reasoning:
+      base_url: "<YOUR_NEMOTRON_NANO_30B_ENDPOINT>"
+      model: "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens - tested successfully
+      temperature: 0.3
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: true
+
+    # =========================================================================
+    # Nemotron-Super-49B - Reasoning in <think> tags in content
+    # Control via system prompt: default=reasoning ON, /no_think=reasoning OFF
+    # =========================================================================
+    nemotron-super-49b:
+      base_url: "<YOUR_NEMOTRON_SUPER_49B_ENDPOINT>"
+      model: "nvidia/Llama-3_3-Nemotron-Super-49B-v1_5"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens - tested up to 300K chars successfully
+      temperature: 0.3
+      # Non-reasoning: Prepend "/no_think" to system prompt
+      system_prompt_prefix: "/no_think"
+
+    nemotron-super-49b-reasoning:
+      base_url: "<YOUR_NEMOTRON_SUPER_49B_ENDPOINT>"
+      model: "nvidia/Llama-3_3-Nemotron-Super-49B-v1_5"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens - tested up to 300K chars successfully
+      temperature: 0.3
+      # Reasoning: Default behavior (no prefix needed)
+
+    # =========================================================================
+    # Nemotron-Nano-9B - Raw thinking in content (no <think> tags)
+    # Control via system prompt: default=reasoning ON, /no_think=reasoning OFF
+    # =========================================================================
+    nemotron-nano-9b:
+      base_url: "<YOUR_NEMOTRON_NANO_9B_ENDPOINT>"
+      model: "nvidia/NVIDIA-Nemotron-Nano-9B-v2"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens - tested successfully up to 500K chars
+      temperature: 0.3
+      # Non-reasoning: Prepend "/no_think" to system prompt
+      system_prompt_prefix: "/no_think"
+
+    nemotron-nano-9b-reasoning:
+      base_url: "<YOUR_NEMOTRON_NANO_9B_ENDPOINT>"
+      model: "nvidia/NVIDIA-Nemotron-Nano-9B-v2"
+      api_key: "<YOUR_API_KEY>"
+      max_tokens: 16000
+      context_limit: 131072  # 128K tokens - tested successfully up to 500K chars
+      temperature: 0.3
+      # Reasoning: Default behavior (no prefix needed)
+
+    # =========================================================================
+    # Claude Haiku 4.5 (Azure Anthropic Foundry)
+    # Uses AnthropicFoundry client (not OpenAI-compatible)
+    # Rate limits: 250,000 tokens/min, 250 requests/min
+    # =========================================================================
+    claude-haiku-4-5:
+      client_type: "anthropic"
+      base_url: "<YOUR_CLAUDE_ENDPOINT>"
+      model: "<YOUR_CLAUDE_DEPLOYMENT>"
+      api_key: "<YOUR_CLAUDE_API_KEY>"
+      max_tokens: 8192  # Increased to 8K to avoid truncation in evaluation responses
+      context_limit: 200000  # 200K context window
+      temperature: 0.3
+
+# =============================================================================
+# OUTPUT SETTINGS
+# =============================================================================
+
+output:
+  # Output directory (relative to this config file)
+  directory: "outputs"
+
+  # Output file names
+  files:
+    all_pairs: "validated_pairs.json"
+    cross_company_pairs: "cross_company_pairs.json"
+    cross_year_pairs: "cross_year_pairs.json"
+    intra_doc_pairs: "intra_doc_pairs.json"

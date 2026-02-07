@@ -15,9 +15,14 @@ Multi-hop question answering over financial documents requires models to synthes
 
 ```
 FinReflectKG-MultiHop/
-├── data/                  # Benchmark QA dataset (18 files, 15,600 questions)
-├── experiments/           # Model outputs across 6 experimental conditions (864 files)
-├── evaluations/           # LLM-as-Judge evaluation scores (1,199 files)
+├── data/                    # Benchmark QA dataset (18 files, 15,600 questions)
+├── experiments/             # Model outputs across 6 experimental conditions (864 files)
+├── evaluations/             # LLM-as-Judge evaluation scores (1,412 files)
+├── prompts/                 # All LLM prompts used across the pipeline
+│   ├── dataset_generation/    # QA generation and validation prompts
+│   ├── experiments/           # Experiment system and user prompts
+│   └── eval/                  # LLM-as-Judge evaluation prompts
+├── dataset_generation/      # Source code for the QA generation pipeline
 └── README.md
 ```
 
@@ -248,13 +253,50 @@ The evaluation framework applies strict assessment on numerical precision while 
 }
 ```
 
+## Prompts
+
+All LLM prompts used throughout the pipeline are provided as YAML files in the `prompts/` directory for full reproducibility.
+
+### Dataset Generation (`prompts/dataset_generation/prompts.yaml`)
+
+Contains prompts for generating and validating multi-hop QA pairs from knowledge graph paths:
+- **QA generation prompts** for each reasoning pattern (cross-company, cross-year, intra-document, 3-hop causal variants)
+- **Validation prompts** with a 50-point scoring rubric covering factual grounding, multi-hop necessity, answer completeness, reasoning clarity, and difficulty calibration
+
+### Experiments (`prompts/experiments/prompts.yaml`)
+
+Contains system and user prompt templates used across all six experiments:
+- **`kg_minimal`**: Used in E1 — instructs the model to answer using KG triplets and text chunks only
+- **`page_context`**: Used in E2–E6 — instructs the model to search through provided document pages and synthesize information
+
+### Evaluation (`prompts/eval/prompts.yaml`)
+
+Contains the LLM-as-Judge prompt used for scoring model outputs:
+- **System prompt**: Defines the 0–10 correctness scoring rubric with detailed band descriptions
+- **User prompt**: Provides a 5-step evaluation checklist (quantitative accuracy, completeness, entity accuracy, reasoning, semantic equivalence) and the JSON output format for structured scoring
+
+## Dataset Generation Code
+
+The `dataset_generation/` directory contains the full pipeline used to generate the benchmark QA pairs from a Neo4j-based financial knowledge graph. The pipeline discovers multi-hop paths across SEC 10-K filings, retrieves evidence chunks along those paths, and uses LLMs to generate and validate question-answer pairs with a reflection-based quality control mechanism.
+
+**Pipeline stages:**
+1. **Connector Discovery** (`connector_discovery.py`) — Mines the knowledge graph for valid multi-hop paths (2-hop and 3-hop) linking organizations through shared entities, with IDF-based difficulty scoring
+2. **Evidence Retrieval** (`evidence_retrieval.py`) — Extracts source text chunks from the graph for each hop along a discovered path
+3. **QA Generation** (`qa_generator.py`) — Uses LLMs with pattern-specific prompts to generate questions and answers grounded in the retrieved evidence
+4. **Validation** (`qa_validate_output.py`) — Applies a reflection mechanism where a separate LLM call scores each QA pair on a 50-point rubric, rejecting low-quality outputs and retrying with increased temperature
+5. **Difficulty Balancing** (`balance_difficulty.py`) — Ensures sector-wise and difficulty-tier balance across the generated dataset
+
+Configuration is managed via `config.yaml`, which includes Neo4j connection settings, LLM endpoint configuration, hop pattern definitions, and quality thresholds. All API keys and endpoints are provided as placeholders. See `dataset_generation/README.md` for detailed usage instructions.
+
 ## File Inventory
 
 | Component | Files | Size | Description |
 |-----------|-------|------|-------------|
 | `data/` | 18 | ~182 MB | Benchmark QA dataset (9 qualitative + 9 quantitative patterns) |
 | `experiments/` | 864 | ~7.1 GB | Model outputs (8 models x 6 experiments x 18 patterns) |
-| `evaluations/` | 1,199 | ~4.4 GB | Judge scores (multiple judges x models x experiments x patterns) |
+| `evaluations/` | 1,412 | ~5.0 GB | Judge scores (multiple judges x models x experiments x patterns) |
+| `prompts/` | 3 | ~104 KB | LLM prompts for dataset generation, experiments, and evaluation |
+| `dataset_generation/` | 14 | ~590 KB | Source code for the QA generation pipeline |
 
 
 
